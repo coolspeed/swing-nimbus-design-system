@@ -1,6 +1,7 @@
 # Nimbus Swing Design System
 
-이 문서는 `screenshots/00.png`부터 `screenshots/04.png`까지의 화면을 시각적으로 분석하고,
+이 문서는 `design-system/screenshots/00.png`부터
+`design-system/screenshots/04.png`까지의 화면을 시각적으로 분석하고,
 OpenJDK Nimbus `UIManager` 기본값과 대조해 만든 구현 기준이다. 화면을 그대로 복제하는
 스타일 가이드가 아니라, 다른 Swing 화면에서도 같은 인상을 재현하기 위한 토큰·컴포넌트·
 사용 규칙의 집합이다.
