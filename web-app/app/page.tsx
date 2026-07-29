@@ -87,7 +87,6 @@ export default function Home() {
   const [treeOpen, setTreeOpen] = useState(true);
   const [sortKey, setSortKey] = useState<SortKey>("component");
   const [sortAscending, setSortAscending] = useState(true);
-  const [progress, setProgress] = useState(72);
   const [accent, setAccent] = useState("#33628C");
   const [saved, setSaved] = useState(false);
   const [gridEnabled, setGridEnabled] = useState(true);
@@ -352,7 +351,7 @@ export default function Home() {
             />
           )}
           {activeTab === "feedback" && (
-            <FeedbackPanel progress={progress} setProgress={setProgress} />
+            <FeedbackPanel />
           )}
           {activeTab === "dialogs" && (
             <DialogsPanel openDialog={showDialog} openContext={() => setContextOpen(true)} />
@@ -627,18 +626,16 @@ function DataPanel({
   );
 }
 
-function FeedbackPanel({ progress, setProgress }: { progress: number; setProgress: (value: number) => void }) {
+function FeedbackPanel() {
   return (
     <section id="panel-feedback" role="tabpanel" aria-labelledby="tab-feedback" className="two-column">
       <Fieldset legend="Progress indicators">
         <div className="progress-stack">
           <label>Upload progress</label>
-          <div className="progress-track" role="progressbar" aria-label="Upload progress" aria-valuenow={progress} aria-valuemin={0} aria-valuemax={100}>
-            <span className="progress-fill" style={{ width: `${progress}%` }} />
-            <span className="progress-value">{progress}%</span>
+          <div className="progress-track" role="progressbar" aria-label="Upload progress" aria-valuenow={72} aria-valuemin={0} aria-valuemax={100}>
+            <span className="progress-fill" style={{ width: "72%" }} />
+            <span className="progress-value">72%</span>
           </div>
-          <label htmlFor="progress-control">Adjust progress</label>
-          <input id="progress-control" data-testid="progress-control" className="nimbus-range" type="range" value={progress} onChange={(event) => setProgress(Number(event.target.value))} />
           <label>Background task</label>
           <div className="progress-track indeterminate" role="progressbar" aria-label="Background task in progress">
             <span className="progress-indeterminate-pattern" aria-hidden="true">

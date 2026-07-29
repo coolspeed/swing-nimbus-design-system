@@ -172,6 +172,8 @@ HiDPI scaling에 맡기고 픽셀 단위 확대 코드를 추가하지 않는다
 
 - 진행률을 알 수 있으면 determinate progress, 알 수 없을 때만 indeterminate progress를 사용한다.
 - determinate progress의 `%` 문자열은 별도 레이블로 빼지 않고 채움 위 중앙에 겹쳐 표시한다.
+- 정적 컴포넌트 캡처를 재현하는 화면에는 원본에 없는 `Adjust progress` 레이블이나 조절용
+  slider를 추가하지 않는다. 예시 진행률은 `72%`로 고정해 구조와 밀도를 그대로 보존한다.
 - indeterminate progress는 짧은 사선 stripe나 반원 outline의 연속이 아니다. 캡처처럼
   주황색 바 중앙을 하나의 흰 stream이 끊김 없이 가로지르고, stream의 두께가 굵어졌다
   가늘어지는 형태가 수평 방향으로 연속해서 흘러야 한다. 완전한 sine처럼 극점의 폭이 0인
