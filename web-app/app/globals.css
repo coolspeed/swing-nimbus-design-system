@@ -390,7 +390,7 @@ textarea:focus-visible {
   height: 25px;
   margin-bottom: -1px;
   border-color: #355d7c;
-  background: linear-gradient(#edf3f7, #dce9f1 62%, #e5eef4);
+  background: linear-gradient(#f3f5f8 0%, #dce4eb 40%, #ccd8e2 62%, #bdcdda 100%);
   box-shadow: inset 0 1px rgba(255,255,255,.58);
 }
 
