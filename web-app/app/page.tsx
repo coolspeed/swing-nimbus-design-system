@@ -311,7 +311,6 @@ export default function Home() {
 
         <section className="page-head">
           <div>
-            <p className="eyebrow">SCREENSHOT-DERIVED UI KIT</p>
             <h1>Nimbus component showcase</h1>
             <p>A faithful web interpretation of Java Swing&apos;s Nimbus Look &amp; Feel.</p>
           </div>
@@ -361,7 +360,7 @@ export default function Home() {
         </div>
 
         <footer className="status-bar">
-          <span><span className="status-dot" /> Ready <b>•</b> Nimbus Look &amp; Feel</span>
+          <span>Ready <b>•</b> Nimbus Look &amp; Feel</span>
           <span>React catalog <b>•</b> {activeTab} <b>•</b> {viewMode}</span>
         </footer>
       </section>

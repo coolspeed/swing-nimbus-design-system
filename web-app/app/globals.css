@@ -52,6 +52,20 @@ button {
   color: inherit;
 }
 
+label,
+legend,
+.app-identity,
+.theme-chip,
+.page-head,
+.tab-strip,
+.tree-pane h2,
+.progress-value,
+.muted-copy,
+.notice h3,
+.status-bar {
+  user-select: none;
+}
+
 button,
 select,
 input[type="checkbox"],
@@ -1045,36 +1059,26 @@ tbody tr:focus-visible {
 }
 
 .preview-window .progress-track {
-  height: 40px;
+  height: 34px;
 }
 
 .status-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 13px;
+  padding: 0 11px;
   border-top: 1px solid #303840;
   background: var(--canvas);
   box-shadow: inset 0 1px rgba(255,255,255,.65);
-  font-size: 12px;
-}
-
-.status-dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  margin-right: 4px;
-  border-radius: 50%;
-  background: #3e8a59;
-  box-shadow: inset 0 1px rgba(255,255,255,.5);
+  font-size: 11px;
 }
 
 .save-toast {
   position: fixed;
-  right: 34px;
-  bottom: 34px;
+  right: 30px;
+  bottom: 30px;
   z-index: 80;
-  padding: 12px 18px;
+  padding: 10px 15px;
   color: white;
   border: 1px solid #183e29;
   border-radius: 5px;

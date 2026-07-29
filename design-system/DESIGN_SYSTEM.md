@@ -135,6 +135,9 @@ HiDPI scaling에 맡기고 픽셀 단위 확대 코드를 추가하지 않는다
 ### Inputs
 
 - 레이블은 필드 왼쪽 또는 위에 항상 표시한다. placeholder만으로 의미를 전달하지 않는다.
+- Swing의 `JLabel`은 일반 텍스트 편집기가 아니므로 드래그 선택 대상이 아니다. 웹 대응
+  `label`, `legend`, 컴포넌트 캡션, 상태 표시줄 텍스트에는 `user-select: none`을 적용하되,
+  입력값과 사용자가 복사해야 하는 본문까지 선택 불가능하게 만들지는 않는다.
 - 오류는 색상 테두리만 사용하지 않고 오류 문구를 필드 가까이에 배치한다.
 - `JSpinner`, `JComboBox`, `JFormattedTextField`처럼 데이터 종류에 맞는 컨트롤을 선택한다.
 - 비활성은 unavailable, 읽기 전용은 view-only라는 서로 다른 의미로 취급한다.
