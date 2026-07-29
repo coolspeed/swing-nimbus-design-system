@@ -59,10 +59,20 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
 
   assert.match(page, /data-testid="component-table"/);
   assert.match(page, /data-testid=\{`dialog-\$\{type\}`\}/);
+  assert.match(page, /className="progress-value">\{progress\}%/);
+  assert.match(page, /progress-indeterminate-pattern/);
+  assert.match(page, /scroll-arrow-left/);
+  assert.match(page, /scroll-arrow-right/);
   assert.match(page, /event\.key === "Escape"/);
   assert.match(page, /event\.altKey/);
   assert.match(css, /--canvas:\s*#d6d9df/i);
   assert.match(css, /--focus:\s*#73a4d1/i);
+  assert.match(css, /--font-ui:\s*Arial,\s*"Malgun Gothic",\s*sans-serif/i);
+  assert.doesNotMatch(css, /--font-ui:[^;]*Segoe UI/i);
+  assert.match(css, /\.tab-strip button\s*\{[\s\S]*?height:\s*30px/i);
+  assert.match(css, /\.progress-track\s*\{[\s\S]*?height:\s*20px/i);
+  assert.match(css, /border-radius:\s*0 0 22px 22px/i);
+  assert.match(css, /\.nimbus-fieldset\s*\{[\s\S]*?background:\s*var\(--canvas\)[\s\S]*?box-shadow:\s*none/i);
   assert.match(css, /@media \(max-width: 720px\)/);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
   assert.match(layout, /x-forwarded-host/);

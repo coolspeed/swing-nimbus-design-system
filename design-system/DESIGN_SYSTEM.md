@@ -9,10 +9,12 @@ OpenJDK Nimbus `UIManager` 기본값과 대조해 만든 구현 기준이다. �
 ## 1. 디자인 원칙
 
 1. **Native first** — 버튼, 입력창, 탭, 스크롤바의 그라디언트와 상태 표현은 Nimbus painter에 맡긴다.
-2. **Quiet canvas, clear surface** — 회청색 캔버스 위에 흰 입력/데이터 표면을 올려 작업 영역을 구분한다.
-3. **State is visible** — 선택, 포커스, 비활성, 진행, 오류 상태는 색뿐 아니라 테두리·아이콘·텍스트로 함께 표현한다.
-4. **Four-pixel rhythm** — 배치 간격은 4의 배수로 구성하고, 폼 내부에는 8 px, 섹션 사이에는 12~16 px를 우선 사용한다.
-5. **Semantic wrappers, standard widgets** — 제품 의미는 작은 helper로 제공하되 실제 컨트롤은 표준 Swing 클래스를 유지한다.
+2. **Matte first** — Nimbus의 기본 인상은 회청색의 낮은 대비와 얕은 명암이다. 넓은 흰 하이라이트,
+   단단한 중간 분할선, 여러 겹의 그림자로 유리·크롬 같은 고광택 표면을 만들지 않는다.
+3. **Quiet canvas, clear surface** — 회청색 캔버스 위에 흰 입력/데이터 표면을 올려 작업 영역을 구분한다.
+4. **State is visible** — 선택, 포커스, 비활성, 진행, 오류 상태는 색뿐 아니라 테두리·아이콘·텍스트로 함께 표현한다.
+5. **Four-pixel rhythm** — 배치 간격은 4의 배수로 구성하고, 폼 내부에는 8 px, 섹션 사이에는 12~16 px를 우선 사용한다.
+6. **Semantic wrappers, standard widgets** — 제품 의미는 작은 helper로 제공하되 실제 컨트롤은 표준 Swing 클래스를 유지한다.
 
 ## 2. 분석 근거
 
@@ -62,16 +64,21 @@ OpenJDK Nimbus `UIManager` 기본값과 대조해 만든 구현 기준이다. �
 
 ## 4. 타이포그래피
 
-기본 글꼴은 `SansSerif` 논리 글꼴이다. 운영체제별 실제 폰트 매핑을 허용해 Swing의
-플랫폼 적응성을 유지한다.
+기본 글꼴은 `SansSerif` 논리 글꼴이다. 이 프로젝트의 Windows/OpenJDK 24 캡처 환경에서
+라틴 문자의 첫 물리 폰트는 `Arial`, 한글 fallback은 `Malgun Gothic`으로 확인했다.
+웹 재현은 `"Arial", "Malgun Gothic", sans-serif` 순서를 사용한다. `Segoe UI`나 Geist로
+임의 대체하지 않는다.
 
-| 역할 | 크기/스타일 | 사용처 |
-|---|---|---|
-| Page title | 20 pt Bold | 한 화면당 하나 |
-| Section title | 14 pt Bold | 큰 콘텐츠 구획 |
-| Body strong | 12 pt Bold | fieldset 제목, 강조 레이블 |
-| Body | 12 pt Regular | 컨트롤, 표, 메뉴, 본문 |
-| Caption | 11 pt Regular | 보조 설명, 메타데이터 |
+| 역할 | Swing | 웹 CSS | 사용처 |
+|---|---|---|---|
+| Page title | 20 pt Bold | 26.67 px / 700 | 한 화면당 하나 |
+| Section title | 14 pt Bold | 18.67 px / 700 | 큰 콘텐츠 구획 |
+| Body strong | 12 pt Bold | 16 px / 700 | `TitledBorder`, 강조 레이블 |
+| Body | 12 pt Regular | 16 px / 400 | 컨트롤, 탭, 표, 메뉴, 본문 |
+| Caption | 11 pt Regular | 14.67 px / 400 | 보조 설명, 메타데이터 |
+
+CSS 변환은 브라우저의 `1 pt = 4/3 px` 기준이다. 캡처 자체의 Windows 배율을 CSS 크기에
+한 번 더 곱하지 않는다. `strong`, 제목, 선택 상태라는 이유만으로 굵기를 추가하지 않는다.
 
 제목과 본문은 문장형 대소문자(sentence case)를 기본으로 한다. 버튼 레이블은 동사로
 시작하고 말줄임표는 추가 입력이 필요한 액션에만 사용한다.
@@ -90,6 +97,18 @@ OpenJDK Nimbus `UIManager` 기본값과 대조해 만든 구현 기준이다. �
 Nimbus 기본 content margin은 버튼 `6/14/6/14`, 텍스트 입력 `6/6/6/6`이다. 높이를
 강제로 고정하기보다 이 inset과 글꼴로 자연 크기를 계산한다. 고해상도 화면에서는 Java의
 HiDPI scaling에 맡기고 픽셀 단위 확대 코드를 추가하지 않는다.
+
+캡처 대조가 필요한 웹 재현에서는 다음 외곽 치수를 우선한다.
+
+| 컴포넌트 | 웹 기준 |
+|---|---:|
+| 탭 | 기본 30 px, 선택 31 px; 세로 padding 2 px 이하 |
+| determinate progress | 20 px; 진행률 문자열은 막대 중앙 내부 |
+| indeterminate progress | 18 px; 주황 바 전체에 흰 물결형 반복 highlight |
+| horizontal scrollbar | 25 px; 양 끝 40 px 버튼, thumb 상단 직선/하단 원호 |
+
+이 값은 글자 높이와의 상대 비율을 보존하기 위한 값이다. 탭이나 progress bar를 섹션
+높이에 맞춰 늘리지 않는다.
 
 ## 6. 레이아웃
 
@@ -119,7 +138,9 @@ HiDPI scaling에 맡기고 픽셀 단위 확대 코드를 추가하지 않는다
 ### Tabs and navigation
 
 - 탭은 같은 수준의 화면 전환에만 사용한다.
-- 선택된 탭의 Nimbus 강조와 키보드 mnemonic을 유지한다.
+- 탭 레이블은 12 pt Regular이며, 선택되었다고 굵게 만들지 않는다.
+- 선택 탭은 낮은 채도의 청회색 `#DCE9F1` 계열과 짙은 `#355D7C` 외곽선으로 구분한다.
+- 세로 inset은 촘촘하게 유지하고 웹에서 30~31 px를 넘겨 과도한 상하 여백을 만들지 않는다.
 - 탭 수가 너무 많아 한 줄을 넘으면 정보 구조를 다시 나눈다.
 
 ### Tables, trees, and lists
@@ -132,9 +153,23 @@ HiDPI scaling에 맡기고 픽셀 단위 확대 코드를 추가하지 않는다
 ### Feedback and dialogs
 
 - 진행률을 알 수 있으면 determinate progress, 알 수 없을 때만 indeterminate progress를 사용한다.
+- determinate progress의 `%` 문자열은 별도 레이블로 빼지 않고 채움 위 중앙에 겹쳐 표시한다.
+- indeterminate progress는 짧은 사선 stripe가 아니라 캡처의 주황색 바 전체를 가로지르는
+  흰 물결형 highlight를 반복한다.
+- horizontal scrollbar의 화살표 버튼은 트랙 쪽 경계만 오목하게 파고, thumb는 상단이
+  직선이고 하단 두 모서리가 크게 둥근 Nimbus의 비대칭 실루엣을 유지한다.
 - 정보/경고/오류는 `JOptionPane`의 표준 아이콘과 버튼 순서를 우선한다.
 - 모달은 즉시 결정이 필요한 경우에만 사용한다.
 - 내부 프레임은 복수 문서를 동시에 다루는 MDI 작업 공간에서만 사용한다.
+
+### Titled groups
+
+- Swing의 이 패턴 이름은 `TitledBorder`이며, 보통 `JPanel`에 적용한다. 일반 UI 용어로는
+  group box, HTML 대응 요소로는 `fieldset`/`legend`다.
+- 제목이 놓인 구간에는 외곽선이 없어야 한다. 제목 배경색으로 선을 덧칠하지 말고,
+  border painter 또는 `legend`의 실제 border interruption으로 선을 끊는다.
+- 제목 뒤 배경은 주변 패널과 정확히 같은 `CANVAS`여야 하며 inset highlight나 box-shadow가
+  제목 아래를 연속해서 지나가면 안 된다.
 
 ## 8. 상태 명세
 

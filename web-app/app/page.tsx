@@ -600,16 +600,21 @@ function FeedbackPanel({ progress, setProgress }: { progress: number; setProgres
     <section id="panel-feedback" role="tabpanel" aria-labelledby="tab-feedback" className="two-column">
       <Fieldset legend="Progress indicators">
         <div className="progress-stack">
-          <label>Upload progress <strong>{progress}%</strong></label>
+          <label>Upload progress</label>
           <div className="progress-track" role="progressbar" aria-label="Upload progress" aria-valuenow={progress} aria-valuemin={0} aria-valuemax={100}>
-            <span style={{ width: `${progress}%` }} />
+            <span className="progress-fill" style={{ width: `${progress}%` }} />
+            <span className="progress-value">{progress}%</span>
           </div>
           <label htmlFor="progress-control">Adjust progress</label>
           <input id="progress-control" data-testid="progress-control" className="nimbus-range" type="range" value={progress} onChange={(event) => setProgress(Number(event.target.value))} />
           <label>Background task</label>
-          <div className="progress-track indeterminate" role="progressbar" aria-label="Background task in progress"><span /></div>
+          <div className="progress-track indeterminate" role="progressbar" aria-label="Background task in progress"><span className="progress-indeterminate-pattern" /></div>
           <label>Horizontal scroll bar</label>
-          <div className="fake-scrollbar"><button aria-label="Scroll left">◀</button><i><span /></i><button aria-label="Scroll right">▶</button></div>
+          <div className="fake-scrollbar">
+            <button className="scroll-arrow scroll-arrow-left" aria-label="Scroll left"><span aria-hidden="true">◀</span></button>
+            <i><span /></i>
+            <button className="scroll-arrow scroll-arrow-right" aria-label="Scroll right"><span aria-hidden="true">▶</span></button>
+          </div>
           <p className="muted-copy">Determinate, indeterminate and scroll feedback use the native Nimbus orange accent.</p>
         </div>
       </Fieldset>
@@ -649,7 +654,7 @@ function DialogsPanel({ openDialog, openContext }: { openDialog: (id: Exclude<Di
           </article>
           <article className="internal-window preview-window">
             <header><button aria-label="Window menu">▼</button><strong>Preview</strong><span>— □ ×</span></header>
-            <div><p>Mini preview</p><div className="progress-track"><span style={{ width: "60%" }} /></div></div>
+            <div><p>Mini preview</p><div className="progress-track"><span className="progress-fill" style={{ width: "60%" }} /><span className="progress-value">60%</span></div></div>
           </article>
         </div>
       </Fieldset>
