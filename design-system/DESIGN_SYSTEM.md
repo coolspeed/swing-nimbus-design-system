@@ -74,11 +74,11 @@ OpenJDK Nimbus `UIManager` 기본값과 대조해 만든 구현 기준이다. �
 
 | 역할 | Swing | 웹 CSS | 사용처 |
 |---|---|---|---|
-| Page title | 20 pt Bold | 24 px / 700 | 한 화면당 하나 |
-| Section title | 14 pt Bold | 16 px / 700 | 큰 콘텐츠 구획 |
-| Body strong | 12 pt Bold | 14 px / 700 | `TitledBorder`, 강조 레이블 |
-| Body | 12 pt Regular | 14 px / 400 | 컨트롤, 탭, 표, 메뉴, 본문 |
-| Caption | 11 pt Regular | 12 px / 400 | 보조 설명, 메타데이터 |
+| Page title | 20 pt Bold | 21 px / 700 | 한 화면당 하나 |
+| Section title | 14 pt Bold | 14 px / 700 | 큰 콘텐츠 구획 |
+| Body strong | 12 pt Bold | 12 px / 700 | `TitledBorder`, 강조 레이블 |
+| Body | 12 pt Regular | 12 px / 400 | 컨트롤, 탭, 표, 메뉴, 본문 |
+| Caption | 11 pt Regular | 11 px / 400 | 보조 설명, 메타데이터 |
 
 웹 카탈로그는 `1 pt = 4/3 px`의 기계 변환값보다 원본 캡처의 조밀한 상대 밀도를 우선해
 한 단계 작은 compact scale을 사용한다. `strong`, 제목, 선택 상태라는 이유만으로 굵기를
@@ -106,10 +106,10 @@ HiDPI scaling에 맡기고 픽셀 단위 확대 코드를 추가하지 않는다
 
 | 컴포넌트 | 웹 기준 |
 |---|---:|
-| 탭 | 기본 27 px, 선택 28 px; 세로 padding 2 px 이하 |
-| determinate progress | 18 px; 진행률 문자열은 막대 중앙 내부 |
-| indeterminate progress | 16 px; 주황 바 전체의 중앙 흰 stream이 굵고 가늘어지며 수평 이동 |
-| horizontal scrollbar | 16 px; 양 끝 28 px 버튼, thumb 상단 직선/하단 원호 |
+| 탭 | 기본 24 px, 선택 25 px; 세로 padding 1 px |
+| determinate progress | 16 px; 진행률 문자열은 막대 중앙 내부 |
+| indeterminate progress | 14 px; 주황 바 전체의 중앙 흰 stream이 굵고 가늘어지며 수평 이동 |
+| horizontal scrollbar | 14 px; 양 끝 24 px 버튼, thumb 상단 직선/하단 원호 |
 
 이 값은 글자 높이와의 상대 비율을 보존하기 위한 값이다. 탭이나 progress bar를 섹션
 높이에 맞춰 늘리지 않는다.
@@ -118,6 +118,8 @@ HiDPI scaling에 맡기고 픽셀 단위 확대 코드를 추가하지 않는다
 
 - 프레임은 `BorderLayout`: 메뉴/툴바, 헤더, 콘텐츠, 상태 표시줄 순서로 구성한다.
 - 페이지 콘텐츠의 바깥 여백은 12 px, 연관 패널 사이 간격은 8~12 px를 사용한다.
+- 웹 데스크톱 재현 창은 viewport를 거의 꽉 채우지 않는다. 최대 `1360 × 820 px`로 제한하고
+  큰 화면에서는 사방 약 52 px의 바깥 여백을 보여 독립된 Swing 프레임처럼 보이게 한다.
 - 폼 레이블은 같은 열에 정렬하며 필드가 남는 가로 공간을 차지한다.
 - 마스터/디테일 구조는 `JSplitPane`을 사용하고 기본 비율은 약 27/73으로 한다.
 - 데이터가 길어질 수 있는 모든 표면은 처음부터 `JScrollPane` 안에 배치한다.
@@ -145,7 +147,7 @@ HiDPI scaling에 맡기고 픽셀 단위 확대 코드를 추가하지 않는다
 ### Tabs and navigation
 
 - 탭은 같은 수준의 화면 전환에만 사용한다.
-- 탭 레이블은 12 pt Regular이며, 선택되었다고 굵게 만들지 않는다.
+- 탭 레이블은 웹 재현에서 12 px Regular이며, 선택되었다고 굵게 만들지 않는다.
 - 선택 탭은 낮은 채도의 청회색 `#DCE9F1` 계열과 짙은 `#355D7C` 외곽선으로 구분한다.
 - 세로 inset은 촘촘하게 유지하고 웹에서 30~31 px를 넘겨 과도한 상하 여백을 만들지 않는다.
 - 탭 수가 너무 많아 한 줄을 넘으면 정보 구조를 다시 나눈다.
