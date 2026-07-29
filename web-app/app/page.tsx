@@ -527,6 +527,14 @@ function DataPanel({
   chooseSort: (key: SortKey) => void;
   openContext: () => void;
 }) {
+  const [selectedRow, setSelectedRow] = useState<string | null>(null);
+  const [selectedActivity, setSelectedActivity] = useState<string | null>(null);
+  const activities = [
+    ["saved", "✓", "Saved workspace settings", "2 min"],
+    ["preview", "↗", "Updated preview device", "18 min"],
+    ["imported", "+", "Imported sample data", "1 hr"],
+  ] as const;
+
   return (
     <section id="panel-data" role="tabpanel" aria-labelledby="tab-data" className="data-layout">
       <aside className="tree-pane">
@@ -573,7 +581,18 @@ function DataPanel({
             </thead>
             <tbody>
               {rows.map((row) => (
-                <tr key={row.component}>
+                <tr
+                  key={row.component}
+                  aria-selected={selectedRow === row.component}
+                  tabIndex={0}
+                  onClick={() => setSelectedRow(row.component)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      setSelectedRow(row.component);
+                    }
+                  }}
+                >
                   <td>{row.component}</td>
                   <td>{row.status}</td>
                   <td>{row.owner}</td>
@@ -584,10 +603,24 @@ function DataPanel({
           </table>
         </div>
         <Fieldset legend="Recent activity" className="activity-panel">
-          <ul>
-            <li><span>✓</span> Saved workspace settings <time>2 min</time></li>
-            <li><span>↗</span> Updated preview device <time>18 min</time></li>
-            <li><span>+</span> Imported sample data <time>1 hr</time></li>
+          <ul role="listbox" aria-label="Recent activity">
+            {activities.map(([id, icon, label, time]) => (
+              <li
+                key={id}
+                role="option"
+                aria-selected={selectedActivity === id}
+                tabIndex={0}
+                onClick={() => setSelectedActivity(id)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    setSelectedActivity(id);
+                  }
+                }}
+              >
+                <span>{icon}</span> {label} <time>{time}</time>
+              </li>
+            ))}
           </ul>
         </Fieldset>
       </div>

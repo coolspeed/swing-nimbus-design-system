@@ -153,6 +153,11 @@ HiDPI scaling에 맡기고 픽셀 단위 확대 코드를 추가하지 않는다
 - 행 선택색은 `SELECTION`; 줄무늬는 Nimbus 기본 중립 표면을 훼손하지 않는 범위에서 사용한다.
 - 표의 row hover에는 배경색, 외곽선, 그림자 등 어떤 시각 변화도 주지 않는다. Nimbus 캡처의
   표는 마우스 위치가 아니라 실제 selection/focus 상태만 표시한다.
+- 표 행은 클릭과 키보드(`Enter`/`Space`)로 선택할 수 있어야 한다. 선택된 행만 Nimbus
+  `SELECTION` 다크 네이비(`#39698A`) 배경과 흰 글자로 강조하고 `aria-selected`를 동기화한다.
+- `Recent activity` 같은 선택 가능한 목록도 hover에는 반응하지 않는다. 클릭 또는
+  `Enter`/`Space`로 선택된 실제 항목만 표와 같은 `SELECTION` 배경·흰 글자를 사용하고
+  `aria-selected`를 동기화해 표와 목록의 selection 언어를 통일한다.
 - `Ready`, `Draft`, `In review` 같은 상태값도 다른 column과 동일한 plain text로 표시한다.
   의미색, 배경 채움, 테두리, pill, badge, rounded square를 사용하지 않는다.
 - 우클릭 메뉴의 모든 핵심 명령은 메뉴나 툴바에서도 접근 가능해야 한다.

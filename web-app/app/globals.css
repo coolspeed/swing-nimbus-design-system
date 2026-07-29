@@ -727,18 +727,28 @@ th {
 
 th button {
   width: 100%;
-  padding: 6px 8px;
+  padding: 5px 7px;
   text-align: left;
   border: 0;
   background: transparent;
 }
 
 td {
-  padding: 5px 8px;
+  padding: 4px 7px;
 }
 
 tbody tr:nth-child(even) {
   background: #f2f2f2;
+}
+
+tbody tr[aria-selected="true"] {
+  color: #fff;
+  background: #39698a;
+}
+
+tbody tr:focus-visible {
+  outline: 1px dotted #fff;
+  outline-offset: -3px;
 }
 
 .activity-panel {
@@ -756,23 +766,33 @@ tbody tr:nth-child(even) {
   display: grid;
   grid-template-columns: 22px 1fr auto;
   align-items: center;
-  min-height: 30px;
-  padding: 0 5px;
+  min-height: 26px;
+  padding: 0 4px;
 }
 
-.activity-panel li:hover {
-  background: #e5f0f7;
+.activity-panel li[aria-selected="true"] {
+  color: #fff;
+  background: #39698a;
+}
+
+.activity-panel li[aria-selected="true"] time {
+  color: #fff;
+}
+
+.activity-panel li:focus-visible {
+  outline: 1px dotted #fff;
+  outline-offset: -3px;
 }
 
 .activity-panel time {
   color: #7a828a;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .progress-stack {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 7px;
 }
 
 .progress-stack label {
