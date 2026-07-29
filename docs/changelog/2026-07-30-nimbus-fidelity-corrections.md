@@ -1,5 +1,7 @@
 # Nimbus fidelity correction checklist
 
+Status: completed on 2026-07-30.
+
 Reference: `design-system/screenshots/00.png`–`04.png` and the user-provided
 detail crops for indeterminate progress, both horizontal-scrollbar comparisons,
 and the titled border.
