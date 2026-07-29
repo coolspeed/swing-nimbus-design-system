@@ -575,7 +575,7 @@ function DataPanel({
               {rows.map((row) => (
                 <tr key={row.component}>
                   <td>{row.component}</td>
-                  <td><span className={`status-pill status-${row.status.toLowerCase().replace(" ", "-")}`}>{row.status}</span></td>
+                  <td>{row.status}</td>
                   <td>{row.owner}</td>
                   <td>{row.updated}</td>
                 </tr>
@@ -608,7 +608,11 @@ function FeedbackPanel({ progress, setProgress }: { progress: number; setProgres
           <label htmlFor="progress-control">Adjust progress</label>
           <input id="progress-control" data-testid="progress-control" className="nimbus-range" type="range" value={progress} onChange={(event) => setProgress(Number(event.target.value))} />
           <label>Background task</label>
-          <div className="progress-track indeterminate" role="progressbar" aria-label="Background task in progress"><span className="progress-indeterminate-pattern" /></div>
+          <div className="progress-track indeterminate" role="progressbar" aria-label="Background task in progress">
+            <span className="progress-indeterminate-pattern" aria-hidden="true">
+              {Array.from({ length: 24 }, (_, index) => <i key={index} />)}
+            </span>
+          </div>
           <label>Horizontal scroll bar</label>
           <div className="fake-scrollbar">
             <button className="scroll-arrow scroll-arrow-left" aria-label="Scroll left"><span aria-hidden="true">◀</span></button>

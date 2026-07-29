@@ -12,9 +12,11 @@ OpenJDK Nimbus `UIManager` 기본값과 대조해 만든 구현 기준이다. �
 2. **Matte first** — Nimbus의 기본 인상은 회청색의 낮은 대비와 얕은 명암이다. 넓은 흰 하이라이트,
    단단한 중간 분할선, 여러 겹의 그림자로 유리·크롬 같은 고광택 표면을 만들지 않는다.
 3. **Quiet canvas, clear surface** — 회청색 캔버스 위에 흰 입력/데이터 표면을 올려 작업 영역을 구분한다.
-4. **State is visible** — 선택, 포커스, 비활성, 진행, 오류 상태는 색뿐 아니라 테두리·아이콘·텍스트로 함께 표현한다.
-5. **Four-pixel rhythm** — 배치 간격은 4의 배수로 구성하고, 폼 내부에는 8 px, 섹션 사이에는 12~16 px를 우선 사용한다.
-6. **Semantic wrappers, standard widgets** — 제품 의미는 작은 helper로 제공하되 실제 컨트롤은 표준 Swing 클래스를 유지한다.
+4. **Color restraint** — 색은 selection, focus, progress, semantic feedback처럼 기능 상태를
+   전달할 때만 쓴다. eyebrow, 장식 제목, 설명 문구를 accent color로 꾸미지 않는다.
+5. **State is visible** — 선택, 포커스, 비활성, 진행, 오류 상태는 색뿐 아니라 테두리·아이콘·텍스트로 함께 표현한다.
+6. **Four-pixel rhythm** — 배치 간격은 4의 배수로 구성하고, 폼 내부에는 8 px, 섹션 사이에는 12~16 px를 우선 사용한다.
+7. **Semantic wrappers, standard widgets** — 제품 의미는 작은 helper로 제공하되 실제 컨트롤은 표준 Swing 클래스를 유지한다.
 
 ## 2. 분석 근거
 
@@ -60,7 +62,8 @@ OpenJDK Nimbus `UIManager` 기본값과 대조해 만든 구현 기준이다. �
 | `DANGER` | `#9D3A3A` | 실패·파괴적 결과. `×` 또는 아이콘 병기 |
 
 의미색은 넓은 배경 채움보다 제목, 1 px 테두리, 아이콘에 사용한다. 본문은 기본 텍스트색을
-유지해 대비와 가독성을 보존한다.
+유지해 대비와 가독성을 보존한다. Success, Information, Warning, Error 메시지 박스에는
+의미색 배경이나 옅은 tint도 넣지 않는다. 박스 내부는 주변 `CANVAS`와 같아야 한다.
 
 ## 4. 타이포그래피
 
@@ -71,14 +74,15 @@ OpenJDK Nimbus `UIManager` 기본값과 대조해 만든 구현 기준이다. �
 
 | 역할 | Swing | 웹 CSS | 사용처 |
 |---|---|---|---|
-| Page title | 20 pt Bold | 26.67 px / 700 | 한 화면당 하나 |
-| Section title | 14 pt Bold | 18.67 px / 700 | 큰 콘텐츠 구획 |
-| Body strong | 12 pt Bold | 16 px / 700 | `TitledBorder`, 강조 레이블 |
-| Body | 12 pt Regular | 16 px / 400 | 컨트롤, 탭, 표, 메뉴, 본문 |
-| Caption | 11 pt Regular | 14.67 px / 400 | 보조 설명, 메타데이터 |
+| Page title | 20 pt Bold | 24 px / 700 | 한 화면당 하나 |
+| Section title | 14 pt Bold | 16 px / 700 | 큰 콘텐츠 구획 |
+| Body strong | 12 pt Bold | 14 px / 700 | `TitledBorder`, 강조 레이블 |
+| Body | 12 pt Regular | 14 px / 400 | 컨트롤, 탭, 표, 메뉴, 본문 |
+| Caption | 11 pt Regular | 12 px / 400 | 보조 설명, 메타데이터 |
 
-CSS 변환은 브라우저의 `1 pt = 4/3 px` 기준이다. 캡처 자체의 Windows 배율을 CSS 크기에
-한 번 더 곱하지 않는다. `strong`, 제목, 선택 상태라는 이유만으로 굵기를 추가하지 않는다.
+웹 카탈로그는 `1 pt = 4/3 px`의 기계 변환값보다 원본 캡처의 조밀한 상대 밀도를 우선해
+한 단계 작은 compact scale을 사용한다. `strong`, 제목, 선택 상태라는 이유만으로 굵기를
+추가하지 않는다.
 
 제목과 본문은 문장형 대소문자(sentence case)를 기본으로 한다. 버튼 레이블은 동사로
 시작하고 말줄임표는 추가 입력이 필요한 액션에만 사용한다.
@@ -102,10 +106,10 @@ HiDPI scaling에 맡기고 픽셀 단위 확대 코드를 추가하지 않는다
 
 | 컴포넌트 | 웹 기준 |
 |---|---:|
-| 탭 | 기본 30 px, 선택 31 px; 세로 padding 2 px 이하 |
-| determinate progress | 20 px; 진행률 문자열은 막대 중앙 내부 |
-| indeterminate progress | 18 px; 주황 바 전체에 흰 물결형 반복 highlight |
-| horizontal scrollbar | 25 px; 양 끝 40 px 버튼, thumb 상단 직선/하단 원호 |
+| 탭 | 기본 27 px, 선택 28 px; 세로 padding 2 px 이하 |
+| determinate progress | 18 px; 진행률 문자열은 막대 중앙 내부 |
+| indeterminate progress | 16 px; 주황 바 전체의 중앙 흰 stream이 굵고 가늘어지며 수평 이동 |
+| horizontal scrollbar | 16 px; 양 끝 28 px 버튼, thumb 상단 직선/하단 원호 |
 
 이 값은 글자 높이와의 상대 비율을 보존하기 위한 값이다. 탭이나 progress bar를 섹션
 높이에 맞춰 늘리지 않는다.
@@ -147,6 +151,10 @@ HiDPI scaling에 맡기고 픽셀 단위 확대 코드를 추가하지 않는다
 
 - 열 머리글은 짧은 명사로 쓰고 정렬 기능이 있으면 `RowSorter`를 제공한다.
 - 행 선택색은 `SELECTION`; 줄무늬는 Nimbus 기본 중립 표면을 훼손하지 않는 범위에서 사용한다.
+- 표의 row hover에는 배경색, 외곽선, 그림자 등 어떤 시각 변화도 주지 않는다. Nimbus 캡처의
+  표는 마우스 위치가 아니라 실제 selection/focus 상태만 표시한다.
+- `Ready`, `Draft`, `In review` 같은 상태값도 다른 column과 동일한 plain text로 표시한다.
+  의미색, 배경 채움, 테두리, pill, badge, rounded square를 사용하지 않는다.
 - 우클릭 메뉴의 모든 핵심 명령은 메뉴나 툴바에서도 접근 가능해야 한다.
 - 빈 상태는 빈 흰 상자 대신 원인과 다음 행동을 설명한다.
 
@@ -154,10 +162,21 @@ HiDPI scaling에 맡기고 픽셀 단위 확대 코드를 추가하지 않는다
 
 - 진행률을 알 수 있으면 determinate progress, 알 수 없을 때만 indeterminate progress를 사용한다.
 - determinate progress의 `%` 문자열은 별도 레이블로 빼지 않고 채움 위 중앙에 겹쳐 표시한다.
-- indeterminate progress는 짧은 사선 stripe가 아니라 캡처의 주황색 바 전체를 가로지르는
-  흰 물결형 highlight를 반복한다.
+- indeterminate progress는 짧은 사선 stripe나 반원 outline의 연속이 아니다. 캡처처럼
+  주황색 바 중앙을 하나의 흰 stream이 끊김 없이 가로지르고, stream의 두께가 굵어졌다
+  가늘어지는 형태가 수평 방향으로 연속해서 흘러야 한다. 완전한 sine처럼 극점의 폭이 0인
+  형태도, 직선 위에 타원을 얹은 꼬치 형태도 아니다. 좁은 구간과 넓은 구간에 각각 짧은
+  plateau를 두고 그 사이를 cubic Bézier 곡선으로 연결한다. 18 px 막대에서 굵은 구간은
+  약 12~14 px까지 팽창하며, 44 px 패턴 한 주기는 약 0.8초에 흘러가도록 한다. 각 반복
+  주황 물방울 내부에는 밝은 오렌지 tone-on-tone 세로 highlight를 1 px 두 줄씩 두고,
+  stream과 같은 속도·방향으로 이동시킨다.
 - horizontal scrollbar의 화살표 버튼은 트랙 쪽 경계만 오목하게 파고, thumb는 상단이
-  직선이고 하단 두 모서리가 크게 둥근 Nimbus의 비대칭 실루엣을 유지한다.
+  직선이고 하단 두 모서리가 둥근 Nimbus의 비대칭 실루엣을 유지한다. 웹 재현에서는
+  전체 높이 16 px, 끝 버튼 폭 28 px, 오목한 홈 반경 약 8 px를 기준으로 하며 패널 폭에
+  따라 세로 크기를 늘리지 않는다. 오목한 경계는 트랙색 도형을 버튼 위에 덧칠해 흉내
+  내지 말고 mask/clip으로 버튼 자체를 잘라 실제 하부 트랙이 보이게 한다.
+- Success, Information, Warning, Error 메시지 박스는 의미색 1 px border와 제목/아이콘만
+  사용한다. 배경색과 `color-mix()` tint는 금지하고 내부는 주변 canvas가 그대로 보여야 한다.
 - 정보/경고/오류는 `JOptionPane`의 표준 아이콘과 버튼 순서를 우선한다.
 - 모달은 즉시 결정이 필요한 경우에만 사용한다.
 - 내부 프레임은 복수 문서를 동시에 다루는 MDI 작업 공간에서만 사용한다.
