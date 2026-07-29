@@ -13,7 +13,9 @@ and the titled border.
 - [ ] Match the OpenJDK Nimbus font mapping, sizes, and font weights.
 - [ ] Make the selected tab use the reference Nimbus blue-grey color.
 - [ ] Reduce the Upload progress bar height and render `72%` inside the bar.
+- [ ] Remove the non-reference `Adjust progress` label and slider; keep Upload progress as a static `72%` example.
 - [ ] Recreate Background task as a full-width orange bar containing one continuous horizontal stream: narrow and wide sections both have short plateaus, cubic curves smoothly connect their thicknesses, and the 44 px pattern flows sideways every 0.8 s. Do not fake it with semicircle outlines or a straight skewer line with ellipses.
+- [ ] Keep the Background task stream's wide plateau near 11 px inside the 14 px bar, leaving at least 1.5 px vertical clearance so it never spills into the border.
 - [ ] Add the two bright-orange tone-on-tone vertical highlight lines visible inside every repeating orange droplet, synchronized with the Background task stream.
 - [ ] Recreate the horizontal scrollbar at the final compact proportions: 14 px track, 24 px end buttons whose shallow concave inner edges are truly masked/cut out (never simulated by a painted overlay patch), and a centered thumb with a flat top and rounded lower corners.
 - [ ] Match the horizontal scrollbar thumb to the reference's nearly neutral pale blue-grey face and restrained dark outline; do not use a conspicuous saturated blue fill.
