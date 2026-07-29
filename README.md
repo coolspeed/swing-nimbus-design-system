@@ -1,32 +1,32 @@
 # Nimbus Swing Design System
 
-스크린샷 분석을 기반으로 만든 Nimbus Look & Feel 디자인 시스템과 실행형 Java Swing
-카탈로그입니다.
+스크린샷 분석을 기반으로 Java Swing Nimbus Look & Feel을 문서, Java 카탈로그,
+모던 웹 애플리케이션으로 구현한 프로젝트입니다.
 
 ## 폴더 구조
 
 ```text
 .
-├─ java-app/
-│  └─ Main.java
-├─ design-system/
-│  ├─ DESIGN_SYSTEM.md
-│  ├─ NimbusTokens.java
-│  ├─ NimbusComponents.java
-│  └─ screenshots/
-│     └─ 00.png ... 04.png
+├─ design-system/   # 공통 명세, Java 토큰/API, 원본 스크린샷
+├─ java-app/        # Java Swing 실행형 카탈로그
+├─ web-app/         # React + Tailwind CSS 웹 카탈로그
 ├─ .gitignore
 └─ README.md
 ```
 
-- `java-app/` — 디자인 시스템을 보여주는 Java 데모 프로그램
-- `design-system/` — 재사용 코드, 명세 문서, 분석 원본
-
-## 컴파일과 실행
+## Java 앱
 
 ```powershell
 javac -encoding UTF-8 -d out design-system/*.java java-app/Main.java
 java -cp out Main
 ```
 
-컴파일 결과인 `out/`은 Git에서 제외됩니다.
+## 웹 앱
+
+```powershell
+cd web-app
+npm install
+npm run dev
+```
+
+웹 앱 검증은 `npm run lint`와 `npm test`로 실행합니다.
