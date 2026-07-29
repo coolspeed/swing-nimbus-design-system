@@ -8,7 +8,7 @@ and the titled border.
 - [ ] Make widget surfaces matte and low-contrast instead of high-gloss.
 - [ ] Remove the `SCREENSHOT-DERIVED UI KIT` eyebrow entirely and enforce Nimbus color restraint: reserve color for functional state, selection, focus, progress, and semantic feedback.
 - [ ] Scale every web widget down one compact size to match the screenshot density, including typography, chrome, buttons, inputs, tabs, table rows, progress bars, scrollbars, messages, and internal windows.
-- [ ] Reduce the desktop app-window itself to a `1360 × 820 px` maximum with visible outer margin instead of nearly filling the browser viewport.
+- [ ] Reduce the desktop app-window itself one more step to a `1200 × 720 px` maximum with about 70 px of visible outer margin instead of nearly filling the browser viewport.
 - [ ] Reduce excessive widget padding, especially the tabs' vertical padding.
 - [ ] Match the OpenJDK Nimbus font mapping, sizes, and font weights.
 - [ ] Make the selected tab use the reference Nimbus blue-grey color.

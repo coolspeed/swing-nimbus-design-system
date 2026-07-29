@@ -74,6 +74,7 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.match(css, /--font-ui:\s*Arial,\s*"Malgun Gothic",\s*sans-serif/i);
   assert.doesNotMatch(css, /--font-ui:[^;]*Segoe UI/i);
   assert.match(css, /body\s*\{[\s\S]*?font-size:\s*12px/i);
+  assert.match(css, /\.app-window\s*\{[\s\S]*?width:\s*min\(1200px,\s*calc\(100vw - 140px\)\)[\s\S]*?height:\s*min\(720px,\s*calc\(100vh - 140px\)\)/i);
   assert.match(css, /\.nimbus-button,[\s\S]*?\.nimbus-select\s*\{[\s\S]*?min-height:\s*23px/i);
   assert.match(css, /\.nimbus-input\s*\{[\s\S]*?min-height:\s*23px/i);
   assert.doesNotMatch(page, /SCREENSHOT-DERIVED UI KIT|status-dot/i);
