@@ -838,24 +838,8 @@ tbody tr:focus-visible {
 
 .progress-track.indeterminate {
   height: 14px;
-  background: #d87a12;
-  box-shadow: inset 0 1px rgba(255,255,255,.5), inset 0 -1px rgba(119,55,0,.32);
-}
-
-.progress-track.indeterminate::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(
-      90deg,
-      transparent 0 34%,
-      rgba(255,190,105,.78) 35% 37%,
-      transparent 38% 62%,
-      rgba(255,190,105,.78) 63% 65%,
-      transparent 66%
-    ) 0 0 / 44px 100% repeat-x;
-  animation: indeterminate-guides .8s linear infinite;
+  background: linear-gradient(#fafafa 0%, #e7e8e9 52%, #f5f5f6 100%);
+  box-shadow: inset 0 1px rgba(255,255,255,.9), inset 0 -1px rgba(104,108,113,.2);
 }
 
 .progress-track.indeterminate .progress-indeterminate-pattern {
@@ -873,7 +857,7 @@ tbody tr:focus-visible {
   position: absolute;
   inset: 6px 0 auto;
   height: 2px;
-  background: rgba(255,255,255,.94);
+  background: linear-gradient(#e9a348, #c96d0b 58%, #e58b20);
 }
 
 .progress-indeterminate-pattern i {
@@ -881,7 +865,16 @@ tbody tr:focus-visible {
   width: 45px;
   height: 14px;
   margin-right: -1px;
-  background: rgba(255,255,255,.94);
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0 34%,
+      rgba(255,190,105,.88) 35% 37%,
+      transparent 38% 62%,
+      rgba(255,190,105,.88) 63% 65%,
+      transparent 66%
+    ),
+    linear-gradient(#e9a348 0%, #c96d0b 58%, #e58b20 100%);
   clip-path: path("M -1 6 C 3 6 5 6 7 5.5 C 10 4.5 12 2.25 16 1.75 C 18 1.5 20 1.5 22 1.5 C 24 1.5 26 1.5 28 1.75 C 32 2.25 34 4.5 37 5.5 C 39 6 41 6 45 6 L 45 8 C 41 8 39 8 37 8.5 C 34 9.5 32 11.75 28 12.25 C 26 12.5 24 12.5 22 12.5 C 20 12.5 18 12.5 16 12.25 C 12 11.75 10 9.5 7 8.5 C 5 8 3 8 -1 8 Z");
 }
 
@@ -890,10 +883,6 @@ tbody tr:focus-visible {
   to { transform: translateX(44px); }
 }
 
-@keyframes indeterminate-guides {
-  from { background-position: 0 0; }
-  to { background-position: 44px 0; }
-}
 
 .fake-scrollbar {
   height: 14px;

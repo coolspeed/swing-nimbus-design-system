@@ -108,7 +108,7 @@ HiDPI scaling에 맡기고 픽셀 단위 확대 코드를 추가하지 않는다
 |---|---:|
 | 탭 | 기본 24 px, 선택 25 px; 세로 padding 1 px |
 | determinate progress | 16 px; 진행률 문자열은 막대 중앙 내부 |
-| indeterminate progress | 14 px; 주황 바 전체의 중앙 흰 stream이 굵고 가늘어지며 수평 이동 |
+| indeterminate progress | 14 px; 밝은 흰색·회색 track 위의 주황 foreground stream이 굵고 가늘어지며 수평 이동 |
 | horizontal scrollbar | 14 px; 양 끝 24 px 버튼, thumb 상단 직선/하단 원호 |
 
 이 값은 글자 높이와의 상대 비율을 보존하기 위한 값이다. 탭이나 progress bar를 섹션
@@ -178,15 +178,16 @@ HiDPI scaling에 맡기고 픽셀 단위 확대 코드를 추가하지 않는다
 - 정적 컴포넌트 캡처를 재현하는 화면에는 원본에 없는 `Adjust progress` 레이블이나 조절용
   slider를 추가하지 않는다. 예시 진행률은 `72%`로 고정해 구조와 밀도를 그대로 보존한다.
 - indeterminate progress는 짧은 사선 stripe나 반원 outline의 연속이 아니다. 캡처처럼
-  주황색 바 중앙을 하나의 흰 stream이 끊김 없이 가로지르고, stream의 두께가 굵어졌다
+  밝은 흰색·회색 track 위를 하나의 주황 foreground stream이 끊김 없이 가로지르고, stream의 두께가 굵어졌다
   가늘어지는 형태가 수평 방향으로 연속해서 흘러야 한다. 완전한 sine처럼 극점의 폭이 0인
   형태도, 직선 위에 타원을 얹은 꼬치 형태도 아니다. 좁은 구간과 넓은 구간에 각각 짧은
   plateau를 두고 그 사이를 cubic Bézier 곡선으로 연결한다. 14 px 막대에서 굵은 구간은
   약 11 px까지만 팽창하고 위아래 최소 1.5 px 여유를 두어 border를 침범하지 않는다.
-  44 px 패턴 한 주기는 약 0.8초에 흘러가도록 한다. 흰 stream을 반복 조각으로 구현할 때는
+  오렌지색을 track 전체에 채운 뒤 흰 모양을 올리는 역상 구현은 금지한다.
+  44 px 패턴 한 주기는 약 0.8초에 흘러가도록 한다. 주황 stream을 반복 조각으로 구현할 때는
   각 조각의 클립 경계를 최소 1 px 겹치고 경계선을 요소 바깥으로 밀며, 좁은 plateau와 같은
-  2 px 두께의 흰 core를 패턴 전체에 연속으로 이어 둔다. 애니메이션의 소수점 이동 중에도
-  주기 경계에 주황색 세로 틈이나 톱니 모양 안티앨리어싱이 드러나지 않아야 한다.
+  2 px 두께의 주황 core를 패턴 전체에 연속으로 이어 둔다. 애니메이션의 소수점 이동 중에도
+  주기 경계에 흰색 세로 틈이나 톱니 모양 안티앨리어싱이 드러나지 않아야 한다.
   각 반복 주황 물방울 내부에는 밝은 오렌지 tone-on-tone 세로 highlight를 1 px 두 줄씩 두고,
   stream과 같은 속도·방향으로 이동시킨다.
 - horizontal scrollbar의 화살표 버튼은 트랙 쪽 경계만 오목하게 파고, thumb는 상단이

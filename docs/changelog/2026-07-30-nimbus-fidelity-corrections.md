@@ -16,7 +16,7 @@ and the titled border.
 - [x] Make the selected tab use the reference Nimbus blue-grey color.
 - [x] Reduce the Upload progress bar height and render `72%` inside the bar.
 - [x] Remove the non-reference `Adjust progress` label and slider; keep Upload progress as a static `72%` example.
-- [x] Recreate Background task as a full-width orange bar containing one continuous horizontal stream: narrow and wide sections both have short plateaus, cubic curves smoothly connect their thicknesses, and the 44 px pattern flows sideways every 0.8 s. Do not fake it with semicircle outlines or a straight skewer line with ellipses.
+- [x] Recreate Background task as a light white-grey track containing one continuous orange foreground stream: narrow and wide sections both have short plateaus, cubic curves smoothly connect their thicknesses, and the 44 px pattern flows sideways every 0.8 s. Never invert the layers into a solid orange track with a white foreground shape, and do not fake the stream with semicircle outlines or a straight skewer line with ellipses.
 - [x] Keep the Background task stream's wide plateau near 11 px inside the 14 px bar, leaving at least 1.5 px vertical clearance so it never spills into the border.
 - [x] Add the two bright-orange tone-on-tone vertical highlight lines visible inside every repeating orange droplet, synchronized with the Background task stream.
 - [x] Recreate the horizontal scrollbar at the final compact proportions: 14 px track, 24 px end buttons whose shallow concave inner edges are truly masked/cut out (never simulated by a painted overlay patch), and a centered thumb with a flat top and rounded lower corners.
