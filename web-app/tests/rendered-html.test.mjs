@@ -83,8 +83,11 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.match(css, /\.tab-strip button\[aria-selected="true"\]\s*\{[\s\S]*?linear-gradient\(#e3eaef 0%,\s*#cdd8e2 36%,\s*#baccda 66%,\s*#a5bacc 100%\)/i);
   assert.match(css, /\.progress-track\s*\{[\s\S]*?height:\s*16px/i);
   assert.match(css, /animation:\s*indeterminate \.8s linear infinite/i);
-  assert.match(css, /clip-path:\s*path\("M 0 6 C 3 6 5 6 7 5\.5/i);
+  assert.match(css, /\.progress-indeterminate-pattern::before\s*\{[\s\S]*?inset:\s*6px 0 auto[\s\S]*?height:\s*2px/i);
+  assert.match(css, /\.progress-indeterminate-pattern i\s*\{[\s\S]*?flex:\s*0 0 45px[\s\S]*?margin-right:\s*-1px/i);
+  assert.match(css, /clip-path:\s*path\("M -1 6 C 3 6 5 6 7 5\.5/i);
   assert.match(css, /C 18 1\.5 20 1\.5 22 1\.5/);
+  assert.match(css, /C 39 6 41 6 45 6 L 45 8/i);
   assert.doesNotMatch(css, /radial-gradient\(ellipse 18px 9px at 50% 50%/i);
   assert.match(css, /rgba\(255,190,105,\.78\) 35% 37%[\s\S]*?rgba\(255,190,105,\.78\) 63% 65%/i);
   assert.match(css, /\.fake-scrollbar\s*\{[\s\S]*?height:\s*14px[\s\S]*?grid-template-columns:\s*24px 1fr 24px/i);
