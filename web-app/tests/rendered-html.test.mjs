@@ -105,6 +105,11 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.match(page, /aria-selected=\{selectedActivity === id\}/i);
   assert.match(css, /\.activity-panel li\[aria-selected="true"\]\s*\{[\s\S]*?background:\s*#39698a/i);
   assert.doesNotMatch(css, /\.notice-(?:success|information|warning|danger)\s*\{[^}]*background\s*:/i);
+  assert.match(css, /container:\s*nimbus-window\s*\/\s*inline-size/i);
+  assert.match(css, /@media \(min-width:\s*981px\)[\s\S]*?\.app-window\.view-tablet\s*\{[\s\S]*?width:\s*820px/i);
+  assert.match(css, /@media \(min-width:\s*981px\)[\s\S]*?\.app-window\.view-mobile\s*\{[\s\S]*?width:\s*430px/i);
+  assert.match(css, /@container nimbus-window \(max-width:\s*980px\)/i);
+  assert.match(css, /@container nimbus-window \(max-width:\s*720px\)/i);
   assert.match(css, /@media \(max-width: 720px\)/);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
   assert.match(layout, /x-forwarded-host/);
