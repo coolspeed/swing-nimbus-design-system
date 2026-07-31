@@ -85,6 +85,7 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.match(css, /animation:\s*indeterminate \.8s linear infinite/i);
   assert.match(css, /\.progress-track\.indeterminate\s*\{[\s\S]*?background:\s*linear-gradient\(#fafafa 0%,\s*#e7e8e9 52%,\s*#f5f5f6 100%\)/i);
   assert.doesNotMatch(css, /\.progress-track\.indeterminate\s*\{[\s\S]*?background:\s*#d87a12/i);
+  assert.match(css, /\.progress-track\.indeterminate \.progress-indeterminate-pattern\s*\{[\s\S]*?top:\s*50%[\s\S]*?height:\s*14px[\s\S]*?margin-top:\s*-7px/i);
   assert.match(css, /\.progress-indeterminate-pattern::before\s*\{[\s\S]*?inset:\s*6px 0 auto[\s\S]*?height:\s*2px[\s\S]*?linear-gradient\(#e9a348,\s*#c96d0b 58%,\s*#e58b20\)/i);
   assert.match(css, /\.progress-indeterminate-pattern i\s*\{[\s\S]*?flex:\s*0 0 45px[\s\S]*?margin-right:\s*-1px/i);
   assert.match(css, /clip-path:\s*path\("M -1 6 C 3 6 5 6 7 5\.5/i);

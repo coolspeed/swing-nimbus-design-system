@@ -846,12 +846,13 @@ tbody tr:focus-visible {
 
 .progress-track.indeterminate .progress-indeterminate-pattern {
   position: absolute;
-  top: 0;
+  top: 50%;
   left: -44px;
   display: flex;
   width: max-content;
   height: 14px;
   animation: indeterminate .8s linear infinite;
+  margin-top: -7px;
 }
 
 .progress-indeterminate-pattern::before {
