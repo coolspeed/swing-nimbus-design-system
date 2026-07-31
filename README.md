@@ -3,10 +3,11 @@
 스크린샷 분석을 기반으로 Java Swing Nimbus Look & Feel을 문서, Java 카탈로그,
 모던 웹 애플리케이션으로 구현한 프로젝트입니다.
 
-## 배포된 웹 앱
+## 최종 배포 위치
 
-Java Swing Nimbus 웹 재현 버전은
-<https://nimbus-swing-web.coolspeed.chatgpt.site/>에서 확인할 수 있습니다.
+> **Production:** <https://nimbus-swing-web.coolspeed.chatgpt.site/>
+
+위 주소가 Java Swing Nimbus 웹 재현 버전의 공식 최종 배포 위치입니다.
 
 ## 폴더 구조
 

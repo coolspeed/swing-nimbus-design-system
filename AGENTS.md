@@ -1,4 +1,5 @@
 # Repository notes
 
-- The deployed web recreation of Java Swing Nimbus is available at
-  <https://nimbus-swing-web.coolspeed.chatgpt.site/>.
+- Canonical production deployment: <https://nimbus-swing-web.coolspeed.chatgpt.site/>.
+- Treat this URL as the final deployed Java Swing Nimbus web recreation when
+  documenting, testing, or handing off the project.
