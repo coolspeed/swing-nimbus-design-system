@@ -629,6 +629,7 @@ function DataPanel({
 function FeedbackPanel() {
   const [scrollPosition, setScrollPosition] = useState(50);
   const scrollTrackRef = useRef<HTMLDivElement>(null);
+  const scrollThumbRef = useRef<HTMLSpanElement>(null);
   const dragOffsetRef = useRef(0);
 
   const clampScrollPosition = (value: number) => Math.min(100, Math.max(0, value));
@@ -639,7 +640,7 @@ function FeedbackPanel() {
     const track = scrollTrackRef.current;
     if (!track) return;
     const bounds = track.getBoundingClientRect();
-    const thumbWidth = bounds.width * 0.27;
+    const thumbWidth = scrollThumbRef.current?.getBoundingClientRect().width ?? bounds.width * 0.27;
     const travel = bounds.width - thumbWidth;
     if (travel <= 0) return;
     setScrollPosition(clampScrollPosition(((clientX - bounds.left - dragOffset) / travel) * 100));
@@ -688,18 +689,23 @@ function FeedbackPanel() {
               onPointerDown={(event) => {
                 event.preventDefault();
                 const bounds = event.currentTarget.getBoundingClientRect();
-                updateScrollbarFromPointer(event.clientX, bounds.width * 0.27 / 2);
+                const thumbWidth = scrollThumbRef.current?.getBoundingClientRect().width ?? bounds.width * 0.27;
+                updateScrollbarFromPointer(event.clientX, thumbWidth / 2);
               }}
             >
               <span
                 className="scroll-thumb"
+                ref={scrollThumbRef}
                 role="slider"
                 tabIndex={0}
                 aria-label="Horizontal scroll position"
                 aria-valuemin={0}
                 aria-valuemax={100}
                 aria-valuenow={Math.round(scrollPosition)}
-                style={{ left: `${scrollPosition * 0.73}%` }}
+                style={{
+                  left: `${scrollPosition}%`,
+                  transform: `translateX(-${scrollPosition}%)`,
+                }}
                 onKeyDown={handleScrollbarKeyDown}
                 onPointerDown={(event) => {
                   event.preventDefault();
