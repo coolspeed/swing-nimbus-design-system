@@ -198,6 +198,8 @@ HiDPI scaling에 맡기고 픽셀 단위 확대 코드를 추가하지 않는다
   내지 말고 mask/clip으로 버튼 자체를 잘라 실제 하부 트랙이 보이게 한다. thumb의 면은
   최신 비교 캡처 오른쪽 원본에서 측정한 회청색(`#CBD4DB → #CCD8E4 → #ACC1D4 →
   #BBD0E3 → #CBE0EF → #DEF1F8`)으로 칠하고, 외곽선(`#4C5E6F`)만 형태를 분명히 한다.
+- 웹 카탈로그의 horizontal scrollbar는 양쪽 화살표 클릭, track 클릭, thumb drag와
+  `Arrow`/`Page`/`Home`/`End` 키로 0–100 위치를 바꾸며 slider ARIA 값을 함께 동기화한다.
 - Success, Information, Warning, Error 메시지 박스는 의미색 1 px border와 제목/아이콘만
   사용한다. 배경색과 `color-mix()` tint는 금지하고 내부는 주변 canvas가 그대로 보여야 한다.
 - 상태 표시줄의 `Ready` 앞에는 초록색 점 같은 웹식 상태 장식을 붙이지 않는다. 원본처럼

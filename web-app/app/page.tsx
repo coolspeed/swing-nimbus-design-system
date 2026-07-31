@@ -627,6 +627,36 @@ function DataPanel({
 }
 
 function FeedbackPanel() {
+  const [scrollPosition, setScrollPosition] = useState(50);
+  const scrollTrackRef = useRef<HTMLDivElement>(null);
+  const dragOffsetRef = useRef(0);
+
+  const clampScrollPosition = (value: number) => Math.min(100, Math.max(0, value));
+  const moveScrollbar = (delta: number) => {
+    setScrollPosition((current) => clampScrollPosition(current + delta));
+  };
+  const updateScrollbarFromPointer = (clientX: number, dragOffset: number) => {
+    const track = scrollTrackRef.current;
+    if (!track) return;
+    const bounds = track.getBoundingClientRect();
+    const thumbWidth = bounds.width * 0.27;
+    const travel = bounds.width - thumbWidth;
+    if (travel <= 0) return;
+    setScrollPosition(clampScrollPosition(((clientX - bounds.left - dragOffset) / travel) * 100));
+  };
+  const handleScrollbarKeyDown = (event: React.KeyboardEvent<HTMLSpanElement>) => {
+    let nextPosition: number | null = null;
+    if (event.key === "ArrowLeft" || event.key === "ArrowDown") nextPosition = scrollPosition - 10;
+    else if (event.key === "ArrowRight" || event.key === "ArrowUp") nextPosition = scrollPosition + 10;
+    else if (event.key === "PageDown") nextPosition = scrollPosition + 25;
+    else if (event.key === "PageUp") nextPosition = scrollPosition - 25;
+    else if (event.key === "Home") nextPosition = 0;
+    else if (event.key === "End") nextPosition = 100;
+    if (nextPosition === null) return;
+    event.preventDefault();
+    setScrollPosition(clampScrollPosition(nextPosition));
+  };
+
   return (
     <section id="panel-feedback" role="tabpanel" aria-labelledby="tab-feedback" className="two-column">
       <Fieldset legend="Progress indicators">
@@ -643,10 +673,60 @@ function FeedbackPanel() {
             </span>
           </div>
           <label>Horizontal scroll bar</label>
-          <div className="fake-scrollbar">
-            <button className="scroll-arrow scroll-arrow-left" aria-label="Scroll left"><span aria-hidden="true">◀</span></button>
-            <i><span /></i>
-            <button className="scroll-arrow scroll-arrow-right" aria-label="Scroll right"><span aria-hidden="true">▶</span></button>
+          <div className="fake-scrollbar" role="group" aria-label="Horizontal scrollbar">
+            <button
+              className="scroll-arrow scroll-arrow-left"
+              aria-label="Scroll left"
+              disabled={scrollPosition === 0}
+              onClick={() => moveScrollbar(-10)}
+            >
+              <span aria-hidden="true">◀</span>
+            </button>
+            <div
+              className="scroll-track"
+              ref={scrollTrackRef}
+              onPointerDown={(event) => {
+                event.preventDefault();
+                const bounds = event.currentTarget.getBoundingClientRect();
+                updateScrollbarFromPointer(event.clientX, bounds.width * 0.27 / 2);
+              }}
+            >
+              <span
+                className="scroll-thumb"
+                role="slider"
+                tabIndex={0}
+                aria-label="Horizontal scroll position"
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-valuenow={Math.round(scrollPosition)}
+                style={{ left: `${scrollPosition * 0.73}%` }}
+                onKeyDown={handleScrollbarKeyDown}
+                onPointerDown={(event) => {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  dragOffsetRef.current = event.clientX - event.currentTarget.getBoundingClientRect().left;
+                  event.currentTarget.setPointerCapture(event.pointerId);
+                }}
+                onPointerMove={(event) => {
+                  if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+                    updateScrollbarFromPointer(event.clientX, dragOffsetRef.current);
+                  }
+                }}
+                onPointerUp={(event) => {
+                  if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+                    event.currentTarget.releasePointerCapture(event.pointerId);
+                  }
+                }}
+              />
+            </div>
+            <button
+              className="scroll-arrow scroll-arrow-right"
+              aria-label="Scroll right"
+              disabled={scrollPosition === 100}
+              onClick={() => moveScrollbar(10)}
+            >
+              <span aria-hidden="true">▶</span>
+            </button>
           </div>
           <p className="muted-copy">Determinate, indeterminate and scroll feedback use the native Nimbus orange accent.</p>
         </div>

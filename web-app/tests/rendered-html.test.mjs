@@ -67,6 +67,12 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.match(page, /Array\.from\(\{ length: 24 \}/);
   assert.match(page, /scroll-arrow-left/);
   assert.match(page, /scroll-arrow-right/);
+  assert.match(page, /const \[scrollPosition,\s*setScrollPosition\] = useState\(50\)/);
+  assert.match(page, /onClick=\{\(\) => moveScrollbar\(-10\)\}/);
+  assert.match(page, /onClick=\{\(\) => moveScrollbar\(10\)\}/);
+  assert.match(page, /role="slider"[\s\S]*?aria-valuenow=\{Math\.round\(scrollPosition\)\}/);
+  assert.match(page, /setPointerCapture\(event\.pointerId\)/);
+  assert.match(page, /event\.key === "Home"[\s\S]*?event\.key === "End"/);
   assert.match(page, /event\.key === "Escape"/);
   assert.match(page, /event\.altKey/);
   assert.match(css, /--canvas:\s*#d6d9df/i);
@@ -94,6 +100,8 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.doesNotMatch(css, /radial-gradient\(ellipse 18px 9px at 50% 50%/i);
   assert.match(css, /\.progress-indeterminate-pattern i\s*\{[\s\S]*?rgba\(255,190,105,\.88\) 35% 37%[\s\S]*?rgba\(255,190,105,\.88\) 63% 65%[\s\S]*?linear-gradient\(#e9a348 0%,\s*#c96d0b 58%,\s*#e58b20 100%\)/i);
   assert.match(css, /\.fake-scrollbar\s*\{[\s\S]*?height:\s*14px[\s\S]*?grid-template-columns:\s*24px 1fr 24px/i);
+  assert.match(css, /\.fake-scrollbar \.scroll-track\s*\{[\s\S]*?touch-action:\s*none/i);
+  assert.match(css, /\.fake-scrollbar \.scroll-thumb\s*\{[\s\S]*?width:\s*27%[\s\S]*?transition:\s*left \.08s ease-out/i);
   assert.match(css, /border-radius:\s*0 0 11px 11px/i);
   assert.match(css, /background:\s*linear-gradient\(#cbd4db 0%,\s*#ccd8e4 20%,\s*#acc1d4 42%,\s*#bbd0e3 58%,\s*#cbe0ef 76%,\s*#def1f8 100%\)/i);
   assert.match(css, /border:\s*1px solid #4c5e6f/i);
