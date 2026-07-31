@@ -934,8 +934,8 @@ tbody tr:focus-visible {
 
 .fake-scrollbar .scroll-track {
   position: relative;
-  left: -7px;
-  width: calc(100% + 14px);
+  left: -15px;
+  width: calc(100% + 30px);
   background: transparent;
   touch-action: none;
 }

@@ -103,7 +103,7 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.doesNotMatch(css, /radial-gradient\(ellipse 18px 9px at 50% 50%/i);
   assert.match(css, /\.progress-indeterminate-pattern i\s*\{[\s\S]*?rgba\(255,190,105,\.88\) 35% 37%[\s\S]*?rgba\(255,190,105,\.88\) 63% 65%[\s\S]*?linear-gradient\(#e9a348 0%,\s*#c96d0b 58%,\s*#e58b20 100%\)/i);
   assert.match(css, /\.fake-scrollbar\s*\{[\s\S]*?height:\s*14px[\s\S]*?grid-template-columns:\s*24px 1fr 24px/i);
-  assert.match(css, /\.fake-scrollbar \.scroll-track\s*\{[\s\S]*?left:\s*-7px[\s\S]*?width:\s*calc\(100% \+ 14px\)[\s\S]*?touch-action:\s*none/i);
+  assert.match(css, /\.fake-scrollbar \.scroll-track\s*\{[\s\S]*?left:\s*-15px[\s\S]*?width:\s*calc\(100% \+ 30px\)[\s\S]*?touch-action:\s*none/i);
   assert.match(css, /\.fake-scrollbar \.scroll-thumb\s*\{[\s\S]*?width:\s*27%/i);
   assert.doesNotMatch(css, /\.fake-scrollbar \.scroll-thumb\s*\{[\s\S]*?transition:/i);
   assert.match(css, /border-radius:\s*0 0 11px 11px/i);
