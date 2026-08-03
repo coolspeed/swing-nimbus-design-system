@@ -92,6 +92,7 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.doesNotMatch(page, /SCREENSHOT-DERIVED UI KIT|status-dot/i);
   assert.match(css, /label,[\s\S]*?\.status-bar\s*\{[\s\S]*?user-select:\s*none/i);
   assert.match(css, /\.tab-strip button\s*\{[\s\S]*?height:\s*24px/i);
+  assert.match(css, /\.tab-strip::after\s*\{[\s\S]*?right:\s*12px[\s\S]*?left:\s*12px[\s\S]*?border-bottom:\s*3px double #294a63/i);
   assert.match(css, /\.tab-strip button\[aria-selected="true"\]\s*\{[\s\S]*?border-width:\s*1\.5px 1\.5px 0[\s\S]*?border-color:\s*#22313f[\s\S]*?linear-gradient\(#d8e2e9 0%,\s*#c3d0db 36%,\s*#adbfce 66%,\s*#96aec1 100%\)/i);
   assert.match(css, /\.progress-track\s*\{[\s\S]*?height:\s*16px/i);
   assert.match(css, /animation:\s*indeterminate \.8s linear infinite/i);

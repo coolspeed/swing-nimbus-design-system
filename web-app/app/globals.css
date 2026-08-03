@@ -404,14 +404,27 @@ textarea:focus-visible {
 }
 
 .tab-strip {
+  position: relative;
   display: flex;
   align-items: end;
+  padding-bottom: 3px;
   padding-left: 17px;
   overflow-x: auto;
+}
+
+.tab-strip::after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  bottom: 0;
+  left: 12px;
   border-bottom: 3px double #294a63;
+  pointer-events: none;
 }
 
 .tab-strip button {
+  position: relative;
+  z-index: 1;
   min-width: 80px;
   height: 24px;
   padding: 1px 11px;
