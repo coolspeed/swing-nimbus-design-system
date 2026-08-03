@@ -181,7 +181,7 @@ HiDPI scaling에 맡기고 픽셀 단위 확대 코드를 추가하지 않는다
 
 - 진행률을 알 수 있으면 determinate progress, 알 수 없을 때만 indeterminate progress를 사용한다.
 - determinate progress의 `%` 문자열은 별도 레이블로 빼지 않고 채움 위 중앙에 겹쳐 표시한다.
-- determinate progress는 `02.png`의 세로 픽셀 프로파일을 따른다. 빈 track은 상단 `#FFFFFF`에서 46% 지점의 `#CED0D4`까지 오목하게 어두워졌다가 하단 `#F9FBFF`로 반사되며, 주황 채움은 `#E9CBAB`에서 54% 지점의 `#C26802`까지 급격히 짙어진 뒤 하단 `#FBAB45` 반사띠로 올라온다. `#898C92` 외곽선과 위·아래 inset 음영을 함께 사용한다.
+- determinate progress는 `02.png`의 세로 픽셀 프로파일을 따른다. 빈 track은 상단 `#FFFFFF`에서 46% 지점의 `#CED0D4`까지 오목하게 어두워졌다가 하단 `#F9FBFF`로 반사된다. 주황 채움은 재현 화면에서 원본과 같은 대비로 보이도록 `#E7BC88`에서 54% 지점의 `#AA4A00`까지 급격히 짙어진 뒤 하단 `#F49A31` 반사띠로 올라온다. 채움 바깥 위쪽 약 3 px와 아래쪽 약 4 px에 주황 반사광을 드리우며, `#898C92` 외곽선과 위·아래 inset 음영을 함께 사용한다.
 - 정적 컴포넌트 캡처를 재현하는 화면에는 원본에 없는 `Adjust progress` 레이블이나 조절용
   slider를 추가하지 않는다. 예시 진행률은 `72%`로 고정해 구조와 밀도를 그대로 보존한다.
 - indeterminate progress는 짧은 사선 stripe나 반원 outline의 연속이 아니다. 캡처처럼
@@ -198,13 +198,13 @@ HiDPI scaling에 맡기고 픽셀 단위 확대 코드를 추가하지 않는다
   주기 경계에 흰색 세로 틈이나 톱니 모양 안티앨리어싱이 드러나지 않아야 한다.
   각 반복 주황 물방울 내부에는 밝은 오렌지 tone-on-tone 세로 highlight를 1 px 두 줄씩 두고,
   stream과 같은 속도·방향으로 이동시킨다.
-- indeterminate stream은 determinate 채움과 같은 주황 명암 프로파일을 재사용하고, 위에는 밝은 반사선, 아래에는 짙은 drop shadow를 더해 흰 track에서 떠 있는 볼록한 흐름으로 보이게 한다.
+- indeterminate stream은 determinate 채움과 같은 주황 명암 프로파일을 재사용하고, 위에는 밝은 반사선, 아래에는 짙은 drop shadow를 더해 흰 track에서 떠 있는 볼록한 흐름으로 보이게 한다. track 상반부는 `#777C84` 외곽선 다음에 흰 반사선을 2 px 겹치고, 52% 지점의 `#D8D9DC`까지 내려가는 오목면으로 만든다.
 - horizontal scrollbar의 화살표 버튼은 트랙 쪽 경계만 오목하게 파고, thumb는 상단이
   직선이고 하단 두 모서리가 둥근 Nimbus의 비대칭 실루엣을 유지한다. 웹 재현에서는
   전체 높이 15 px, 끝 버튼 폭 24 px, 오목한 홈 반경 약 7 px를 기준으로 하며 패널 폭에
   따라 세로 크기를 늘리지 않는다. 오목한 경계는 트랙색 도형을 버튼 위에 덧칠해 흉내
   내지 말고 mask/clip으로 버튼 자체를 잘라 실제 하부 트랙이 보이게 한다. thumb의 면은
-  최신 비교 캡처에서 측정한 회청색(`#F3F7F8 → #A9BFD1 → #E4F7FA`)으로 칠한다. 가장 짙은 지점은 높이의 약 29%에 두고 이후 빠르게 밝아지게 하며, 좌우 `#4C5E6F`와 하단 `#34495C` 외곽선으로 형태를 분명히 한다. rail은 상단 `#68696D`의 깊은 홈에서 하단 canvas `#D6D9DF`로 풀리는 비대칭 그라데이션을 사용한다.
+  최신 비교 캡처에서 측정한 구조를 강화한 회청색(`#F8FBFC → #91AEC5 → #F0FCFF`)으로 칠한다. 가장 짙은 지점은 높이의 약 32%에 두고 이후 빠르게 밝아지게 하며, `#34495C` 외곽선으로 형태를 분명히 한다. 하단 모서리는 수평 22 px·수직 14 px의 타원 곡률을 사용해 양옆 사선이 길게 들어오도록 하고, rail은 상단 `#68696D`의 깊은 홈에서 하단 canvas `#D6D9DF`로 풀리는 비대칭 그라데이션을 사용한다.
 - 웹 카탈로그의 horizontal scrollbar는 양쪽 화살표 클릭, track 클릭, thumb drag와
   `Arrow`/`Page`/`Home`/`End` 키로 0–100 위치를 바꾸며 slider ARIA 값을 함께 동기화한다.
 - Success, Information, Warning, Error 메시지 박스는 의미색 1 px border와 제목/아이콘만

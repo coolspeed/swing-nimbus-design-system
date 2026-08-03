@@ -1003,7 +1003,7 @@ tbody tr:focus-visible {
 .progress-track {
   position: relative;
   height: 19px;
-  overflow: hidden;
+  overflow: visible;
   border: 1px solid #898c92;
   background: linear-gradient(
     to bottom,
@@ -1024,22 +1024,24 @@ tbody tr:focus-visible {
 .progress-track > .progress-fill {
   display: block;
   height: 100%;
-  border-top: 1px solid #9b4c00;
-  border-right: 1px solid #9b4c00;
-  border-bottom: 1px solid #813a00;
+  border-top: 1px solid #7f3500;
+  border-right: 1px solid #7f3500;
+  border-bottom: 1px solid #6e2b00;
   background: linear-gradient(
     to bottom,
-    #e9cbab 0%,
-    #dfa96f 12%,
-    #d09140 36%,
-    #c26802 54%,
-    #c56c06 58%,
-    #e78d27 96%,
-    #fbab45 100%
+    #e7bc88 0%,
+    #d7954e 12%,
+    #c47b23 36%,
+    #aa4a00 54%,
+    #b35100 58%,
+    #d2720f 94%,
+    #f49a31 100%
   );
   box-shadow:
-    inset 0 1px rgba(255,255,255,.58),
-    inset 0 -1px rgba(255,183,93,.72);
+    inset 0 1px rgba(255,255,255,.72),
+    inset 0 -1px rgba(255,177,75,.8),
+    0 -2px 3px rgba(170,74,0,.48),
+    0 3px 4px rgba(166,70,0,.38);
 }
 
 .progress-value {
@@ -1056,20 +1058,26 @@ tbody tr:focus-visible {
 
 .progress-track.indeterminate {
   height: 16px;
+  overflow: hidden;
+  border-color: #777c84;
   background: linear-gradient(
     to bottom,
     #fff 0%,
-    #f2f3f4 6%,
-    #e8e9eb 20%,
-    #ced0d4 46%,
-    #d0d2d6 54%,
-    #e1e3e7 88%,
-    #f9fbff 100%
+    #fff 10%,
+    #f1f2f3 20%,
+    #e4e5e7 34%,
+    #d8d9dc 52%,
+    #dcdee1 62%,
+    #e9ebee 80%,
+    #fbfcff 100%
   );
   box-shadow:
-    inset 0 1px rgba(255,255,255,.96),
-    inset 0 -1px rgba(92,98,106,.35),
-    0 1px rgba(255,255,255,.52);
+    inset 0 1px #fff,
+    inset 0 2px rgba(255,255,255,.92),
+    inset 0 3px rgba(84,89,96,.2),
+    inset 0 -1px rgba(95,101,109,.48),
+    0 -1px rgba(71,76,82,.3),
+    0 1px rgba(255,255,255,.65);
 }
 
 .progress-track.indeterminate .progress-indeterminate-pattern {
@@ -1091,7 +1099,7 @@ tbody tr:focus-visible {
   position: absolute;
   inset: 6px 0 auto;
   height: 2px;
-  background: linear-gradient(#dfa96f, #c26802 54%, #e78d27);
+  background: linear-gradient(#d7954e, #aa4a00 54%, #d2720f);
 }
 
 .progress-indeterminate-pattern i {
@@ -1110,13 +1118,13 @@ tbody tr:focus-visible {
     ),
     linear-gradient(
       to bottom,
-      #e9cbab 0%,
-      #dfa96f 12%,
-      #d09140 36%,
-      #c26802 54%,
-      #c56c06 58%,
-      #e78d27 96%,
-      #fbab45 100%
+      #e7bc88 0%,
+      #d7954e 12%,
+      #c47b23 36%,
+      #aa4a00 54%,
+      #b35100 58%,
+      #d2720f 94%,
+      #f49a31 100%
     );
   clip-path: path("M -1 6 C 3 6 5 6 7 5.5 C 10 4.5 12 2.25 16 1.75 C 18 1.5 20 1.5 22 1.5 C 24 1.5 26 1.5 28 1.75 C 32 2.25 34 4.5 37 5.5 C 39 6 41 6 45 6 L 45 8 C 41 8 39 8 37 8.5 C 34 9.5 32 11.75 28 12.25 C 26 12.5 24 12.5 22 12.5 C 20 12.5 18 12.5 16 12.25 C 12 11.75 10 9.5 7 8.5 C 5 8 3 8 -1 8 Z");
 }
@@ -1214,31 +1222,30 @@ tbody tr:focus-visible {
 
 .fake-scrollbar .scroll-thumb {
   position: absolute;
-  top: 0;
+  top: -1px;
   width: 27%;
-  height: 15px;
+  height: 16px;
   padding: 0;
-  border-style: solid;
-  border-width: 0 1px 1px;
-  border-color: #4c5e6f #4c5e6f #34495c;
-  border-radius: 0 0 11px 11px;
+  border: 1px solid #34495c;
+  border-top-color: #b8c3cd;
+  border-radius: 0 0 22px 22px / 0 0 14px 14px;
   background: linear-gradient(
-    #f3f7f8 0%,
-    #e6edf2 5%,
-    #cdd9e5 18%,
-    #a9bfd1 29%,
-    #acc1d4 33%,
-    #bbd0e3 52%,
-    #cbe0ef 72%,
-    #d8edf5 88%,
-    #e4f7fa 100%
+    #f8fbfc 0%,
+    #e9f1f6 6%,
+    #c8d8e5 17%,
+    #91aec5 32%,
+    #9ab6cc 38%,
+    #bdd5e7 58%,
+    #d7ebf7 82%,
+    #f0fcff 100%
   );
   box-shadow:
-    inset 0 1px rgba(255,255,255,.78),
-    inset 1px 0 rgba(255,255,255,.24),
-    inset -1px 0 rgba(44,67,86,.2),
-    inset 0 -1px #8da1ab,
-    0 1px rgba(30,47,62,.35);
+    inset 0 1px #fff,
+    inset 0 2px rgba(255,255,255,.58),
+    inset 1px 0 rgba(255,255,255,.32),
+    inset -1px 0 rgba(29,54,75,.32),
+    inset 0 -1px #738d9e,
+    0 2px 2px rgba(21,39,55,.58);
   cursor: default;
   user-select: none;
   -webkit-user-select: none;
@@ -1248,15 +1255,14 @@ tbody tr:focus-visible {
 .fake-scrollbar .scroll-thumb:active {
   border-color: #354a5e;
   background: linear-gradient(
-    #e5edf1 0%,
-    #d6e1e9 5%,
-    #becddb 18%,
-    #91aabd 29%,
-    #98b0c4 33%,
-    #a8c0d3 52%,
-    #bad1e1 72%,
-    #c5dce7 88%,
-    #cfe4ed 100%
+    #eaf2f6 0%,
+    #d8e4ec 6%,
+    #b4c7d7 17%,
+    #7899b2 32%,
+    #84a2ba 38%,
+    #a9c3d7 58%,
+    #c4ddea 82%,
+    #dceff4 100%
   );
   box-shadow: inset 0 1px rgba(45,66,84,.24), inset 0 -1px rgba(255,255,255,.45);
 }
