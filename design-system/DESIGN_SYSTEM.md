@@ -74,15 +74,16 @@ OpenJDK Nimbus `UIManager` 기본값과 대조해 만든 구현 기준이다. �
 
 | 역할 | Swing | 웹 CSS | 사용처 |
 |---|---|---|---|
-| Page title | 20 pt Bold | 21 px / 700 | 한 화면당 하나 |
+| Page title | 20 pt Bold | 20 px / 700 | 한 화면당 하나 |
 | Section title | 14 pt Bold | 14 px / 700 | 큰 콘텐츠 구획 |
 | Body strong | 12 pt Bold | 12 px / 700 | `TitledBorder`, 강조 레이블 |
 | Body | 12 pt Regular | 12 px / 400 | 컨트롤, 탭, 표, 메뉴, 본문 |
 | Caption | 11 pt Regular | 11 px / 400 | 보조 설명, 메타데이터 |
 
-웹 카탈로그는 `1 pt = 4/3 px`의 기계 변환값보다 원본 캡처의 조밀한 상대 밀도를 우선해
-한 단계 작은 compact scale을 사용한다. `strong`, 제목, 선택 상태라는 이유만으로 굵기를
-추가하지 않는다.
+웹 카탈로그는 Swing의 논리 폰트 크기를 같은 수치의 CSS px로 옮겨 원본 캡처의 compact
+scale을 유지한다. 브라우저 기본 커닝과 합자는 끄고, 색상 토큰처럼 코드 형태로 보이는
+문자열에도 임의의 모노스페이스 폰트를 섞지 않는다. `strong`, 제목, 선택 상태라는 이유만으로
+굵기를 추가하지 않는다.
 
 제목과 본문은 문장형 대소문자(sentence case)를 기본으로 한다. 버튼 레이블은 동사로
 시작하고 말줄임표는 추가 입력이 필요한 액션에만 사용한다.

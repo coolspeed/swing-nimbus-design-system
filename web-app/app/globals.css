@@ -39,6 +39,9 @@ body {
   font-size: 12px;
   font-weight: 400;
   line-height: 1.25;
+  font-kerning: none;
+  font-variant-ligatures: none;
+  font-synthesis: none;
 }
 
 button,
@@ -473,7 +476,7 @@ textarea:focus-visible {
 
 .page-head h1 {
   margin: 0 0 4px;
-  font-size: 21px;
+  font-size: 20px;
   line-height: 1.15;
   letter-spacing: 0;
 }
@@ -584,8 +587,8 @@ textarea:focus-visible {
 }
 
 .swatch code {
-  font-family: "Cascadia Mono", Consolas, monospace;
-  font-size: 11px;
+  font-family: inherit;
+  font-size: 12px;
 }
 
 .swatch-canvas { background: #d6d9df; }
@@ -618,7 +621,7 @@ textarea:focus-visible {
   margin: 2px 0;
 }
 
-.type-page { font-size: 21px; font-weight: 700; }
+.type-page { font-size: 20px; font-weight: 700; }
 .type-section { font-size: 14px; font-weight: 700; }
 .type-strong { font-weight: 700; }
 .type-caption { font-size: 11px; color: #777f87; }
@@ -1426,7 +1429,8 @@ tbody tr:focus-visible {
   padding: 3px 7px;
   color: white;
   background: rgba(0,0,0,.45);
-  font-family: Consolas, monospace;
+  font-family: inherit;
+  font-size: 12px;
 }
 
 .color-options {

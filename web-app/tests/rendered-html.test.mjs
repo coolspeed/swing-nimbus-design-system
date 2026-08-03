@@ -82,7 +82,10 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.match(css, /--focus:\s*#73a4d1/i);
   assert.match(css, /--font-ui:\s*Arial,\s*"Malgun Gothic",\s*sans-serif/i);
   assert.doesNotMatch(css, /--font-ui:[^;]*Segoe UI/i);
-  assert.match(css, /body\s*\{[\s\S]*?font-size:\s*12px/i);
+  assert.match(css, /body\s*\{[\s\S]*?font-size:\s*12px[\s\S]*?font-kerning:\s*none[\s\S]*?font-variant-ligatures:\s*none[\s\S]*?font-synthesis:\s*none/i);
+  assert.match(css, /\.page-head h1\s*\{[\s\S]*?font-size:\s*20px/i);
+  assert.match(css, /\.swatch code\s*\{[\s\S]*?font-family:\s*inherit[\s\S]*?font-size:\s*12px/i);
+  assert.doesNotMatch(css, /Cascadia Mono|Consolas/i);
   assert.match(css, /\.app-window\s*\{[\s\S]*?width:\s*min\(1200px,\s*calc\(100vw - 140px\)\)[\s\S]*?height:\s*min\(720px,\s*calc\(100vh - 140px\)\)/i);
   assert.match(page, /function NimbusSelect\([\s\S]*?nimbus-select-arrow/i);
   assert.match(page, /function NimbusSpinner\([\s\S]*?Increase quantity[\s\S]*?Decrease quantity/i);
