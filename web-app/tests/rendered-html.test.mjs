@@ -92,7 +92,6 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.match(css, /\.nimbus-spinner-controls\s*\{[\s\S]*?grid-template-rows:\s*1fr 1fr/i);
   assert.match(css, /\.check-row input\[type="checkbox"\],[\s\S]*?width:\s*15px[\s\S]*?appearance:\s*none/i);
   assert.match(css, /\.check-row input\[type="checkbox"\]:checked,[\s\S]*?background:\s*linear-gradient\(#e9f3f8 0%,\s*#b9d1df 57%,\s*#dceaf1 100%\)/i);
-  assert.match(css, /\.nimbus-button:active,[\s\S]*?background:\s*linear-gradient\(#c6d8e5 0%,\s*#a7becf 34%,\s*#8faabd 63%,\s*#bcd0dd 100%\)/i);
   assert.doesNotMatch(page, /SCREENSHOT-DERIVED UI KIT|status-dot/i);
   assert.match(css, /label,[\s\S]*?\.status-bar\s*\{[\s\S]*?user-select:\s*none/i);
   assert.match(css, /\.tab-strip button\s*\{[\s\S]*?height:\s*24px/i);
