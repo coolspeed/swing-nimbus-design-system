@@ -146,7 +146,8 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.match(css, /@keyframes indeterminate\s*\{[\s\S]*?translateX\(33px\)/i);
   assert.doesNotMatch(css, /radial-gradient\(ellipse 18px 9px at 50% 50%/i);
   assert.match(css, /\.progress-indeterminate-pattern i\s*\{[\s\S]*?rgba\(255,206,139,\.9\) 35% 37%[\s\S]*?rgba\(255,206,139,\.9\) 63% 65%[\s\S]*?#f0c995 0%,[\s\S]*?#c36903 54%,[\s\S]*?#f8aa48 100%/i);
-  assert.match(css, /\.fake-scrollbar\s*\{[\s\S]*?height:\s*15px[\s\S]*?grid-template-columns:\s*24px 1fr 24px[\s\S]*?#3d3f44 0%,[\s\S]*?#55575c 7%,[\s\S]*?#7d8085 13%,[\s\S]*?#f1f2f3 26%,[\s\S]*?#b0b3b9 48%,[\s\S]*?#d6d9df 100%[\s\S]*?inset 0 1px rgba\(7,9,12,\.64\)[\s\S]*?inset 0 3px rgba\(255,255,255,\.18\)[\s\S]*?inset 0 -1px rgba\(255,255,255,\.34\)/i);
+  assert.match(css, /\.fake-scrollbar\s*\{[\s\S]*?height:\s*15px[\s\S]*?grid-template-columns:\s*24px 1fr 24px[\s\S]*?#68696d 0%,[\s\S]*?#8e9094 8%,[\s\S]*?#a1a4a8 12%,[\s\S]*?#adb0b5 16%,[\s\S]*?#b8bac0 25%,[\s\S]*?#c2c4ca 35%,[\s\S]*?#c7c9cf 42%,[\s\S]*?#cfd2d8 65%,[\s\S]*?#d6d9df 100%[\s\S]*?box-shadow:\s*none/i);
+  assert.doesNotMatch(css, /\.fake-scrollbar\s*\{[\s\S]*?#f1f2f3 26%/i);
   assert.match(css, /\.fake-scrollbar \.scroll-track\s*\{[\s\S]*?left:\s*-10px[\s\S]*?width:\s*calc\(100% \+ 20px\)[\s\S]*?touch-action:\s*none/i);
   assert.match(css, /\.fake-scrollbar \.scroll-thumb\s*\{[\s\S]*?width:\s*27%/i);
   assert.match(css, /\.fake-scrollbar \.scroll-thumb\s*\{[\s\S]*?cursor:\s*default[\s\S]*?touch-action:\s*none/i);
