@@ -84,7 +84,9 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.doesNotMatch(css, /--font-ui:[^;]*Segoe UI/i);
   assert.match(css, /body\s*\{[\s\S]*?font-size:\s*12px/i);
   assert.match(css, /\.app-window\s*\{[\s\S]*?width:\s*min\(1200px,\s*calc\(100vw - 140px\)\)[\s\S]*?height:\s*min\(720px,\s*calc\(100vh - 140px\)\)/i);
-  assert.match(css, /\.nimbus-button,[\s\S]*?\.nimbus-select\s*\{[\s\S]*?min-height:\s*23px/i);
+  assert.match(page, /function NimbusSelect\([\s\S]*?nimbus-select-arrow/i);
+  assert.match(css, /\.nimbus-button,[\s\S]*?\.nimbus-select-shell\s*\{[\s\S]*?min-height:\s*23px/i);
+  assert.match(css, /\.nimbus-select-arrow\s*\{[\s\S]*?width:\s*17px[\s\S]*?linear-gradient\(#ecf1f4 0%,\s*#dae3eb 52%,\s*#c1ceda 100%\)/i);
   assert.match(css, /\.nimbus-input\s*\{[\s\S]*?min-height:\s*23px/i);
   assert.doesNotMatch(page, /SCREENSHOT-DERIVED UI KIT|status-dot/i);
   assert.match(css, /label,[\s\S]*?\.status-bar\s*\{[\s\S]*?user-select:\s*none/i);

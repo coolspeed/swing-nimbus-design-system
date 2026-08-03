@@ -62,6 +62,21 @@ function NimbusButton({
   );
 }
 
+function NimbusSelect({
+  children,
+  className = "",
+  ...props
+}: React.SelectHTMLAttributes<HTMLSelectElement>) {
+  return (
+    <span className={`nimbus-select-shell ${className}`}>
+      <select className="nimbus-select" {...props}>
+        {children}
+      </select>
+      <span className="nimbus-select-arrow" aria-hidden="true">▼</span>
+    </span>
+  );
+}
+
 function Fieldset({
   legend,
   children,
@@ -294,16 +309,15 @@ export default function Home() {
           </button>
           <span className="tool-separator" />
           <label htmlFor="viewport-select">View:</label>
-          <select
+          <NimbusSelect
             id="viewport-select"
-            className="nimbus-select"
             value={viewMode}
             onChange={(event) => setViewMode(event.target.value)}
           >
             <option>Desktop</option>
             <option>Tablet</option>
             <option>Mobile</option>
-          </select>
+          </NimbusSelect>
           <span className="toolbar-spacer" />
           <span className="theme-chip"><span /> Nimbus native</span>
         </div>
@@ -475,7 +489,7 @@ function ControlsPanel() {
           <label><span>Name</span><input className="nimbus-input" data-testid="name-input" defaultValue="Morgan Lee" /></label>
           <label><span>Email</span><input className="nimbus-input" type="email" defaultValue="morgan@example.com" /></label>
           <label><span>Password</span><input className="nimbus-input" type="password" defaultValue="demopass" /></label>
-          <label><span>Role</span><select className="nimbus-select" data-testid="role-select" defaultValue="Designer"><option>Designer</option><option>Developer</option><option>Manager</option></select></label>
+          <label><span>Role</span><NimbusSelect data-testid="role-select" defaultValue="Designer"><option>Designer</option><option>Developer</option><option>Manager</option></NimbusSelect></label>
           <label><span>Date</span><input className="nimbus-input" type="text" defaultValue="2026-07-30" /></label>
           <label><span>Quantity</span><input className="nimbus-input" type="number" defaultValue="0" /></label>
           <label className="notes-field"><span>Notes</span><textarea className="nimbus-input" defaultValue={"Multiline text area\nwith scroll support."} /></label>
@@ -865,7 +879,7 @@ function NimbusDialog({
               ))}
             </div>
             <label className="file-field"><span>File name:</span><input className="nimbus-input" /></label>
-            <label className="file-field"><span>Files of type:</span><select className="nimbus-select"><option>All files</option><option>PNG images</option><option>Java source</option></select></label>
+            <label className="file-field"><span>Files of type:</span><NimbusSelect><option>All files</option><option>PNG images</option><option>Java source</option></NimbusSelect></label>
           </div>
         )}
         {type === "color" && (
