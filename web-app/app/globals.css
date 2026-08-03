@@ -950,11 +950,16 @@ tbody tr:focus-visible {
   border-radius: 0 0 11px 11px;
   background: linear-gradient(#cbd4db 0%, #ccd8e4 20%, #acc1d4 42%, #bbd0e3 58%, #cbe0ef 76%, #def1f8 100%);
   box-shadow: inset 0 1px rgba(255,255,255,.65);
-  cursor: grab;
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
 }
 
 .fake-scrollbar .scroll-thumb:active {
-  cursor: grabbing;
+  border-color: #354a5e;
+  background: linear-gradient(#b9c4cd 0%, #b5c3d0 20%, #98b0c4 42%, #a8c0d3 58%, #bad1e1 76%, #cfe4ed 100%);
+  box-shadow: inset 0 1px rgba(45,66,84,.24), inset 0 -1px rgba(255,255,255,.45);
 }
 
 .muted-copy {

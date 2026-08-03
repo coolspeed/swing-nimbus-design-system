@@ -105,6 +105,9 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.match(css, /\.fake-scrollbar\s*\{[\s\S]*?height:\s*14px[\s\S]*?grid-template-columns:\s*24px 1fr 24px/i);
   assert.match(css, /\.fake-scrollbar \.scroll-track\s*\{[\s\S]*?left:\s*-10px[\s\S]*?width:\s*calc\(100% \+ 20px\)[\s\S]*?touch-action:\s*none/i);
   assert.match(css, /\.fake-scrollbar \.scroll-thumb\s*\{[\s\S]*?width:\s*27%/i);
+  assert.match(css, /\.fake-scrollbar \.scroll-thumb\s*\{[\s\S]*?cursor:\s*default[\s\S]*?touch-action:\s*none/i);
+  assert.doesNotMatch(css, /\.fake-scrollbar \.scroll-thumb\s*\{[\s\S]*?cursor:\s*grab/i);
+  assert.doesNotMatch(css, /\.fake-scrollbar \.scroll-thumb:active\s*\{[\s\S]*?cursor:\s*grabbing/i);
   assert.doesNotMatch(css, /\.fake-scrollbar \.scroll-thumb\s*\{[\s\S]*?transition:/i);
   assert.match(css, /border-radius:\s*0 0 11px 11px/i);
   assert.match(css, /background:\s*linear-gradient\(#cbd4db 0%,\s*#ccd8e4 20%,\s*#acc1d4 42%,\s*#bbd0e3 58%,\s*#cbe0ef 76%,\s*#def1f8 100%\)/i);
