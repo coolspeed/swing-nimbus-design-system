@@ -1002,19 +1002,44 @@ tbody tr:focus-visible {
 
 .progress-track {
   position: relative;
-  height: 16px;
+  height: 19px;
   overflow: hidden;
-  border: 1px solid #9a9fa6;
-  background: linear-gradient(#f5f6f7, #e4e6e8 58%, #f0f1f2);
-  box-shadow: inset 0 1px 2px rgba(0,0,0,.14);
+  border: 1px solid #898c92;
+  background: linear-gradient(
+    to bottom,
+    #fff 0%,
+    #f2f3f4 6%,
+    #e8e9eb 20%,
+    #ced0d4 46%,
+    #d0d2d6 54%,
+    #e1e3e7 88%,
+    #f9fbff 100%
+  );
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.96),
+    inset 0 -1px rgba(92,98,106,.35),
+    0 1px rgba(255,255,255,.52);
 }
 
 .progress-track > .progress-fill {
   display: block;
   height: 100%;
+  border-top: 1px solid #9b4c00;
   border-right: 1px solid #9b4c00;
-  background: linear-gradient(#e9a348, #c96d0b 58%, #e58b20);
-  box-shadow: inset 0 1px rgba(255,255,255,.38);
+  border-bottom: 1px solid #813a00;
+  background: linear-gradient(
+    to bottom,
+    #e9cbab 0%,
+    #dfa96f 12%,
+    #d09140 36%,
+    #c26802 54%,
+    #c56c06 58%,
+    #e78d27 96%,
+    #fbab45 100%
+  );
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.58),
+    inset 0 -1px rgba(255,183,93,.72);
 }
 
 .progress-value {
@@ -1030,9 +1055,21 @@ tbody tr:focus-visible {
 }
 
 .progress-track.indeterminate {
-  height: 14px;
-  background: linear-gradient(#fafafa 0%, #e7e8e9 52%, #f5f5f6 100%);
-  box-shadow: inset 0 1px rgba(255,255,255,.9), inset 0 -1px rgba(104,108,113,.2);
+  height: 16px;
+  background: linear-gradient(
+    to bottom,
+    #fff 0%,
+    #f2f3f4 6%,
+    #e8e9eb 20%,
+    #ced0d4 46%,
+    #d0d2d6 54%,
+    #e1e3e7 88%,
+    #f9fbff 100%
+  );
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.96),
+    inset 0 -1px rgba(92,98,106,.35),
+    0 1px rgba(255,255,255,.52);
 }
 
 .progress-track.indeterminate .progress-indeterminate-pattern {
@@ -1044,6 +1081,9 @@ tbody tr:focus-visible {
   height: 14px;
   animation: indeterminate .8s linear infinite;
   margin-top: -7px;
+  filter:
+    drop-shadow(0 -1px 0 rgba(255,244,225,.82))
+    drop-shadow(0 1px 0 rgba(133,65,4,.78));
 }
 
 .progress-indeterminate-pattern::before {
@@ -1051,7 +1091,7 @@ tbody tr:focus-visible {
   position: absolute;
   inset: 6px 0 auto;
   height: 2px;
-  background: linear-gradient(#e9a348, #c96d0b 58%, #e58b20);
+  background: linear-gradient(#dfa96f, #c26802 54%, #e78d27);
 }
 
 .progress-indeterminate-pattern i {
@@ -1068,7 +1108,16 @@ tbody tr:focus-visible {
       rgba(255,190,105,.88) 63% 65%,
       transparent 66%
     ),
-    linear-gradient(#e9a348 0%, #c96d0b 58%, #e58b20 100%);
+    linear-gradient(
+      to bottom,
+      #e9cbab 0%,
+      #dfa96f 12%,
+      #d09140 36%,
+      #c26802 54%,
+      #c56c06 58%,
+      #e78d27 96%,
+      #fbab45 100%
+    );
   clip-path: path("M -1 6 C 3 6 5 6 7 5.5 C 10 4.5 12 2.25 16 1.75 C 18 1.5 20 1.5 22 1.5 C 24 1.5 26 1.5 28 1.75 C 32 2.25 34 4.5 37 5.5 C 39 6 41 6 45 6 L 45 8 C 41 8 39 8 37 8.5 C 34 9.5 32 11.75 28 12.25 C 26 12.5 24 12.5 22 12.5 C 20 12.5 18 12.5 16 12.25 C 12 11.75 10 9.5 7 8.5 C 5 8 3 8 -1 8 Z");
 }
 
@@ -1079,13 +1128,26 @@ tbody tr:focus-visible {
 
 
 .fake-scrollbar {
-  height: 14px;
+  height: 15px;
   display: grid;
   grid-template-columns: 24px 1fr 24px;
-  border: 1px solid #a0a7af;
+  border: 0;
   overflow: hidden;
-  background: linear-gradient(#c7cbd0, #e5e7e9 52%, #d1d4d8);
-  box-shadow: inset 0 2px 4px rgba(0,0,0,.22);
+  background: linear-gradient(
+    to bottom,
+    #68696d 0%,
+    #8e9094 8%,
+    #a1a4a8 12%,
+    #adb0b5 16%,
+    #b8bac0 25%,
+    #c2c4ca 35%,
+    #c7c9cf 42%,
+    #cfd2d8 65%,
+    #d6d9df 100%
+  );
+  box-shadow:
+    inset 0 1px rgba(24,26,29,.32),
+    inset 0 2px rgba(255,255,255,.06);
 }
 
 .fake-scrollbar .scroll-arrow {
@@ -1096,6 +1158,9 @@ tbody tr:focus-visible {
   color: #555c63;
   background-color: #f2f3f4;
   background-repeat: no-repeat;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.84),
+    inset 0 -1px rgba(255,255,255,.72);
   font-size: 9px;
 }
 
@@ -1111,14 +1176,30 @@ tbody tr:focus-visible {
 
 .fake-scrollbar .scroll-arrow-left {
   padding-right: 7px;
-  background-image: linear-gradient(#f8f8f8, #e1e3e5);
+  background-image: linear-gradient(
+    #f0f1f2 0%,
+    #f6f6f7 4%,
+    #e9ebed 20%,
+    #d3d7dc 60%,
+    #d3d7dc 64%,
+    #d7dbe0 68%,
+    #f2f6f9 100%
+  );
   -webkit-mask: radial-gradient(circle 7px at 100% 50%, transparent 0 6px, #000 7px);
   mask: radial-gradient(circle 7px at 100% 50%, transparent 0 6px, #000 7px);
 }
 
 .fake-scrollbar .scroll-arrow-right {
   padding-left: 7px;
-  background-image: linear-gradient(#f8f8f8, #e1e3e5);
+  background-image: linear-gradient(
+    #f0f1f2 0%,
+    #f6f6f7 4%,
+    #e9ebed 20%,
+    #d3d7dc 60%,
+    #d3d7dc 64%,
+    #d7dbe0 68%,
+    #f2f6f9 100%
+  );
   -webkit-mask: radial-gradient(circle 7px at 0 50%, transparent 0 6px, #000 7px);
   mask: radial-gradient(circle 7px at 0 50%, transparent 0 6px, #000 7px);
 }
@@ -1133,14 +1214,31 @@ tbody tr:focus-visible {
 
 .fake-scrollbar .scroll-thumb {
   position: absolute;
-  top: -1px;
+  top: 0;
   width: 27%;
-  height: 14px;
+  height: 15px;
   padding: 0;
-  border: 1px solid #4c5e6f;
+  border-style: solid;
+  border-width: 0 1px 1px;
+  border-color: #4c5e6f #4c5e6f #34495c;
   border-radius: 0 0 11px 11px;
-  background: linear-gradient(#cbd4db 0%, #ccd8e4 20%, #acc1d4 42%, #bbd0e3 58%, #cbe0ef 76%, #def1f8 100%);
-  box-shadow: inset 0 1px rgba(255,255,255,.65);
+  background: linear-gradient(
+    #f3f7f8 0%,
+    #e6edf2 5%,
+    #cdd9e5 18%,
+    #a9bfd1 29%,
+    #acc1d4 33%,
+    #bbd0e3 52%,
+    #cbe0ef 72%,
+    #d8edf5 88%,
+    #e4f7fa 100%
+  );
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.78),
+    inset 1px 0 rgba(255,255,255,.24),
+    inset -1px 0 rgba(44,67,86,.2),
+    inset 0 -1px #8da1ab,
+    0 1px rgba(30,47,62,.35);
   cursor: default;
   user-select: none;
   -webkit-user-select: none;
@@ -1149,7 +1247,17 @@ tbody tr:focus-visible {
 
 .fake-scrollbar .scroll-thumb:active {
   border-color: #354a5e;
-  background: linear-gradient(#b9c4cd 0%, #b5c3d0 20%, #98b0c4 42%, #a8c0d3 58%, #bad1e1 76%, #cfe4ed 100%);
+  background: linear-gradient(
+    #e5edf1 0%,
+    #d6e1e9 5%,
+    #becddb 18%,
+    #91aabd 29%,
+    #98b0c4 33%,
+    #a8c0d3 52%,
+    #bad1e1 72%,
+    #c5dce7 88%,
+    #cfe4ed 100%
+  );
   box-shadow: inset 0 1px rgba(45,66,84,.24), inset 0 -1px rgba(255,255,255,.45);
 }
 
