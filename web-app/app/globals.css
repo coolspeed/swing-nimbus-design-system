@@ -266,18 +266,15 @@ textarea:focus-visible {
 }
 
 .nimbus-button,
-.toggle-tool {
+.toggle-tool,
+.nimbus-select {
   min-height: 23px;
-  border: 1px solid #68737e;
+  border: 1px solid #7d8791;
   border-radius: 6px;
-  background: linear-gradient(#fdfefe 0%, #f3f5f6 42%, #d9dfe4 72%, #f4f6f7 100%);
+  background: linear-gradient(#f7f8fa, #e4e7ea 58%, #eef0f2);
   box-shadow:
-    inset 0 1px rgba(255,255,255,.98),
-    inset 1px 0 rgba(255,255,255,.55),
-    inset -1px 0 rgba(114,126,138,.16),
-    inset 0 -1px rgba(111,124,136,.24),
-    0 1px rgba(255,255,255,.7),
-    0 1px rgba(0,0,0,.12);
+    inset 0 1px rgba(255,255,255,.58),
+    0 1px rgba(0,0,0,.08);
 }
 
 .nimbus-button,
@@ -286,18 +283,18 @@ textarea:focus-visible {
 }
 
 .nimbus-button:hover,
-.toggle-tool:hover {
+.toggle-tool:hover,
+.nimbus-select:hover {
   border-color: #577c9a;
-  background: linear-gradient(#ffffff, #e7f0f6 55%, #d3e1ea 75%, #f0f5f8);
+  background: linear-gradient(#f7fafc, #d9e7f0 60%, #e8f0f5);
 }
 
 .nimbus-button:active,
 .toggle-tool:active,
 .toggle-tool.active,
 .selected-button {
-  border-color: #59646f;
-  background: linear-gradient(#c4ccd3, #b7c1ca 62%, #d6dde2);
-  box-shadow: inset 0 1px 2px rgba(32, 45, 58, 0.24), inset 0 -1px rgba(255,255,255,.46);
+  background: linear-gradient(#c7cdd3, #b9c1c9 62%, #cdd2d7);
+  box-shadow: inset 0 1px 2px rgba(32, 45, 58, 0.18);
 }
 
 .nimbus-button:disabled {
@@ -321,51 +318,10 @@ textarea:focus-visible {
   padding-inline: 9px;
 }
 
-.nimbus-select-shell {
-  position: relative;
-  display: inline-block;
-  min-width: 116px;
-  min-height: 23px;
-  border: 1px solid #68737e;
-  border-radius: 6px;
-  overflow: hidden;
-  background: linear-gradient(#fdfefe 0%, #f3f5f6 42%, #d9dfe4 72%, #f4f6f7 100%);
-  box-shadow: inset 0 1px rgba(255,255,255,.98), 0 1px rgba(0,0,0,.12);
-}
-
-.nimbus-select-shell:hover {
-  border-color: #577c9a;
-}
-
 .nimbus-select {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  min-height: 21px;
-  padding: 1px 31px 2px 7px;
-  appearance: none;
-  -webkit-appearance: none;
-  border: 0;
-  border-radius: 5px;
-  background: transparent;
+  min-width: 116px;
+  padding: 1px 28px 2px 7px;
   color: var(--text);
-}
-
-.nimbus-select-arrow {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 27px;
-  display: grid;
-  place-items: center;
-  border-left: 1px solid #738c9e;
-  color: #263e50;
-  background: linear-gradient(#dcebf3 0%, #a6bfce 48%, #c7d8e2 100%);
-  box-shadow: inset 1px 0 rgba(255,255,255,.48);
-  font-size: 9px;
-  line-height: 1;
-  pointer-events: none;
 }
 
 .theme-chip {
@@ -435,9 +391,9 @@ textarea:focus-visible {
 .tab-strip button[aria-selected="true"] {
   height: 25px;
   margin-bottom: -1px;
-  border-color: #7b858f;
-  background: linear-gradient(#f8f9fa 0%, #e8eaee 30%, #e0e2e7 64%, #d7dae0 100%);
-  box-shadow: inset 0 1px rgba(255,255,255,.94), inset 1px 0 rgba(255,255,255,.5);
+  border-color: #355d7c;
+  background: linear-gradient(#e3eaef 0%, #cdd8e2 36%, #baccda 66%, #a5bacc 100%);
+  box-shadow: inset 0 1px rgba(255,255,255,.58);
 }
 
 .content-area {
@@ -573,11 +529,6 @@ textarea:focus-visible {
   gap: 8px;
 }
 
-.input-form .nimbus-select-shell,
-.file-field .nimbus-select-shell {
-  width: 100%;
-}
-
 .input-form .notes-field {
   grid-template-columns: 1fr;
   align-content: stretch;
@@ -607,59 +558,6 @@ textarea:focus-visible {
     inset 0 2px 3px rgba(49,57,67,.12);
 }
 
-.nimbus-spinner {
-  position: relative;
-  display: block;
-  width: 100%;
-}
-
-.nimbus-spinner-input {
-  padding-right: 31px;
-  appearance: textfield;
-  -moz-appearance: textfield;
-}
-
-.nimbus-spinner-input::-webkit-inner-spin-button,
-.nimbus-spinner-input::-webkit-outer-spin-button {
-  margin: 0;
-  appearance: none;
-  -webkit-appearance: none;
-}
-
-.nimbus-spinner-controls {
-  position: absolute;
-  z-index: 2;
-  top: 1px;
-  right: 1px;
-  bottom: 1px;
-  width: 27px;
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  overflow: hidden;
-  border-left: 1px solid #738c9e;
-}
-
-.nimbus-spinner-controls button {
-  display: grid;
-  place-items: center;
-  padding: 0;
-  border: 0;
-  color: #263e50;
-  background: linear-gradient(#dcebf3, #a6bfce 70%, #c7d8e2);
-  font-size: 7px;
-  line-height: 1;
-}
-
-.nimbus-spinner-controls button + button {
-  border-top: 1px solid #7891a2;
-  background: linear-gradient(#cadce6, #9fb9c9 66%, #bed1dc);
-}
-
-.nimbus-spinner-controls button:active {
-  background: #91abba;
-  box-shadow: inset 0 1px 2px rgba(38,62,80,.28);
-}
-
 .read-only {
   color: #3e464f;
   background: #f0f1f2;
@@ -678,65 +576,10 @@ textarea:focus-visible {
   min-height: 26px;
 }
 
-.check-row input[type="checkbox"],
-.check-row input[type="radio"] {
-  width: 15px;
-  height: 15px;
-  margin: 0;
-  appearance: none;
-  -webkit-appearance: none;
-  border: 1px solid #697985;
-  background: linear-gradient(#fbfcfc, #e0e4e7 58%, #f4f6f7);
-  box-shadow: inset 0 1px rgba(255,255,255,.95), 0 1px rgba(0,0,0,.12);
-}
-
-.check-row input[type="checkbox"] {
-  border-radius: 3px;
-}
-
-.check-row input[type="radio"] {
-  border-radius: 50%;
-}
-
-.check-row input[type="checkbox"]:checked,
-.check-row input[type="radio"]:checked {
-  border-color: #5f8096;
-  background: linear-gradient(#e9f3f8 0%, #b9d1df 57%, #dceaf1 100%);
-}
-
-.check-row input[type="checkbox"]:checked::after {
-  content: "";
-  display: block;
-  width: 7px;
-  height: 4px;
-  margin: -2px 0 0 3px;
-  border: solid #234864;
-  border-width: 0 0 2px 2px;
-  transform: rotate(-45deg);
-}
-
-.check-row input[type="radio"]:checked::after {
-  content: "";
-  display: block;
-  width: 7px;
-  height: 7px;
-  margin: 3px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #517995, #274b65 70%);
-  box-shadow: 0 1px rgba(255,255,255,.44);
-}
-
-.check-row input:disabled {
-  border-color: #c0c6cb;
-  background: linear-gradient(#f0f2f3, #e1e4e6);
-}
-
-.check-row input[type="checkbox"]:checked:disabled::after {
-  border-color: #aeb8bf;
-}
-
-.check-row input[type="radio"]:checked:disabled::after {
-  background: #b4bec5;
+.check-row input {
+  width: 13px;
+  height: 13px;
+  accent-color: var(--nimbus-accent);
 }
 
 .disabled-control {
