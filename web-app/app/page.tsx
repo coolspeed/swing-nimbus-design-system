@@ -141,6 +141,7 @@ export default function Home() {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [dialog, setDialog] = useState<DialogId>(null);
   const [contextOpen, setContextOpen] = useState(false);
+  const [contextPosition, setContextPosition] = useState({ left: 0, top: 0 });
   const [treeOpen, setTreeOpen] = useState(true);
   const [sortKey, setSortKey] = useState<SortKey>("component");
   const [sortAscending, setSortAscending] = useState(true);
@@ -211,6 +212,17 @@ export default function Home() {
       setSortKey(key);
       setSortAscending(true);
     }
+  };
+
+  const openContext = (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+    const bounds = event.currentTarget.getBoundingClientRect();
+    contextOpenerRef.current = event.currentTarget;
+    setContextPosition({
+      left: event.type === "contextmenu" ? event.clientX : bounds.left,
+      top: event.type === "contextmenu" ? event.clientY : bounds.bottom + 2,
+    });
+    setContextOpen(true);
   };
 
   const showDialog = (id: Exclude<DialogId, null>) => {
@@ -403,14 +415,14 @@ export default function Home() {
               sortKey={sortKey}
               sortAscending={sortAscending}
               chooseSort={chooseSort}
-              openContext={() => setContextOpen(true)}
+              openContext={openContext}
             />
           )}
           {activeTab === "feedback" && (
             <FeedbackPanel />
           )}
           {activeTab === "dialogs" && (
-            <DialogsPanel openDialog={showDialog} openContext={() => setContextOpen(true)} />
+            <DialogsPanel openDialog={showDialog} openContext={openContext} />
           )}
         </div>
 
@@ -430,6 +442,7 @@ export default function Home() {
             className="context-menu"
             role="menu"
             aria-label="Component actions"
+            style={contextPosition}
             onClick={(event) => event.stopPropagation()}
             onKeyDown={(event) => {
               const items = Array.from(
@@ -579,7 +592,7 @@ function DataPanel({
   sortKey: SortKey;
   sortAscending: boolean;
   chooseSort: (key: SortKey) => void;
-  openContext: () => void;
+  openContext: (event: React.MouseEvent<HTMLElement>) => void;
 }) {
   const [selectedRow, setSelectedRow] = useState<string | null>(null);
   const [selectedActivity, setSelectedActivity] = useState<string | null>(null);
@@ -615,7 +628,7 @@ function DataPanel({
             onContextMenu={(event) => {
               event.preventDefault();
               event.currentTarget.focus();
-              openContext();
+              openContext(event);
             }}
           >
             <thead>
@@ -807,7 +820,7 @@ function FeedbackPanel() {
   );
 }
 
-function DialogsPanel({ openDialog, openContext }: { openDialog: (id: Exclude<DialogId, null>) => void; openContext: () => void }) {
+function DialogsPanel({ openDialog, openContext }: { openDialog: (id: Exclude<DialogId, null>) => void; openContext: (event: React.MouseEvent<HTMLElement>) => void }) {
   return (
     <section id="panel-dialogs" role="tabpanel" aria-labelledby="tab-dialogs" className="two-column">
       <Fieldset legend="Dialog & menu samples">

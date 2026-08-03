@@ -78,6 +78,8 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.match(page, /event\.key === "Home"[\s\S]*?event\.key === "End"/);
   assert.match(page, /event\.key === "Escape"/);
   assert.match(page, /event\.altKey/);
+  assert.match(page, /const \[contextPosition,\s*setContextPosition\] = useState\(\{ left: 0, top: 0 \}\)/);
+  assert.match(page, /left: event\.type === "contextmenu" \? event\.clientX : bounds\.left[\s\S]*?top: event\.type === "contextmenu" \? event\.clientY : bounds\.bottom \+ 2/);
   assert.match(css, /--canvas:\s*#d6d9df/i);
   assert.match(css, /--focus:\s*#73a4d1/i);
   assert.match(css, /--font-ui:\s*Arial,\s*"Malgun Gothic",\s*sans-serif/i);
@@ -92,11 +94,13 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.match(css, /\.nimbus-spinner-controls\s*\{[\s\S]*?grid-template-rows:\s*1fr 1fr/i);
   assert.match(css, /\.check-row input\[type="checkbox"\],[\s\S]*?width:\s*15px[\s\S]*?appearance:\s*none/i);
   assert.match(css, /\.check-row input\[type="checkbox"\]:checked,[\s\S]*?background:\s*linear-gradient\(#e9f3f8 0%,\s*#b9d1df 57%,\s*#dceaf1 100%\)/i);
+  assert.match(css, /\.check-row input\[type="checkbox"\]:checked::after\s*\{[\s\S]*?left:\s*2px[\s\S]*?top:\s*3px[\s\S]*?width:\s*9px/i);
+  assert.match(css, /\.check-row input\[type="radio"\]:checked::after\s*\{[\s\S]*?left:\s*3px[\s\S]*?top:\s*3px[\s\S]*?border-radius:\s*50%[\s\S]*?background:\s*#3b6380/i);
   assert.match(css, /\.nimbus-button:active,[\s\S]*?background:\s*linear-gradient\(#c2cdd6 0%,\s*#b3c0ca 62%,\s*#d2dce4 100%\)/i);
   assert.doesNotMatch(page, /SCREENSHOT-DERIVED UI KIT|status-dot/i);
   assert.match(css, /label,[\s\S]*?\.status-bar\s*\{[\s\S]*?user-select:\s*none/i);
-  assert.match(css, /\.tab-strip button\s*\{[\s\S]*?height:\s*24px/i);
-  assert.match(css, /\.tab-strip button\[aria-selected="true"\]\s*\{[\s\S]*?linear-gradient\(#dfe7ed 0%,\s*#c7d4df 36%,\s*#b4c8d7 66%,\s*#9db6c9 100%\)/i);
+  assert.match(css, /\.tab-strip button\s*\{[\s\S]*?height:\s*24px[\s\S]*?border:\s*2px solid #4f5b66/i);
+  assert.match(css, /\.tab-strip button\[aria-selected="true"\]\s*\{[\s\S]*?border-color:\s*#2f5878[\s\S]*?linear-gradient\(#e0e8ee 0%,\s*#c9d6e0 36%,\s*#b7cadd 66%,\s*#a2b9cc 100%\)/i);
   assert.match(css, /\.progress-track\s*\{[\s\S]*?height:\s*16px/i);
   assert.match(css, /animation:\s*indeterminate \.8s linear infinite/i);
   assert.match(css, /\.progress-track\.indeterminate\s*\{[\s\S]*?background:\s*linear-gradient\(#fafafa 0%,\s*#e7e8e9 52%,\s*#f5f5f6 100%\)/i);
@@ -123,6 +127,7 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.doesNotMatch(css, /radial-gradient\(circle at (?:100%|0) 50%,\s*#dfe2e5/i);
   assert.match(css, /\.nimbus-fieldset\s*\{[\s\S]*?background:\s*var\(--canvas\)[\s\S]*?box-shadow:\s*none/i);
   assert.match(css, /\.nimbus-fieldset legend\s*\{[\s\S]*?padding:\s*0 6px;/i);
+  assert.match(css, /\.context-menu\s*\{[\s\S]*?position:\s*fixed/i);
   assert.doesNotMatch(css, /tbody\s+tr:hover|activity-panel\s+li:hover|status-pill|status-ready|status-draft|status-in-review/i);
   assert.match(page, /aria-selected=\{selectedRow === row\.component\}/i);
   assert.match(css, /tbody tr\[aria-selected="true"\]\s*\{[\s\S]*?background:\s*#39698a/i);
