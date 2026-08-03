@@ -421,6 +421,27 @@ textarea:focus-visible {
   place-items: center;
 }
 
+.nimbus-spinner-step:first-child {
+  background: linear-gradient(
+    #f3f6f8 0%,
+    #e8edf2 20%,
+    #ccd8e2 60%,
+    #b6c8d6 94%,
+    #d8e3ec 100%
+  );
+}
+
+.nimbus-spinner-step:last-child {
+  background: linear-gradient(
+    #ccd7e2 0%,
+    #ccd7e2 6%,
+    #a5bacc 16%,
+    #a3b8cb 48%,
+    #bdd2e5 94%,
+    #d8e3ec 100%
+  );
+}
+
 .nimbus-spinner-step + .nimbus-spinner-step {
   border-top: 1px solid #687c8e;
 }

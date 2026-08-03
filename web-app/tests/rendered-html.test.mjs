@@ -92,6 +92,8 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.match(css, /\.nimbus-select-arrow,\s*\.nimbus-spinner-step\s*\{[\s\S]*?linear-gradient\([\s\S]*?#dce7ee 0%,[\s\S]*?#a4b9cc 62%,[\s\S]*?#d8e3ec 100%/i);
   assert.match(css, /\.nimbus-spinner\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0,\s*1fr\) 17px[\s\S]*?overflow:\s*hidden/i);
   assert.match(css, /\.nimbus-spinner-buttons\s*\{[\s\S]*?grid-template-rows:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)[\s\S]*?border-left:\s*1px solid #687c8e/i);
+  assert.match(css, /\.nimbus-spinner-step:first-child\s*\{[\s\S]*?#b6c8d6 94%,[\s\S]*?#d8e3ec 100%/i);
+  assert.match(css, /\.nimbus-spinner-step:last-child\s*\{[\s\S]*?#ccd7e2 6%,[\s\S]*?#a5bacc 16%/i);
   assert.match(css, /\.nimbus-spinner-step \+ \.nimbus-spinner-step\s*\{[\s\S]*?border-top:\s*1px solid #687c8e/i);
   assert.match(css, /\.nimbus-input\s*\{[\s\S]*?min-height:\s*23px/i);
   assert.doesNotMatch(page, /SCREENSHOT-DERIVED UI KIT|status-dot/i);
