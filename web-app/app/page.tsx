@@ -360,22 +360,25 @@ export default function Home() {
           </NimbusButton>
         </section>
 
-        <div className="tab-strip" role="tablist" aria-label="Design system sections">
-          {tabs.map((tab, index) => (
-            <button
-              key={tab.id}
-              id={`tab-${tab.id}`}
-              role="tab"
-              data-testid={`tab-${tab.id}`}
-              aria-selected={activeTab === tab.id}
-              aria-controls={`panel-${tab.id}`}
-              tabIndex={activeTab === tab.id ? 0 : -1}
-              onClick={() => setActiveTab(tab.id)}
-              onKeyDown={(event) => handleTabKeyDown(event, index)}
-            >
-              <u>{tab.label.slice(0, 1)}</u>{tab.label.slice(1)}
-            </button>
-          ))}
+        <div className="tab-strip">
+          <div className="tab-list" role="tablist" aria-label="Design system sections">
+            {tabs.map((tab, index) => (
+              <button
+                key={tab.id}
+                id={`tab-${tab.id}`}
+                role="tab"
+                data-testid={`tab-${tab.id}`}
+                aria-selected={activeTab === tab.id}
+                aria-controls={`panel-${tab.id}`}
+                tabIndex={activeTab === tab.id ? 0 : -1}
+                onClick={() => setActiveTab(tab.id)}
+                onKeyDown={(event) => handleTabKeyDown(event, index)}
+              >
+                <u>{tab.label.slice(0, 1)}</u>{tab.label.slice(1)}
+              </button>
+            ))}
+          </div>
+          <div className="tab-divider" aria-hidden="true" />
         </div>
 
         <div className="content-area">

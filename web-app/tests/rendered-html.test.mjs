@@ -55,6 +55,7 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   ]);
 
   assert.ok(page.includes('data-testid={`tab-${tab.id}`}'));
+  assert.match(page, /<div className="tab-strip">[\s\S]*?<div className="tab-list" role="tablist"[\s\S]*?<div className="tab-divider" aria-hidden="true" \/>/i);
   for (const tab of ["foundations", "controls", "data", "feedback", "dialogs"]) {
     assert.match(page, new RegExp(`panel-${tab}`));
   }
@@ -118,7 +119,12 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.doesNotMatch(page, /SCREENSHOT-DERIVED UI KIT|status-dot/i);
   assert.match(css, /label,[\s\S]*?\.status-bar\s*\{[\s\S]*?user-select:\s*none/i);
   assert.match(css, /\.tab-strip button\s*\{[\s\S]*?height:\s*24px/i);
-  assert.match(css, /\.tab-strip::after\s*\{[\s\S]*?right:\s*12px[\s\S]*?left:\s*12px[\s\S]*?border-bottom:\s*3px double #294a63/i);
+  assert.match(css, /\.tab-strip\s*\{[\s\S]*?min-width:\s*0[\s\S]*?overflow:\s*hidden/i);
+  assert.match(css, /\.tab-list\s*\{[\s\S]*?width:\s*100%[\s\S]*?padding:\s*0 0 3px 17px[\s\S]*?overflow-x:\s*auto[\s\S]*?scrollbar-width:\s*none/i);
+  assert.match(css, /\.tab-divider\s*\{[\s\S]*?right:\s*12px[\s\S]*?left:\s*12px[\s\S]*?border-bottom:\s*3px double #294a63/i);
+  assert.doesNotMatch(css, /\.tab-strip::after/);
+  assert.match(css, /@container nimbus-window \(max-width:\s*720px\)[\s\S]*?\.tab-list\s*\{[\s\S]*?padding-left:\s*8px/i);
+  assert.match(css, /@media \(max-width:\s*720px\)[\s\S]*?\.tab-list\s*\{[\s\S]*?padding-left:\s*8px/i);
   assert.match(css, /\.tab-strip button\[aria-selected="true"\]\s*\{[\s\S]*?border-width:\s*1\.5px 1\.5px 0[\s\S]*?border-color:\s*#22313f[\s\S]*?linear-gradient\(#d8e2e9 0%,\s*#c3d0db 36%,\s*#adbfce 66%,\s*#96aec1 100%\)/i);
   assert.match(css, /\.progress-track\s*\{[\s\S]*?height:\s*19px[\s\S]*?border:\s*1px solid #898c92[\s\S]*?#fff 0%,[\s\S]*?#ced0d4 46%,[\s\S]*?#f9fbff 100%/i);
   assert.match(css, /\.progress-track > \.progress-fill\s*\{[\s\S]*?#e7bc88 0%,[\s\S]*?#aa4a00 54%,[\s\S]*?#f49a31 100%[\s\S]*?0 -2px 3px rgba\(170,74,0,\.48\)[\s\S]*?0 3px 4px rgba\(166,70,0,\.38\)/i);
