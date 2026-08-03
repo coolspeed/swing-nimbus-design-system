@@ -57,6 +57,10 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
 
   assert.ok(page.includes('data-testid={`tab-${tab.id}`}'));
   assert.doesNotMatch(page, /Nimbus native|theme-chip|toolbar-spacer/i);
+  assert.match(page, /const openContextAt = \(event: React\.MouseEvent<HTMLElement>\)[\s\S]*?event\.clientX[\s\S]*?event\.clientY[\s\S]*?getBoundingClientRect\(\)[\s\S]*?setContextMenuPosition/i);
+  assert.match(page, /style=\{\{ left: contextMenuPosition\.x, top: contextMenuPosition\.y \}\}/i);
+  assert.match(page, /onContextMenu=\{\(event\)[\s\S]*?openContext\(event\)/i);
+  assert.doesNotMatch(css, /\.context-menu\s*\{\s*position:\s*absolute;\s*top:\s*48%;\s*left:\s*54%/i);
   assert.match(page, /<div className="tab-strip">[\s\S]*?<div className="tab-list" role="tablist"[\s\S]*?<div className="tab-divider" aria-hidden="true" \/>/i);
   for (const tab of ["foundations", "controls", "data", "feedback", "dialogs"]) {
     assert.match(page, new RegExp(`panel-${tab}`));

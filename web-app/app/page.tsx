@@ -7,6 +7,7 @@ type TabId = "foundations" | "controls" | "data" | "feedback" | "dialogs";
 type DialogId = "info" | "confirm" | "file" | "color" | null;
 type SortKey = "component" | "status" | "owner" | "updated";
 type ComponentRow = Record<SortKey, string>;
+type ContextMenuPosition = { x: number; y: number };
 
 const tabs: Array<{ id: TabId; label: string; shortcut: string }> = [
   { id: "foundations", label: "Foundations", shortcut: "F" },
@@ -124,6 +125,7 @@ export default function Home() {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [dialog, setDialog] = useState<DialogId>(null);
   const [contextOpen, setContextOpen] = useState(false);
+  const [contextMenuPosition, setContextMenuPosition] = useState<ContextMenuPosition>({ x: 0, y: 0 });
   const [treeOpen, setTreeOpen] = useState(true);
   const [sortKey, setSortKey] = useState<SortKey>("component");
   const [sortAscending, setSortAscending] = useState(true);
@@ -169,7 +171,15 @@ export default function Home() {
     contextOpenerRef.current =
       document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const frame = window.requestAnimationFrame(() => {
-      contextMenuRef.current?.querySelector<HTMLButtonElement>('[role="menuitem"]')?.focus();
+      const menu = contextMenuRef.current;
+      if (!menu) return;
+      const bounds = menu.getBoundingClientRect();
+      setContextMenuPosition((position) => {
+        const x = Math.min(Math.max(4, position.x), Math.max(4, window.innerWidth - bounds.width - 4));
+        const y = Math.min(Math.max(4, position.y), Math.max(4, window.innerHeight - bounds.height - 4));
+        return x === position.x && y === position.y ? position : { x, y };
+      });
+      menu.querySelector<HTMLButtonElement>('[role="menuitem"]')?.focus();
     });
     return () => {
       window.cancelAnimationFrame(frame);
@@ -205,6 +215,16 @@ export default function Home() {
         : activeElement,
     );
     setDialog(id);
+  };
+
+  const openContextAt = (event: React.MouseEvent<HTMLElement>) => {
+    const hasPointerCoordinates = event.clientX !== 0 || event.clientY !== 0;
+    const targetBounds = event.currentTarget.getBoundingClientRect();
+    setContextMenuPosition({
+      x: hasPointerCoordinates ? event.clientX : targetBounds.left,
+      y: hasPointerCoordinates ? event.clientY : targetBounds.bottom,
+    });
+    setContextOpen(true);
   };
 
   const handleTabKeyDown = (
@@ -390,14 +410,14 @@ export default function Home() {
               sortKey={sortKey}
               sortAscending={sortAscending}
               chooseSort={chooseSort}
-              openContext={() => setContextOpen(true)}
+              openContext={openContextAt}
             />
           )}
           {activeTab === "feedback" && (
             <FeedbackPanel />
           )}
           {activeTab === "dialogs" && (
-            <DialogsPanel openDialog={showDialog} openContext={() => setContextOpen(true)} />
+            <DialogsPanel openDialog={showDialog} openContext={openContextAt} />
           )}
         </div>
 
@@ -417,6 +437,7 @@ export default function Home() {
             className="context-menu"
             role="menu"
             aria-label="Component actions"
+            style={{ left: contextMenuPosition.x, top: contextMenuPosition.y }}
             onClick={(event) => event.stopPropagation()}
             onKeyDown={(event) => {
               const items = Array.from(
@@ -566,7 +587,7 @@ function DataPanel({
   sortKey: SortKey;
   sortAscending: boolean;
   chooseSort: (key: SortKey) => void;
-  openContext: () => void;
+  openContext: (event: React.MouseEvent<HTMLElement>) => void;
 }) {
   const [selectedRow, setSelectedRow] = useState<string | null>(null);
   const [selectedActivity, setSelectedActivity] = useState<string | null>(null);
@@ -602,7 +623,7 @@ function DataPanel({
             onContextMenu={(event) => {
               event.preventDefault();
               event.currentTarget.focus();
-              openContext();
+              openContext(event);
             }}
           >
             <thead>
@@ -794,7 +815,7 @@ function FeedbackPanel() {
   );
 }
 
-function DialogsPanel({ openDialog, openContext }: { openDialog: (id: Exclude<DialogId, null>) => void; openContext: () => void }) {
+function DialogsPanel({ openDialog, openContext }: { openDialog: (id: Exclude<DialogId, null>) => void; openContext: (event: React.MouseEvent<HTMLElement>) => void }) {
   return (
     <section id="panel-dialogs" role="tabpanel" aria-labelledby="tab-dialogs" className="two-column">
       <Fieldset legend="Dialog & menu samples">
