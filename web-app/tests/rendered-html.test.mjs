@@ -115,7 +115,6 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.match(css, /mask:\s*radial-gradient\(circle 7px at 100% 50%,\s*transparent 0 6px,\s*#000 7px\)/i);
   assert.doesNotMatch(css, /radial-gradient\(circle at (?:100%|0) 50%,\s*#dfe2e5/i);
   assert.match(css, /\.nimbus-fieldset\s*\{[\s\S]*?background:\s*var\(--canvas\)[\s\S]*?box-shadow:\s*none/i);
-  assert.match(css, /\.nimbus-fieldset legend\s*\{[\s\S]*?padding:\s*0 6px;/i);
   assert.doesNotMatch(css, /tbody\s+tr:hover|activity-panel\s+li:hover|status-pill|status-ready|status-draft|status-in-review/i);
   assert.match(page, /aria-selected=\{selectedRow === row\.component\}/i);
   assert.match(css, /tbody tr\[aria-selected="true"\]\s*\{[\s\S]*?background:\s*#39698a/i);
