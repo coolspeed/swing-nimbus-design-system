@@ -109,7 +109,7 @@ HiDPI scaling에 맡기고 픽셀 단위 확대 코드를 추가하지 않는다
 |---|---:|
 | 탭 | 기본 24 px, 선택 25 px; 세로 padding 1 px |
 | determinate progress | 19 px; 진행률 문자열은 막대 중앙 내부 |
-| indeterminate progress | 16 px; 밝은 흰색·회색 track 위의 주황 foreground stream이 굵고 가늘어지며 수평 이동 |
+| indeterminate progress | 12 px track; 밝은 흰색·회색 track 위로 14 px 주황 foreground stream이 겹쳐지며 수평 이동 |
 | horizontal scrollbar | 15 px; 양 끝 24 px 버튼, thumb 상단 직선/하단 원호 |
 
 이 값은 글자 높이와의 상대 비율을 보존하기 위한 값이다. 탭이나 progress bar를 섹션
@@ -188,9 +188,9 @@ HiDPI scaling에 맡기고 픽셀 단위 확대 코드를 추가하지 않는다
   밝은 흰색·회색 track 위를 하나의 주황 foreground stream이 끊김 없이 가로지르고, stream의 두께가 굵어졌다
   가늘어지는 형태가 수평 방향으로 연속해서 흘러야 한다. 완전한 sine처럼 극점의 폭이 0인
   형태도, 직선 위에 타원을 얹은 꼬치 형태도 아니다. 좁은 구간과 넓은 구간에 각각 짧은
-  plateau를 두고 그 사이를 cubic Bézier 곡선으로 연결한다. 14 px 패턴 레이어의 원형은
-  약 11 px까지 팽창하되, 최종 화면에서는 세로만 75%로 축소해 굵은 구간을 약 8 px로 보이게
-  한다. 패턴 레이어는 border box의 세로 중앙에 놓아 위·아래 여백을 정확히 대칭으로 유지한다.
+  plateau를 두고 그 사이를 cubic Bézier 곡선으로 연결한다. 14 px 패턴 레이어의 굵은 구간은
+  약 11 px까지 팽창하며 별도로 세로 축소하지 않는다. 흰 track만 16 px 기준에서 25% 줄인
+  12 px로 만들고, 패턴 레이어는 중앙에 겹쳐 위·아래로 약 1 px씩 보이도록 한다.
   오렌지색을 track 전체에 채운 뒤 흰 모양을 올리는 역상 구현은 금지한다.
   44 px 패턴 한 주기는 약 0.8초에 흘러가도록 한다. 주황 stream을 반복 조각으로 구현할 때는
   각 조각의 클립 경계를 최소 1 px 겹치고 경계선을 요소 바깥으로 밀며, 좁은 plateau와 같은
