@@ -8,6 +8,13 @@ type DialogId = "info" | "confirm" | "file" | "color" | null;
 type SortKey = "component" | "status" | "owner" | "updated";
 type ComponentRow = Record<SortKey, string>;
 type ContextMenuPosition = { x: number; y: number };
+type InternalWindowId = "inspector" | "preview";
+type InternalWindowState = {
+  closed: boolean;
+  maximized: boolean;
+  minimized: boolean;
+  position: { x: number; y: number } | null;
+};
 
 const tabs: Array<{ id: TabId; label: string; shortcut: string }> = [
   { id: "foundations", label: "Foundations", shortcut: "F" },
@@ -830,18 +837,159 @@ function DialogsPanel({ openDialog, openContext }: { openDialog: (id: Exclude<Di
         <p className="muted-copy">Tip: right-click the table in Data views for the same context menu.</p>
       </Fieldset>
       <Fieldset legend="Internal windows" className="desktop-fieldset">
-        <div className="internal-desktop">
-          <article className="internal-window inspector-window">
-            <header><button aria-label="Window menu">▼</button><strong>Inspector</strong><span>— □ ×</span></header>
-            <div><p>Selected: <b>Primary action</b></p><p>State: Default</p><label className="check-row"><input type="checkbox" defaultChecked /><span>Visible</span></label></div>
-          </article>
-          <article className="internal-window preview-window">
-            <header><button aria-label="Window menu">▼</button><strong>Preview</strong><span>— □ ×</span></header>
-            <div><p>Mini preview</p><div className="progress-track"><span className="progress-fill" style={{ width: "60%" }} /><span className="progress-value">60%</span></div></div>
-          </article>
-        </div>
+        <InternalDesktop />
       </Fieldset>
     </section>
+  );
+}
+
+function InternalDesktop() {
+  const desktopRef = useRef<HTMLDivElement>(null);
+  const windowRefs = useRef<Record<InternalWindowId, HTMLElement | null>>({ inspector: null, preview: null });
+  const dragRef = useRef<{
+    id: InternalWindowId;
+    pointerId: number;
+    offsetX: number;
+    offsetY: number;
+  } | null>(null);
+  const [activeWindow, setActiveWindow] = useState<InternalWindowId>("preview");
+  const [windows, setWindows] = useState<Record<InternalWindowId, InternalWindowState>>({
+    inspector: { closed: false, maximized: false, minimized: false, position: null },
+    preview: { closed: false, maximized: false, minimized: false, position: null },
+  });
+
+  const updateWindow = (id: InternalWindowId, update: Partial<InternalWindowState>) => {
+    setWindows((current) => ({ ...current, [id]: { ...current[id], ...update } }));
+  };
+
+  const beginDrag = (event: React.PointerEvent<HTMLElement>, id: InternalWindowId) => {
+    if (event.button !== 0 || windows[id].maximized) return;
+    const desktop = desktopRef.current;
+    const internalWindow = windowRefs.current[id];
+    if (!desktop || !internalWindow) return;
+    event.preventDefault();
+    setActiveWindow(id);
+    const desktopBounds = desktop.getBoundingClientRect();
+    const windowBounds = internalWindow.getBoundingClientRect();
+    dragRef.current = {
+      id,
+      pointerId: event.pointerId,
+      offsetX: event.clientX - windowBounds.left,
+      offsetY: event.clientY - windowBounds.top,
+    };
+    updateWindow(id, {
+      position: { x: windowBounds.left - desktopBounds.left, y: windowBounds.top - desktopBounds.top },
+    });
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const dragWindow = (event: React.PointerEvent<HTMLElement>, id: InternalWindowId) => {
+    const drag = dragRef.current;
+    const desktop = desktopRef.current;
+    const internalWindow = windowRefs.current[id];
+    if (!drag || drag.id !== id || drag.pointerId !== event.pointerId || !desktop || !internalWindow) return;
+    const desktopBounds = desktop.getBoundingClientRect();
+    const maxX = Math.max(0, desktopBounds.width - internalWindow.offsetWidth);
+    const visibleHeight = windows[id].minimized ? 27 : internalWindow.offsetHeight;
+    const maxY = Math.max(0, desktopBounds.height - visibleHeight);
+    updateWindow(id, {
+      position: {
+        x: Math.min(maxX, Math.max(0, event.clientX - desktopBounds.left - drag.offsetX)),
+        y: Math.min(maxY, Math.max(0, event.clientY - desktopBounds.top - drag.offsetY)),
+      },
+    });
+  };
+
+  const endDrag = (event: React.PointerEvent<HTMLElement>) => {
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+    dragRef.current = null;
+  };
+
+  const closeWindow = (id: InternalWindowId) => {
+    updateWindow(id, { closed: true });
+    setActiveWindow(id === "inspector" ? "preview" : "inspector");
+  };
+
+  const renderInternalWindow = (id: InternalWindowId, title: string, children: React.ReactNode) => {
+    const state = windows[id];
+    if (state.closed) return null;
+    const windowStyle: React.CSSProperties = state.maximized
+      ? { inset: 4, width: "auto", zIndex: activeWindow === id ? 3 : 1 }
+      : {
+          ...(state.position
+            ? { left: state.position.x, top: state.position.y, right: "auto", bottom: "auto" }
+            : {}),
+          zIndex: activeWindow === id ? 3 : 1,
+        };
+
+    return (
+      <article
+        ref={(element) => { windowRefs.current[id] = element; }}
+        className={`internal-window ${id}-window`}
+        data-active={activeWindow === id}
+        data-maximized={state.maximized}
+        data-minimized={state.minimized}
+        style={windowStyle}
+        tabIndex={0}
+        onFocusCapture={() => setActiveWindow(id)}
+        onPointerDown={() => setActiveWindow(id)}
+      >
+        <header
+          aria-label={`${title} title bar`}
+          onDoubleClick={() => updateWindow(id, { maximized: !state.maximized, minimized: false })}
+          onPointerDown={(event) => beginDrag(event, id)}
+          onPointerMove={(event) => dragWindow(event, id)}
+          onPointerUp={endDrag}
+          onPointerCancel={endDrag}
+        >
+          <button
+            type="button"
+            className="internal-window-menu"
+            aria-label={`${title} window menu`}
+            onPointerDown={(event) => event.stopPropagation()}
+            onClick={() => setActiveWindow(id)}
+          >▼</button>
+          <strong>{title}</strong>
+          <span className="internal-window-controls">
+            <button
+              type="button"
+              className="internal-minimize"
+              aria-label={`Minimize ${title}`}
+              onPointerDown={(event) => event.stopPropagation()}
+              onClick={() => updateWindow(id, { minimized: !state.minimized, maximized: false })}
+            >−</button>
+            <button
+              type="button"
+              className="internal-maximize"
+              aria-label={`${state.maximized ? "Restore" : "Maximize"} ${title}`}
+              onPointerDown={(event) => event.stopPropagation()}
+              onClick={() => updateWindow(id, { maximized: !state.maximized, minimized: false })}
+            >□</button>
+            <button
+              type="button"
+              className="internal-close"
+              aria-label={`Close ${title}`}
+              onPointerDown={(event) => event.stopPropagation()}
+              onClick={() => closeWindow(id)}
+            >×</button>
+          </span>
+        </header>
+        {!state.minimized && <div className="internal-window-body">{children}</div>}
+      </article>
+    );
+  };
+
+  return (
+    <div className="internal-desktop" ref={desktopRef}>
+      {renderInternalWindow("inspector", "Inspector", (
+        <><p>Selected: <b>Primary action</b></p><p>State: Default</p><label className="check-row"><input type="checkbox" defaultChecked /><span>Visible</span></label></>
+      ))}
+      {renderInternalWindow("preview", "Preview", (
+        <><p>Mini preview</p><div className="progress-track"><span className="progress-fill" style={{ width: "60%" }} /><span className="progress-value">60%</span></div></>
+      ))}
+    </div>
   );
 }
 
@@ -859,6 +1007,35 @@ function NimbusDialog({
   onClose: () => void;
 }) {
   const dialogRef = useRef<HTMLElement>(null);
+  const [fileLocation, setFileLocation] = useState("Documents");
+  const [fileView, setFileView] = useState<"list" | "details">("list");
+  const [selectedFile, setSelectedFile] = useState("");
+  const [fileEntries, setFileEntries] = useState([
+    "Design tokens",
+    "Nimbus references",
+    "Component specs",
+    "Archived",
+    "Exports",
+    "Java sources",
+    "Web assets",
+    "Research notes",
+  ]);
+
+  const changeFileLocation = (location: string) => {
+    setFileLocation(location);
+    setSelectedFile("");
+  };
+
+  const createFolder = () => {
+    let suffix = 1;
+    let name = "New Folder";
+    while (fileEntries.includes(name)) {
+      suffix += 1;
+      name = `New Folder ${suffix}`;
+    }
+    setFileEntries((entries) => [...entries, name]);
+    setSelectedFile(name);
+  };
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
@@ -922,13 +1099,35 @@ function NimbusDialog({
         )}
         {type === "file" && (
           <div className="file-dialog-body">
-            <div className="look-in"><label>Look in:</label><div><span className="folder-icon" /> Documents <b>▼</b></div><NimbusButton>⌂</NimbusButton><NimbusButton>▦</NimbusButton></div>
-            <div className="file-grid">
-              {["Design tokens", "Nimbus references", "Component specs", "Archived", "Exports", "Java sources", "Web assets", "Research notes"].map((folder) => (
-                <button key={folder}><span className="folder-icon" />{folder}</button>
+            <div className="look-in">
+              <label htmlFor="file-location">Look in:</label>
+              <span className="file-location-shell">
+                <span className="folder-icon" aria-hidden="true" />
+                <select id="file-location" value={fileLocation} onChange={(event) => changeFileLocation(event.target.value)}>
+                  <option>Computer</option>
+                  <option>Home</option>
+                  <option>Documents</option>
+                </select>
+                <span className="file-location-arrow" aria-hidden="true">▼</span>
+              </span>
+              <div className="file-toolbar" role="toolbar" aria-label="File chooser navigation and view">
+                <button type="button" aria-label="Up one level" title="Up one level" onClick={() => changeFileLocation(fileLocation === "Documents" ? "Home" : "Computer")}><span className="file-toolbar-icon icon-up" aria-hidden="true">↑</span></button>
+                <button type="button" aria-label="Home folder" title="Home folder" onClick={() => changeFileLocation("Home")}><span className="file-toolbar-icon icon-home" aria-hidden="true">⌂</span></button>
+                <button type="button" aria-label="Create new folder" title="Create new folder" onClick={createFolder}><span className="file-toolbar-icon icon-new-folder" aria-hidden="true">✳</span></button>
+                <button type="button" aria-label="List" title="List" aria-pressed={fileView === "list"} onClick={() => setFileView("list")}><span className="file-toolbar-icon icon-list" aria-hidden="true">▤</span></button>
+                <button type="button" aria-label="Details" title="Details" aria-pressed={fileView === "details"} onClick={() => setFileView("details")}><span className="file-toolbar-icon icon-details" aria-hidden="true">▦</span></button>
+              </div>
+            </div>
+            <div className={`file-grid file-view-${fileView}`} role="listbox" aria-label={`${fileLocation} folders`}>
+              {fileView === "details" && <div className="file-details-header"><span>Name</span><span>Type</span></div>}
+              {fileEntries.map((folder) => (
+                <button key={folder} type="button" role="option" aria-selected={selectedFile === folder} onClick={() => setSelectedFile(folder)}>
+                  <span><span className="folder-icon" aria-hidden="true" />{folder}</span>
+                  {fileView === "details" && <small>File folder</small>}
+                </button>
               ))}
             </div>
-            <label className="file-field"><span>File name:</span><input className="nimbus-input" /></label>
+            <label className="file-field"><span>File name:</span><input className="nimbus-input" value={selectedFile} onChange={(event) => setSelectedFile(event.target.value)} /></label>
             <label className="file-field"><span>Files of type:</span><NimbusSelect><option>All files</option><option>PNG images</option><option>Java source</option></NimbusSelect></label>
           </div>
         )}

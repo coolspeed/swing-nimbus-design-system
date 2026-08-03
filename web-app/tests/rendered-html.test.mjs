@@ -70,6 +70,19 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.match(page, /<td>\{row\.status\}<\/td>/);
   assert.doesNotMatch(page, /status-pill|status-ready|status-draft|status-in-review/);
   assert.match(page, /data-testid=\{`dialog-\$\{type\}`\}/);
+  assert.match(page, /function InternalDesktop\(\)[\s\S]*?setPointerCapture\(event\.pointerId\)[\s\S]*?getBoundingClientRect\(\)[\s\S]*?data-active=\{activeWindow === id\}/i);
+  assert.match(page, /className="internal-minimize"[\s\S]*?className="internal-maximize"[\s\S]*?className="internal-close"/i);
+  assert.match(page, /aria-label=\{`Minimize \$\{title\}`\}[\s\S]*?aria-label=\{`\$\{state\.maximized \? "Restore" : "Maximize"\} \$\{title\}`\}[\s\S]*?aria-label=\{`Close \$\{title\}`\}/i);
+  assert.match(css, /\.internal-window\[data-active="true"\] \.internal-minimize\s*\{[\s\S]*?#c66708 48%/i);
+  assert.match(css, /\.internal-window\[data-active="true"\] \.internal-maximize\s*\{[\s\S]*?#6f8a10 48%/i);
+  assert.match(css, /\.internal-window\[data-active="true"\] \.internal-close\s*\{[\s\S]*?#b22a1d 48%/i);
+  for (const fileAction of ["Up one level", "Home folder", "Create new folder", "List", "Details"]) {
+    assert.match(page, new RegExp(`aria-label="${fileAction}"`));
+  }
+  assert.match(page, /const \[fileView, setFileView\] = useState<"list" \| "details">\("list"\)/i);
+  assert.match(page, /onClick=\{createFolder\}[\s\S]*?setFileView\("list"\)[\s\S]*?setFileView\("details"\)/i);
+  assert.match(page, /className=\{`file-grid file-view-\$\{fileView\}`\}[\s\S]*?aria-selected=\{selectedFile === folder\}/i);
+  assert.match(css, /@media \(max-width:\s*600px\)[\s\S]*?\.look-in\s*\{[\s\S]*?grid-template-columns:\s*auto minmax\(0,\s*1fr\)[\s\S]*?\.file-toolbar\s*\{[\s\S]*?grid-column:\s*2/i);
   assert.match(page, /className="progress-value">72%/);
   assert.doesNotMatch(page, /Adjust progress|progress-control/);
   assert.match(page, /progress-indeterminate-pattern/);
@@ -146,7 +159,7 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.match(css, /@keyframes indeterminate\s*\{[\s\S]*?translateX\(33px\)/i);
   assert.doesNotMatch(css, /radial-gradient\(ellipse 18px 9px at 50% 50%/i);
   assert.match(css, /\.progress-indeterminate-pattern i\s*\{[\s\S]*?rgba\(255,206,139,\.9\) 35% 37%[\s\S]*?rgba\(255,206,139,\.9\) 63% 65%[\s\S]*?#f0c995 0%,[\s\S]*?#c36903 54%,[\s\S]*?#f8aa48 100%/i);
-  assert.match(css, /\.fake-scrollbar\s*\{[\s\S]*?height:\s*15px[\s\S]*?grid-template-columns:\s*24px 1fr 24px[\s\S]*?#68696d 0%,[\s\S]*?#8e9094 8%,[\s\S]*?#a1a4a8 12%,[\s\S]*?#adb0b5 16%,[\s\S]*?#b8bac0 25%,[\s\S]*?#c2c4ca 35%,[\s\S]*?#c7c9cf 42%,[\s\S]*?#cfd2d8 65%,[\s\S]*?#d6d9df 100%[\s\S]*?box-shadow:\s*none/i);
+  assert.match(css, /\.fake-scrollbar\s*\{[\s\S]*?height:\s*15px[\s\S]*?grid-template-columns:\s*24px 1fr 24px[\s\S]*?#494a4c 0%,[\s\S]*?#646669 8%,[\s\S]*?#7f8184 12%,[\s\S]*?#93969a 16%,[\s\S]*?#aaacb2 25%,[\s\S]*?#c2c4ca 35%,[\s\S]*?#c7c9cf 42%,[\s\S]*?#cfd2d8 65%,[\s\S]*?#d6d9df 100%[\s\S]*?box-shadow:\s*none/i);
   assert.doesNotMatch(css, /\.fake-scrollbar\s*\{[\s\S]*?#f1f2f3 26%/i);
   assert.match(css, /\.fake-scrollbar \.scroll-track\s*\{[\s\S]*?left:\s*-10px[\s\S]*?width:\s*calc\(100% \+ 20px\)[\s\S]*?touch-action:\s*none/i);
   assert.match(css, /\.fake-scrollbar \.scroll-thumb\s*\{[\s\S]*?width:\s*27%/i);
