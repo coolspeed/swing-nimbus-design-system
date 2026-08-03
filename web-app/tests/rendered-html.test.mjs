@@ -86,10 +86,16 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.match(css, /\.app-window\s*\{[\s\S]*?width:\s*min\(1200px,\s*calc\(100vw - 140px\)\)[\s\S]*?height:\s*min\(720px,\s*calc\(100vh - 140px\)\)/i);
   assert.match(css, /\.nimbus-button,[\s\S]*?\.nimbus-select\s*\{[\s\S]*?min-height:\s*23px/i);
   assert.match(css, /\.nimbus-input\s*\{[\s\S]*?min-height:\s*23px/i);
+  assert.match(page, /function NimbusSelect[\s\S]*?nimbus-select-arrow/i);
+  assert.match(page, /function NimbusSpinner[\s\S]*?nimbus-spinner-controls/i);
+  assert.match(css, /\.nimbus-select-arrow\s*\{[\s\S]*?background:\s*linear-gradient\(#dcebf3 0%,\s*#a6bfce 48%,\s*#c7d8e2 100%\)/i);
+  assert.match(css, /\.nimbus-spinner-controls\s*\{[\s\S]*?grid-template-rows:\s*1fr 1fr/i);
+  assert.match(css, /\.check-row input\[type="checkbox"\],[\s\S]*?width:\s*15px[\s\S]*?appearance:\s*none/i);
+  assert.match(css, /\.check-row input\[type="checkbox"\]:checked,[\s\S]*?background:\s*linear-gradient\(#e9f3f8 0%,\s*#b9d1df 57%,\s*#dceaf1 100%\)/i);
   assert.doesNotMatch(page, /SCREENSHOT-DERIVED UI KIT|status-dot/i);
   assert.match(css, /label,[\s\S]*?\.status-bar\s*\{[\s\S]*?user-select:\s*none/i);
   assert.match(css, /\.tab-strip button\s*\{[\s\S]*?height:\s*24px/i);
-  assert.match(css, /\.tab-strip button\[aria-selected="true"\]\s*\{[\s\S]*?linear-gradient\(#e3eaef 0%,\s*#cdd8e2 36%,\s*#baccda 66%,\s*#a5bacc 100%\)/i);
+  assert.match(css, /\.tab-strip button\[aria-selected="true"\]\s*\{[\s\S]*?linear-gradient\(#f8f9fa 0%,\s*#e8eaee 30%,\s*#e0e2e7 64%,\s*#d7dae0 100%\)/i);
   assert.match(css, /\.progress-track\s*\{[\s\S]*?height:\s*16px/i);
   assert.match(css, /animation:\s*indeterminate \.8s linear infinite/i);
   assert.match(css, /\.progress-track\.indeterminate\s*\{[\s\S]*?background:\s*linear-gradient\(#fafafa 0%,\s*#e7e8e9 52%,\s*#f5f5f6 100%\)/i);
