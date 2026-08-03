@@ -77,6 +77,30 @@ function NimbusSelect({
   );
 }
 
+function NimbusSpinner({ initialValue = 0 }: { initialValue?: number }) {
+  const [value, setValue] = useState(String(initialValue));
+
+  const stepValue = (amount: number) => {
+    const currentValue = Number(value);
+    setValue(String((Number.isFinite(currentValue) ? currentValue : 0) + amount));
+  };
+
+  return (
+    <span className="nimbus-spinner">
+      <input
+        className="nimbus-spinner-input"
+        type="number"
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
+      />
+      <span className="nimbus-spinner-buttons">
+        <button className="nimbus-spinner-step" type="button" aria-label="Increase quantity" onClick={() => stepValue(1)}>▲</button>
+        <button className="nimbus-spinner-step" type="button" aria-label="Decrease quantity" onClick={() => stepValue(-1)}>▼</button>
+      </span>
+    </span>
+  );
+}
+
 function Fieldset({
   legend,
   children,
@@ -491,7 +515,7 @@ function ControlsPanel() {
           <label><span>Password</span><input className="nimbus-input" type="password" defaultValue="demopass" /></label>
           <label><span>Role</span><NimbusSelect data-testid="role-select" defaultValue="Designer"><option>Designer</option><option>Developer</option><option>Manager</option></NimbusSelect></label>
           <label><span>Date</span><input className="nimbus-input" type="text" defaultValue="2026-07-30" /></label>
-          <label><span>Quantity</span><input className="nimbus-input" type="number" defaultValue="0" /></label>
+          <label><span>Quantity</span><NimbusSpinner /></label>
           <label className="notes-field"><span>Notes</span><textarea className="nimbus-input" defaultValue={"Multiline text area\nwith scroll support."} /></label>
         </form>
       </Fieldset>
