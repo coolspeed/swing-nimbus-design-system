@@ -1083,11 +1083,11 @@ tbody tr:focus-visible {
 .progress-track.indeterminate .progress-indeterminate-pattern {
   position: absolute;
   top: 50%;
-  left: -44px;
+  left: -33px;
   display: flex;
   width: max-content;
   height: 14px;
-  animation: indeterminate .7s linear infinite;
+  animation: indeterminate .52s linear infinite;
   margin-top: -7px;
   filter:
     drop-shadow(0 -1px 0 rgba(255,244,225,.82))
@@ -1099,12 +1099,12 @@ tbody tr:focus-visible {
   position: absolute;
   inset: 6px 0 auto;
   height: 2px;
-  background: linear-gradient(#d7954e, #aa4a00 54%, #d2720f);
+  background: linear-gradient(#e0a05e, #c36903 54%, #df8120);
 }
 
 .progress-indeterminate-pattern i {
-  flex: 0 0 45px;
-  width: 45px;
+  flex: 0 0 34px;
+  width: 34px;
   height: 14px;
   margin-right: -1px;
   transform: scaleY(.86);
@@ -1112,27 +1112,27 @@ tbody tr:focus-visible {
     linear-gradient(
       90deg,
       transparent 0 34%,
-      rgba(255,190,105,.88) 35% 37%,
+      rgba(255,206,139,.9) 35% 37%,
       transparent 38% 62%,
-      rgba(255,190,105,.88) 63% 65%,
+      rgba(255,206,139,.9) 63% 65%,
       transparent 66%
     ),
     linear-gradient(
       to bottom,
-      #e7bc88 0%,
-      #d7954e 12%,
-      #c47b23 36%,
-      #aa4a00 54%,
-      #b35100 58%,
-      #d2720f 94%,
-      #f49a31 100%
+      #f0c995 0%,
+      #e4aa64 12%,
+      #d9903c 36%,
+      #c36903 54%,
+      #cb720b 58%,
+      #e58422 94%,
+      #f8aa48 100%
     );
-  clip-path: path("M -1 6 C 3 6 5 6 7 5.5 C 10 4.5 12 2.25 16 1.75 C 18 1.5 20 1.5 22 1.5 C 24 1.5 26 1.5 28 1.75 C 32 2.25 34 4.5 37 5.5 C 39 6 41 6 45 6 L 45 8 C 41 8 39 8 37 8.5 C 34 9.5 32 11.75 28 12.25 C 26 12.5 24 12.5 22 12.5 C 20 12.5 18 12.5 16 12.25 C 12 11.75 10 9.5 7 8.5 C 5 8 3 8 -1 8 Z");
+  clip-path: path("M -1 6 C 2.25 6 3.75 6 5.25 5.5 C 7.5 4.5 9 2.25 12 1.75 C 13.5 1.5 15 1.5 16.5 1.5 C 18 1.5 19.5 1.5 21 1.75 C 24 2.25 25.5 4.5 27.75 5.5 C 29.25 6 30.75 6 33.75 6 L 33.75 8 C 30.75 8 29.25 8 27.75 8.5 C 25.5 9.5 24 11.75 21 12.25 C 19.5 12.5 18 12.5 16.5 12.5 C 15 12.5 13.5 12.5 12 12.25 C 9 11.75 7.5 9.5 5.25 8.5 C 3.75 8 2.25 8 -1 8 Z");
 }
 
 @keyframes indeterminate {
   from { transform: translateX(0); }
-  to { transform: translateX(44px); }
+  to { transform: translateX(33px); }
 }
 
 
