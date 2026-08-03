@@ -66,7 +66,6 @@ button {
 label,
 legend,
 .app-identity,
-.theme-chip,
 .page-head,
 .tab-strip,
 .tree-pane h2,
@@ -266,10 +265,6 @@ textarea:focus-visible {
   border-bottom: 1px solid #929aa4;
   background: var(--canvas);
   box-shadow: inset 0 1px rgba(255,255,255,.48);
-}
-
-.toolbar-spacer {
-  flex: 1;
 }
 
 .tool-separator {
@@ -497,23 +492,6 @@ textarea:focus-visible {
 
 .nimbus-spinner-step + .nimbus-spinner-step {
   border-top: 1px solid var(--nimbus-control-chrome-border);
-}
-
-.theme-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding-right: 5px;
-  color: #525c67;
-  font-size: 11px;
-}
-
-.theme-chip span {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--nimbus-accent);
-  box-shadow: 0 0 0 2px rgba(255,255,255,.65), 0 0 0 3px #78818a;
 }
 
 .page-head {
@@ -1249,14 +1227,14 @@ tbody tr:focus-visible {
   border-top-color: #b8c3cd;
   border-radius: 3px 3px 22px 22px / 2px 2px 14px 14px;
   background: linear-gradient(
-    #f5f9fa 0%,
-    #eaf1f5 6%,
-    #d2dee8 17%,
-    #a6bed1 32%,
-    #aec4d6 38%,
-    #c5d9e8 58%,
-    #d9eaf4 82%,
-    #e9f7fa 100%
+    #e6edef 0%,
+    #dce5ea 6%,
+    #c3d1dc 17%,
+    #95aec3 32%,
+    #9fb6c9 38%,
+    #b6ccdc 58%,
+    #cadde9 82%,
+    #dcebf0 100%
   );
   box-shadow:
     inset 0 1px rgba(255,255,255,.88),
@@ -1269,6 +1247,21 @@ tbody tr:focus-visible {
   user-select: none;
   -webkit-user-select: none;
   touch-action: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fake-scrollbar .scroll-thumb:hover {
+    background: linear-gradient(
+      #f5f9fa 0%,
+      #eaf1f5 6%,
+      #d2dee8 17%,
+      #a6bed1 32%,
+      #aec4d6 38%,
+      #c5d9e8 58%,
+      #d9eaf4 82%,
+      #e9f7fa 100%
+    );
+  }
 }
 
 .fake-scrollbar .scroll-thumb:active {
@@ -1672,11 +1665,6 @@ tbody tr:focus-visible {
   .foundation-bottom > :last-child {
     grid-column: 1 / -1;
   }
-
-  .toolbar-spacer,
-  .theme-chip {
-    display: none;
-  }
 }
 
 @container nimbus-window (max-width: 720px) {
@@ -1761,11 +1749,6 @@ tbody tr:focus-visible {
 
   .foundation-bottom > :last-child {
     grid-column: 1 / -1;
-  }
-
-  .toolbar-spacer,
-  .theme-chip {
-    display: none;
   }
 }
 

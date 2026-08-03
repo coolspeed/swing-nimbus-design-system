@@ -42,6 +42,7 @@ test("server-renders the Nimbus design-system catalog", async () => {
   assert.match(html, /#33628C/);
   assert.match(html, /role="tablist"/);
   assert.match(html, /https:\/\/nimbus\.test\/og\.png/);
+  assert.doesNotMatch(html, /Nimbus native|theme-chip/i);
   assert.doesNotMatch(html, /codex-preview|SkeletonPreview|react-loading-skeleton/i);
 });
 
@@ -55,6 +56,7 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   ]);
 
   assert.ok(page.includes('data-testid={`tab-${tab.id}`}'));
+  assert.doesNotMatch(page, /Nimbus native|theme-chip|toolbar-spacer/i);
   assert.match(page, /<div className="tab-strip">[\s\S]*?<div className="tab-list" role="tablist"[\s\S]*?<div className="tab-divider" aria-hidden="true" \/>/i);
   for (const tab of ["foundations", "controls", "data", "feedback", "dialogs"]) {
     assert.match(page, new RegExp(`panel-${tab}`));
@@ -147,8 +149,10 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.doesNotMatch(css, /\.fake-scrollbar \.scroll-thumb\s*\{[\s\S]*?cursor:\s*grab/i);
   assert.doesNotMatch(css, /\.fake-scrollbar \.scroll-thumb:active\s*\{[\s\S]*?cursor:\s*grabbing/i);
   assert.doesNotMatch(css, /\.fake-scrollbar \.scroll-thumb\s*\{[\s\S]*?transition:/i);
-  assert.match(css, /\.fake-scrollbar \.scroll-thumb\s*\{[\s\S]*?top:\s*-1px[\s\S]*?height:\s*16px[\s\S]*?border-radius:\s*3px 3px 22px 22px \/ 2px 2px 14px 14px[\s\S]*?#f5f9fa 0%,[\s\S]*?#a6bed1 32%,[\s\S]*?#e9f7fa 100%[\s\S]*?inset 0 0 0 1px rgba\(33,62,84,\.18\)[\s\S]*?inset 0 -1px #70899c[\s\S]*?0 1px 1px rgba\(21,39,55,\.22\)/i);
+  assert.match(css, /\.fake-scrollbar \.scroll-thumb\s*\{[\s\S]*?top:\s*-1px[\s\S]*?height:\s*16px[\s\S]*?border-radius:\s*3px 3px 22px 22px \/ 2px 2px 14px 14px[\s\S]*?#e6edef 0%,[\s\S]*?#95aec3 32%,[\s\S]*?#dcebf0 100%[\s\S]*?inset 0 0 0 1px rgba\(33,62,84,\.18\)[\s\S]*?inset 0 -1px #70899c[\s\S]*?0 1px 1px rgba\(21,39,55,\.22\)/i);
   assert.match(css, /border:\s*1px solid #34495c[\s\S]*?border-top-color:\s*#b8c3cd/i);
+  assert.match(css, /@media \(hover:\s*hover\) and \(pointer:\s*fine\)\s*\{[\s\S]*?\.fake-scrollbar \.scroll-thumb:hover\s*\{[\s\S]*?#f5f9fa 0%,[\s\S]*?#a6bed1 32%,[\s\S]*?#e9f7fa 100%/i);
+  assert.ok(css.indexOf(".fake-scrollbar .scroll-thumb:hover") < css.indexOf(".fake-scrollbar .scroll-thumb:active"));
   assert.match(css, /\.fake-scrollbar \.scroll-thumb:active\s*\{[\s\S]*?border-color:\s*#17364d[\s\S]*?border-top-color:\s*#5a7289[\s\S]*?#8da8be 0%,[\s\S]*?#386791 35%,[\s\S]*?#7aa7d2 100%[\s\S]*?inset 0 0 0 1px rgba\(14,43,65,\.24\)[\s\S]*?inset 0 -1px #416484[\s\S]*?0 1px 1px rgba\(5,20,32,\.24\)/i);
   assert.match(css, /mask:\s*radial-gradient\(circle 7px at 100% 50%,\s*transparent 0 6px,\s*#000 7px\)/i);
   assert.doesNotMatch(css, /radial-gradient\(circle at (?:100%|0) 50%,\s*#dfe2e5/i);

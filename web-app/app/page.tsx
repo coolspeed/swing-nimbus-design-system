@@ -346,8 +346,6 @@ export default function Home() {
             <option>Tablet</option>
             <option>Mobile</option>
           </NimbusSelect>
-          <span className="toolbar-spacer" />
-          <span className="theme-chip"><span /> Nimbus native</span>
         </div>
 
         <section className="page-head">
