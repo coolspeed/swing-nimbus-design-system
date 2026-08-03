@@ -92,7 +92,7 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.doesNotMatch(page, /SCREENSHOT-DERIVED UI KIT|status-dot/i);
   assert.match(css, /label,[\s\S]*?\.status-bar\s*\{[\s\S]*?user-select:\s*none/i);
   assert.match(css, /\.tab-strip button\s*\{[\s\S]*?height:\s*24px/i);
-  assert.match(css, /\.tab-strip button\[aria-selected="true"\]\s*\{[\s\S]*?linear-gradient\(#e3eaef 0%,\s*#cdd8e2 36%,\s*#baccda 66%,\s*#a5bacc 100%\)/i);
+  assert.match(css, /\.tab-strip button\[aria-selected="true"\]\s*\{[\s\S]*?border-width:\s*1\.5px 1\.5px 0[\s\S]*?border-color:\s*#22313f[\s\S]*?linear-gradient\(#d8e2e9 0%,\s*#c3d0db 36%,\s*#adbfce 66%,\s*#96aec1 100%\)/i);
   assert.match(css, /\.progress-track\s*\{[\s\S]*?height:\s*16px/i);
   assert.match(css, /animation:\s*indeterminate \.8s linear infinite/i);
   assert.match(css, /\.progress-track\.indeterminate\s*\{[\s\S]*?background:\s*linear-gradient\(#fafafa 0%,\s*#e7e8e9 52%,\s*#f5f5f6 100%\)/i);
