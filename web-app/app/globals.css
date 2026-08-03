@@ -16,6 +16,14 @@
   --border: #89919b;
   --soft-border: #aab0b8;
   --nimbus-accent: #33628c;
+  --nimbus-control-chrome-top: #d6e2ea;
+  --nimbus-control-chrome-upper: #c0d0dc;
+  --nimbus-control-chrome-mid: #a9bdcc;
+  --nimbus-control-chrome-dark: #9fb5c7;
+  --nimbus-control-chrome-trough: #9db3c5;
+  --nimbus-control-chrome-lower: #b2c8db;
+  --nimbus-control-chrome-edge: #cedce7;
+  --nimbus-control-chrome-border: #687c8e;
   --font-ui: Arial, "Malgun Gothic", sans-serif;
 }
 
@@ -347,7 +355,7 @@ textarea:focus-visible {
   width: 17px;
   display: grid;
   place-items: center;
-  border-left: 1px solid #687c8e;
+  border-left: 1px solid var(--nimbus-control-chrome-border);
   pointer-events: none;
 }
 
@@ -355,12 +363,12 @@ textarea:focus-visible {
 .nimbus-spinner-step {
   color: #2d3e4d;
   background: linear-gradient(
-    #dce7ee 0%,
-    #c6d4df 22%,
-    #afc1cf 36%,
-    #a4b9cc 62%,
-    #b9cee1 88%,
-    #d8e3ec 100%
+    var(--nimbus-control-chrome-top) 0%,
+    var(--nimbus-control-chrome-upper) 22%,
+    var(--nimbus-control-chrome-mid) 36%,
+    var(--nimbus-control-chrome-dark) 62%,
+    var(--nimbus-control-chrome-lower) 88%,
+    var(--nimbus-control-chrome-edge) 100%
   );
   box-shadow: inset 1px 0 rgba(255,255,255,.48);
   font-size: 8px;
@@ -411,7 +419,7 @@ textarea:focus-visible {
 .nimbus-spinner-buttons {
   display: grid;
   grid-template-rows: repeat(2, minmax(0, 1fr));
-  border-left: 1px solid #687c8e;
+  border-left: 1px solid var(--nimbus-control-chrome-border);
 }
 
 .nimbus-spinner-step {
@@ -426,27 +434,27 @@ textarea:focus-visible {
 
 .nimbus-spinner-step:first-child {
   background: linear-gradient(
-    #f3f6f8 0%,
-    #e8edf2 20%,
-    #ccd8e2 60%,
-    #b6c8d6 94%,
-    #d8e3ec 100%
+    var(--nimbus-control-chrome-top) 0%,
+    var(--nimbus-control-chrome-upper) 20%,
+    var(--nimbus-control-chrome-mid) 60%,
+    var(--nimbus-control-chrome-dark) 94%,
+    var(--nimbus-control-chrome-edge) 100%
   );
 }
 
 .nimbus-spinner-step:last-child {
   background: linear-gradient(
-    #ccd7e2 0%,
-    #ccd7e2 6%,
-    #a5bacc 16%,
-    #a3b8cb 48%,
-    #bdd2e5 94%,
-    #d8e3ec 100%
+    var(--nimbus-control-chrome-upper) 0%,
+    var(--nimbus-control-chrome-upper) 6%,
+    var(--nimbus-control-chrome-dark) 16%,
+    var(--nimbus-control-chrome-trough) 48%,
+    var(--nimbus-control-chrome-lower) 94%,
+    var(--nimbus-control-chrome-edge) 100%
   );
 }
 
 .nimbus-spinner-step + .nimbus-spinner-step {
-  border-top: 1px solid #687c8e;
+  border-top: 1px solid var(--nimbus-control-chrome-border);
 }
 
 .theme-chip {
@@ -477,6 +485,7 @@ textarea:focus-visible {
 .page-head h1 {
   margin: 0 0 4px;
   font-size: 20px;
+  font-weight: 700;
   line-height: 1.15;
   letter-spacing: 0;
 }
