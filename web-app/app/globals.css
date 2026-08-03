@@ -280,12 +280,27 @@ textarea:focus-visible {
 .toggle-tool,
 .nimbus-select-shell {
   min-height: 23px;
-  border: 1px solid #7d8791;
+  border: 1px solid #6e747a;
   border-radius: 6px;
-  background: linear-gradient(#f7f8fa, #e4e7ea 58%, #eef0f2);
+  background: linear-gradient(
+    to bottom,
+    #eff0f1 0%,
+    #f6f6f8 3%,
+    #f0f1f3 8%,
+    #e7e9ec 26%,
+    #d6d9df 63%,
+    #d6d9df 70%,
+    #d7dae0 73%,
+    #e8ebf1 88%,
+    #f5f8fd 100%
+  );
   box-shadow:
-    inset 0 1px rgba(255,255,255,.58),
-    0 1px rgba(0,0,0,.08);
+    inset 0 1px rgba(255,255,255,.92),
+    inset 1px 0 rgba(255,255,255,.42),
+    inset -1px 0 rgba(54,62,70,.15),
+    inset 0 -1px rgba(255,255,255,.82),
+    0 -1px rgba(255,255,255,.48),
+    0 1px 1px rgba(38,44,50,.42);
 }
 
 .nimbus-button,
@@ -293,11 +308,30 @@ textarea:focus-visible {
   padding: 1px 10px 2px;
 }
 
+.nimbus-button {
+  min-height: 27px;
+}
+
+.tool-bar .nimbus-button {
+  min-height: 23px;
+}
+
 .nimbus-button:hover,
 .toggle-tool:hover,
 .nimbus-select-shell:hover {
   border-color: #577c9a;
-  background: linear-gradient(#f7fafc, #d9e7f0 60%, #e8f0f5);
+  background: linear-gradient(
+    to bottom,
+    #eef4f8 0%,
+    #f9fbfc 3%,
+    #e9f1f6 8%,
+    #dce9f1 26%,
+    #c9dce8 63%,
+    #c9dce8 70%,
+    #ccdfea 73%,
+    #e4eff5 88%,
+    #f3f8fb 100%
+  );
 }
 
 .nimbus-button:active,
@@ -321,7 +355,11 @@ textarea:focus-visible {
   border-color: #4d7696;
   box-shadow:
     0 0 0 2px rgba(115,164,209,.65),
-    inset 0 1px rgba(255,255,255,.95);
+    inset 0 1px rgba(255,255,255,.95),
+    inset 1px 0 rgba(255,255,255,.42),
+    inset -1px 0 rgba(54,62,70,.15),
+    inset 0 -1px rgba(255,255,255,.82),
+    0 1px 1px rgba(38,44,50,.42);
 }
 
 .toggle-tool {
@@ -496,7 +534,7 @@ textarea:focus-visible {
 }
 
 .hero-action {
-  min-height: 34px;
+  min-height: 54px;
   padding-inline: 20px;
   white-space: nowrap;
 }
@@ -1508,7 +1546,7 @@ tbody tr:focus-visible {
   }
 
   .page-head .hero-action {
-    min-height: 35px;
+    min-height: 54px;
     padding-inline: 12px;
   }
 
@@ -1615,7 +1653,7 @@ tbody tr:focus-visible {
   }
 
   .page-head .hero-action {
-    min-height: 35px;
+    min-height: 54px;
     padding-inline: 12px;
   }
 

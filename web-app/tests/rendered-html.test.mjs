@@ -90,6 +90,11 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.match(page, /function NimbusSelect\([\s\S]*?nimbus-select-arrow/i);
   assert.match(page, /function NimbusSpinner\([\s\S]*?Increase quantity[\s\S]*?Decrease quantity/i);
   assert.match(css, /\.nimbus-button,[\s\S]*?\.nimbus-select-shell\s*\{[\s\S]*?min-height:\s*23px/i);
+  assert.match(css, /\.nimbus-button,[\s\S]*?\.nimbus-select-shell\s*\{[\s\S]*?border:\s*1px solid #6e747a[\s\S]*?linear-gradient\([\s\S]*?#f6f6f8 3%,[\s\S]*?#d6d9df 63%,[\s\S]*?#d6d9df 70%,[\s\S]*?#f5f8fd 100%/i);
+  assert.match(css, /\.nimbus-button\s*\{[\s\S]*?min-height:\s*27px/i);
+  assert.match(css, /\.tool-bar \.nimbus-button\s*\{[\s\S]*?min-height:\s*23px/i);
+  assert.match(css, /\.hero-action\s*\{[\s\S]*?min-height:\s*54px/i);
+  assert.match(css, /\.tool-primary,[\s\S]*?\.dialog-default\s*\{[\s\S]*?0 0 0 2px rgba\(115,164,209,\.65\)[\s\S]*?inset -1px 0 rgba\(54,62,70,\.15\)[\s\S]*?0 1px 1px rgba\(38,44,50,\.42\)/i);
   assert.match(css, /\.nimbus-select-shell\s*\{[\s\S]*?overflow:\s*hidden/i);
   assert.match(css, /\.nimbus-select-arrow\s*\{[\s\S]*?width:\s*17px/i);
   assert.match(css, /--nimbus-control-chrome-top:\s*#d6e2ea/i);
