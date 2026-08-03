@@ -416,7 +416,7 @@ textarea:focus-visible {
 }
 
 .nimbus-fieldset legend {
-  padding: 0 6px 0 0;
+  padding: 0 6px;
   font-weight: 700;
   font-size: 12px;
 }
