@@ -15,12 +15,6 @@
   --danger: #9d3a3a;
   --border: #89919b;
   --soft-border: #aab0b8;
-  --nimbus-control-highlight: #f2f5f8;
-  --nimbus-control-mid: #dae3eb;
-  --nimbus-control-low: #bcccda;
-  --nimbus-control-border: #687c8e;
-  --nimbus-control-divider: #56697a;
-  --nimbus-control-mark: #2d3237;
   --nimbus-accent: #33628c;
   --font-ui: Arial, "Malgun Gothic", sans-serif;
 }
@@ -274,9 +268,9 @@ textarea:focus-visible {
 .nimbus-button,
 .toggle-tool {
   min-height: 23px;
-  border: 1px solid var(--nimbus-control-border);
+  border: 1px solid #68737e;
   border-radius: 6px;
-  background: linear-gradient(var(--nimbus-control-highlight) 0%, var(--nimbus-control-mid) 56%, var(--nimbus-control-low) 100%);
+  background: linear-gradient(#fdfefe 0%, #f3f5f6 42%, #d9dfe4 72%, #f4f6f7 100%);
   box-shadow:
     inset 0 1px rgba(255,255,255,.98),
     inset 1px 0 rgba(255,255,255,.55),
@@ -332,10 +326,10 @@ textarea:focus-visible {
   display: inline-block;
   min-width: 116px;
   min-height: 23px;
-  border: 1px solid var(--nimbus-control-border);
+  border: 1px solid #68737e;
   border-radius: 6px;
   overflow: hidden;
-  background: linear-gradient(var(--nimbus-control-highlight) 0%, var(--nimbus-control-mid) 56%, var(--nimbus-control-low) 100%);
+  background: linear-gradient(#fdfefe 0%, #f3f5f6 42%, #d9dfe4 72%, #f4f6f7 100%);
   box-shadow: inset 0 1px rgba(255,255,255,.98), 0 1px rgba(0,0,0,.12);
 }
 
@@ -348,7 +342,7 @@ textarea:focus-visible {
   z-index: 1;
   width: 100%;
   min-height: 21px;
-  padding: 1px 20px 2px 7px;
+  padding: 1px 31px 2px 7px;
   appearance: none;
   -webkit-appearance: none;
   border: 0;
@@ -362,12 +356,12 @@ textarea:focus-visible {
   top: 0;
   right: 0;
   bottom: 0;
-  width: 16px;
+  width: 27px;
   display: grid;
   place-items: center;
-  border-left: 1px solid var(--nimbus-control-border);
+  border-left: 1px solid #738c9e;
   color: #263e50;
-  background: linear-gradient(#ecf1f4 0%, var(--nimbus-control-mid) 52%, #c1ceda 100%);
+  background: linear-gradient(#dcebf3 0%, #a6bfce 48%, #c7d8e2 100%);
   box-shadow: inset 1px 0 rgba(255,255,255,.48);
   font-size: 9px;
   line-height: 1;
@@ -429,7 +423,7 @@ textarea:focus-visible {
   min-width: 80px;
   height: 24px;
   padding: 1px 11px;
-  border: 1px solid #343a40;
+  border: 2px solid #4f5b66;
   border-bottom: 0;
   border-radius: 7px 7px 0 0;
   background: linear-gradient(#f5f6f8, #e1e4e8 60%, #eceef1);
@@ -439,9 +433,9 @@ textarea:focus-visible {
 }
 
 .tab-strip button[aria-selected="true"] {
-  height: 25px;
+  height: 26px;
   margin-bottom: -1px;
-  border-color: #202b35;
+  border-color: #2f5878;
   background: linear-gradient(#e0e8ee 0%, #c9d6e0 36%, #b7cadd 66%, #a2b9cc 100%);
   box-shadow: inset 0 1px rgba(255,255,255,.76);
 }
@@ -642,7 +636,7 @@ textarea:focus-visible {
   display: grid;
   grid-template-rows: 1fr 1fr;
   overflow: hidden;
-  border-left: 1px solid var(--nimbus-control-border);
+  border-left: 1px solid #738c9e;
 }
 
 .nimbus-spinner-controls button {
@@ -651,14 +645,14 @@ textarea:focus-visible {
   padding: 0;
   border: 0;
   color: #263e50;
-  background: linear-gradient(#ecf1f4 0%, var(--nimbus-control-mid) 55%, #c1ceda 100%);
+  background: linear-gradient(#dcebf3, #a6bfce 70%, #c7d8e2);
   font-size: 7px;
   line-height: 1;
 }
 
 .nimbus-spinner-controls button + button {
-  border-top: 1px solid var(--nimbus-control-divider);
-  background: linear-gradient(#d7e2e9 0%, #b0c2d2 55%, #a9bfd2 100%);
+  border-top: 1px solid #7891a2;
+  background: linear-gradient(#cadce6, #9fb9c9 66%, #bed1dc);
 }
 
 .nimbus-spinner-controls button:active {
@@ -692,8 +686,8 @@ textarea:focus-visible {
   margin: 0;
   appearance: none;
   -webkit-appearance: none;
-  border: 1px solid var(--nimbus-control-border);
-  background: linear-gradient(var(--nimbus-control-highlight) 0%, var(--nimbus-control-mid) 58%, var(--nimbus-control-low) 100%);
+  border: 1px solid #697985;
+  background: linear-gradient(#fbfcfc, #e0e4e7 58%, #f4f6f7);
   box-shadow: inset 0 1px rgba(255,255,255,.95), 0 1px rgba(0,0,0,.12);
 }
 
@@ -707,8 +701,8 @@ textarea:focus-visible {
 
 .check-row input[type="checkbox"]:checked,
 .check-row input[type="radio"]:checked {
-  border-color: var(--nimbus-control-border);
-  background: linear-gradient(var(--nimbus-control-highlight) 0%, var(--nimbus-control-mid) 58%, var(--nimbus-control-low) 100%);
+  border-color: #5f8096;
+  background: linear-gradient(#e9f3f8 0%, #b9d1df 57%, #dceaf1 100%);
 }
 
 .check-row input[type="checkbox"]:checked::after {
@@ -718,7 +712,7 @@ textarea:focus-visible {
   top: 3px;
   width: 9px;
   height: 5px;
-  border: solid var(--nimbus-control-mark);
+  border: solid #234864;
   border-width: 0 0 2px 2px;
   transform: rotate(-45deg);
 }
@@ -731,7 +725,7 @@ textarea:focus-visible {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #030304;
+  background: #3b6380;
   box-shadow: inset 0 1px rgba(255,255,255,.42), 0 1px rgba(255,255,255,.48);
 }
 
@@ -741,11 +735,11 @@ textarea:focus-visible {
 }
 
 .check-row input[type="checkbox"]:checked:disabled::after {
-  border-color: #a6b0bb;
+  border-color: #aeb8bf;
 }
 
 .check-row input[type="radio"]:checked:disabled::after {
-  background: #a6b0bb;
+  background: #b4bec5;
 }
 
 .disabled-control {
