@@ -125,6 +125,10 @@ textarea:focus-visible {
   transition: width .18s ease, height .18s ease;
 }
 
+.app-window.without-title-bar {
+  grid-template-rows: 25px 36px auto 34px 1fr 26px;
+}
+
 .app-window.preview-enabled {
   box-shadow:
     0 0 0 4px color-mix(in srgb, var(--nimbus-accent) 58%, transparent),
@@ -1636,6 +1640,10 @@ tbody tr:focus-visible {
     min-height: min(640px, calc(100vh - 24px));
     grid-template-rows: 30px 28px auto auto 39px 1fr 30px;
   }
+
+  .app-window.view-mobile.without-title-bar {
+    grid-template-rows: 28px auto auto 39px 1fr 30px;
+  }
 }
 
 @container nimbus-window (max-width: 980px) {
@@ -1763,6 +1771,10 @@ tbody tr:focus-visible {
     border: 0;
     border-radius: 0;
     grid-template-rows: 30px 28px auto auto 39px 1fr 30px;
+  }
+
+  .app-window.without-title-bar {
+    grid-template-rows: 28px auto auto 39px 1fr 30px;
   }
 
   .tool-bar {

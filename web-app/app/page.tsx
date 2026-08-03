@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { SHOW_WINDOW_TITLE_BAR } from "./nimbus-config";
 
 type TabId = "foundations" | "controls" | "data" | "feedback" | "dialogs";
 type DialogId = "info" | "confirm" | "file" | "color" | null;
@@ -227,20 +228,23 @@ export default function Home() {
       style={{ "--nimbus-accent": accent } as React.CSSProperties}
     >
       <section
-        className={`app-window view-${viewMode.toLowerCase()} ${previewEnabled ? "preview-enabled" : ""}`}
+        className={`app-window view-${viewMode.toLowerCase()} ${SHOW_WINDOW_TITLE_BAR ? "" : "without-title-bar"} ${previewEnabled ? "preview-enabled" : ""}`}
+        data-window-title-bar={SHOW_WINDOW_TITLE_BAR ? "visible" : "hidden"}
         aria-label="Nimbus Swing Design System web application"
         aria-hidden={dialog ? true : undefined}
         inert={dialog ? true : undefined}
       >
-        <header className="title-bar">
-          <div className="app-identity">
-            <span className="java-mark" aria-hidden="true">N</span>
-            <span>Nimbus Swing Design System</span>
-          </div>
-          <div className="window-controls" aria-hidden="true">
-            <span>—</span><span>□</span><span>×</span>
-          </div>
-        </header>
+        {SHOW_WINDOW_TITLE_BAR && (
+          <header className="title-bar">
+            <div className="app-identity">
+              <span className="java-mark" aria-hidden="true">N</span>
+              <span>Nimbus Swing Design System</span>
+            </div>
+            <div className="window-controls" aria-hidden="true">
+              <span>—</span><span>□</span><span>×</span>
+            </div>
+          </header>
+        )}
 
         <nav className="menu-bar" aria-label="Application menu">
           {appMenus.map(({ label, items }) => (

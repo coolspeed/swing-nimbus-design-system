@@ -36,6 +36,7 @@ test("server-renders the Nimbus design-system catalog", async () => {
   const html = await response.text();
   assert.match(html, /<title>Nimbus Swing Design System — Web Edition<\/title>/i);
   assert.match(html, /Nimbus component showcase/);
+  assert.match(html, /data-window-title-bar="visible"/);
   assert.match(html, /data-testid="tab-foundations"/);
   assert.match(html, /#D6D9DF/);
   assert.match(html, /#33628C/);
@@ -45,11 +46,12 @@ test("server-renders the Nimbus design-system catalog", async () => {
 });
 
 test("keeps the design-system tokens and interactive contracts explicit", async () => {
-  const [page, layout, css, packageJson] = await Promise.all([
+  const [page, layout, css, packageJson, config] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
+    readFile(new URL("../app/nimbus-config.ts", import.meta.url), "utf8"),
   ]);
 
   assert.ok(page.includes('data-testid={`tab-${tab.id}`}'));
@@ -87,6 +89,12 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.match(css, /\.swatch code\s*\{[\s\S]*?font-family:\s*inherit[\s\S]*?font-size:\s*12px/i);
   assert.doesNotMatch(css, /Cascadia Mono|Consolas/i);
   assert.match(css, /\.app-window\s*\{[\s\S]*?width:\s*min\(1200px,\s*calc\(100vw - 140px\)\)[\s\S]*?height:\s*min\(720px,\s*calc\(100vh - 140px\)\)/i);
+  assert.match(config, /export const SHOW_WINDOW_TITLE_BAR = true/);
+  assert.match(page, /SHOW_WINDOW_TITLE_BAR\s*\?\s*""\s*:\s*"without-title-bar"/);
+  assert.match(page, /data-window-title-bar=\{SHOW_WINDOW_TITLE_BAR \? "visible" : "hidden"\}/);
+  assert.match(page, /\{SHOW_WINDOW_TITLE_BAR && \([\s\S]*?<header className="title-bar">/i);
+  assert.match(css, /\.app-window\.without-title-bar\s*\{[\s\S]*?grid-template-rows:\s*25px 36px auto 34px 1fr 26px/i);
+  assert.match(css, /\.app-window\.view-mobile\.without-title-bar\s*\{[\s\S]*?grid-template-rows:\s*28px auto auto 39px 1fr 30px/i);
   assert.match(page, /function NimbusSelect\([\s\S]*?nimbus-select-arrow/i);
   assert.match(page, /function NimbusSpinner\([\s\S]*?Increase quantity[\s\S]*?Decrease quantity/i);
   assert.match(css, /\.nimbus-button,[\s\S]*?\.nimbus-select-shell\s*\{[\s\S]*?min-height:\s*23px/i);

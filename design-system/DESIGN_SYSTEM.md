@@ -126,6 +126,19 @@ HiDPI scaling에 맡기고 픽셀 단위 확대 코드를 추가하지 않는다
 - 데이터가 길어질 수 있는 모든 표면은 처음부터 `JScrollPane` 안에 배치한다.
 - 제목이 있는 경계는 정보 구조를 만들 때만 사용한다. 장식 목적으로 중첩하지 않는다.
 
+### Window chrome과 Electron
+
+- 웹 카탈로그의 상단 title bar는 독립된 Swing 창을 설명하기 위한 모의 window chrome이다.
+  표시 여부의 단일 출처는 `web-app/app/nimbus-config.ts`의 `SHOW_WINDOW_TITLE_BAR` 상수다.
+- 브라우저 카탈로그는 `true`를 사용한다. 네이티브 프레임과 title bar를 제공하는 Electron 창은
+  `false`로 바꿔 중복 title bar를 제거한다. 이때 title bar DOM뿐 아니라 전용 grid 행도 함께
+  제거되어 메뉴 막대 위에 빈 공간이 남지 않아야 한다.
+- Electron을 `frame: false`로 실행하고 웹 UI가 최소화·최대화·닫기 동작까지 담당한다면
+  `SHOW_WINDOW_TITLE_BAR`를 `true`로 유지한다. 이 경우 drag region과 각 window control을
+  Electron IPC에 연결해야 하며, 현재 카탈로그의 장식용 control을 그대로 제품 기능으로 간주하지 않는다.
+- 이 상수는 화면 안의 모의 chrome만 제어한다. 운영체제 작업 표시줄과 접근성 API에 전달되는
+  실제 Electron `BrowserWindow`의 `title`은 별도로 설정한다.
+
 ## 7. 컴포넌트 규칙
 
 ### Buttons
