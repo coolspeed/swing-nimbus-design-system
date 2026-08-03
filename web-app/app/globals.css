@@ -295,13 +295,9 @@ textarea:focus-visible {
 .toggle-tool:active,
 .toggle-tool.active,
 .selected-button {
-  border-color: #456d8c;
-  background: linear-gradient(#c6d8e5 0%, #a7becf 34%, #8faabd 63%, #bcd0dd 100%);
-  box-shadow:
-    inset 0 1px 2px rgba(32, 51, 67, 0.34),
-    inset 0 -1px rgba(255,255,255,.56),
-    inset 1px 0 rgba(55,92,119,.22),
-    inset -1px 0 rgba(255,255,255,.34);
+  border-color: #596b79;
+  background: linear-gradient(#c2cdd6 0%, #b3c0ca 62%, #d2dce4 100%);
+  box-shadow: inset 0 1px 2px rgba(32, 45, 58, 0.24), inset 0 -1px rgba(255,255,255,.46);
 }
 
 .nimbus-button:disabled {
@@ -439,9 +435,9 @@ textarea:focus-visible {
 .tab-strip button[aria-selected="true"] {
   height: 25px;
   margin-bottom: -1px;
-  border-color: #7b858f;
-  background: linear-gradient(#f8f9fa 0%, #e8eaee 30%, #e0e2e7 64%, #d7dae0 100%);
-  box-shadow: inset 0 1px rgba(255,255,255,.94), inset 1px 0 rgba(255,255,255,.5);
+  border-color: #355d7c;
+  background: linear-gradient(#dfe7ed 0%, #c7d4df 36%, #b4c8d7 66%, #9db6c9 100%);
+  box-shadow: inset 0 1px rgba(255,255,255,.58);
 }
 
 .content-area {
