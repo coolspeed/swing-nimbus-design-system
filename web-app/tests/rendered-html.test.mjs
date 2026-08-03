@@ -119,7 +119,7 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.doesNotMatch(css, /\.progress-track\.indeterminate\s*\{[\s\S]*?background:\s*#d87a12/i);
   assert.match(css, /\.progress-track\.indeterminate \.progress-indeterminate-pattern\s*\{[\s\S]*?top:\s*50%[\s\S]*?height:\s*14px[\s\S]*?margin-top:\s*-7px/i);
   assert.match(css, /\.progress-indeterminate-pattern::before\s*\{[\s\S]*?inset:\s*6px 0 auto[\s\S]*?height:\s*2px[\s\S]*?linear-gradient\(#d7954e,\s*#aa4a00 54%,\s*#d2720f\)/i);
-  assert.match(css, /\.progress-indeterminate-pattern i\s*\{[\s\S]*?flex:\s*0 0 45px[\s\S]*?margin-right:\s*-1px/i);
+  assert.match(css, /\.progress-indeterminate-pattern i\s*\{[\s\S]*?flex:\s*0 0 45px[\s\S]*?margin-right:\s*-1px[\s\S]*?transform:\s*scaleY\(\.75\)/i);
   assert.match(css, /clip-path:\s*path\("M -1 6 C 3 6 5 6 7 5\.5/i);
   assert.match(css, /C 18 1\.5 20 1\.5 22 1\.5/);
   assert.match(css, /C 39 6 41 6 45 6 L 45 8/i);
@@ -132,9 +132,9 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.doesNotMatch(css, /\.fake-scrollbar \.scroll-thumb\s*\{[\s\S]*?cursor:\s*grab/i);
   assert.doesNotMatch(css, /\.fake-scrollbar \.scroll-thumb:active\s*\{[\s\S]*?cursor:\s*grabbing/i);
   assert.doesNotMatch(css, /\.fake-scrollbar \.scroll-thumb\s*\{[\s\S]*?transition:/i);
-  assert.match(css, /\.fake-scrollbar \.scroll-thumb\s*\{[\s\S]*?top:\s*-1px[\s\S]*?height:\s*16px[\s\S]*?border-radius:\s*0 0 22px 22px \/ 0 0 14px 14px[\s\S]*?#f5f9fa 0%,[\s\S]*?#a6bed1 32%,[\s\S]*?#e9f7fa 100%[\s\S]*?0 1px 1px rgba\(21,39,55,\.34\)/i);
+  assert.match(css, /\.fake-scrollbar \.scroll-thumb\s*\{[\s\S]*?top:\s*-1px[\s\S]*?height:\s*16px[\s\S]*?border-radius:\s*3px 3px 22px 22px \/ 2px 2px 14px 14px[\s\S]*?#f5f9fa 0%,[\s\S]*?#a6bed1 32%,[\s\S]*?#e9f7fa 100%[\s\S]*?inset 0 0 0 1px rgba\(33,62,84,\.18\)[\s\S]*?inset 0 -1px #70899c[\s\S]*?0 1px 1px rgba\(21,39,55,\.22\)/i);
   assert.match(css, /border:\s*1px solid #34495c[\s\S]*?border-top-color:\s*#b8c3cd/i);
-  assert.match(css, /\.fake-scrollbar \.scroll-thumb:active\s*\{[\s\S]*?#7899b2 32%/i);
+  assert.match(css, /\.fake-scrollbar \.scroll-thumb:active\s*\{[\s\S]*?border-color:\s*#17364d[\s\S]*?border-top-color:\s*#5a7289[\s\S]*?#8da8be 0%,[\s\S]*?#386791 35%,[\s\S]*?#7aa7d2 100%[\s\S]*?inset 0 0 0 1px rgba\(14,43,65,\.24\)[\s\S]*?inset 0 -1px #416484[\s\S]*?0 1px 1px rgba\(5,20,32,\.24\)/i);
   assert.match(css, /mask:\s*radial-gradient\(circle 7px at 100% 50%,\s*transparent 0 6px,\s*#000 7px\)/i);
   assert.doesNotMatch(css, /radial-gradient\(circle at (?:100%|0) 50%,\s*#dfe2e5/i);
   assert.match(css, /\.nimbus-fieldset\s*\{[\s\S]*?background:\s*var\(--canvas\)[\s\S]*?box-shadow:\s*none/i);
