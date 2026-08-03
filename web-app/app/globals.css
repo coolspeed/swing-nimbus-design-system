@@ -1226,9 +1226,9 @@ tbody tr:focus-visible {
   width: 27%;
   height: 16px;
   padding: 0;
-  border: 1px solid #34495c;
-  border-top-color: #b8c3cd;
-  border-radius: 3px 3px 22px 22px / 2px 2px 14px 14px;
+  border: 1px solid #142a3a;
+  border-top-color: #b9d8e7;
+  border-radius: 5px 5px 22px 22px / 3px 3px 14px 14px;
   background: linear-gradient(
     #e6edef 0%,
     #dce5ea 6%,
@@ -1243,8 +1243,8 @@ tbody tr:focus-visible {
     inset 0 1px rgba(255,255,255,.88),
     inset 0 2px rgba(255,255,255,.34),
     inset 0 0 0 1px rgba(33,62,84,.18),
-    inset -1px 0 rgba(29,54,75,.18),
-    inset 0 -1px #70899c,
+    inset -1px 0 rgba(18,40,57,.3),
+    inset 0 -1px #526f85,
     0 1px 1px rgba(21,39,55,.22);
   cursor: default;
   user-select: none;
@@ -1268,8 +1268,8 @@ tbody tr:focus-visible {
 }
 
 .fake-scrollbar .scroll-thumb:active {
-  border-color: #17364d;
-  border-top-color: #5a7289;
+  border-color: #10283a;
+  border-top-color: #a5c8db;
   background: linear-gradient(
     #8da8be 0%,
     #7f9db6 10%,
