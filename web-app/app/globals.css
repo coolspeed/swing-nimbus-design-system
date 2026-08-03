@@ -321,6 +321,7 @@ textarea:focus-visible {
 .nimbus-select-shell {
   position: relative;
   display: inline-block;
+  overflow: hidden;
   min-width: 116px;
 }
 
@@ -345,7 +346,14 @@ textarea:focus-visible {
   place-items: center;
   border-left: 1px solid #687c8e;
   color: #2d3e4d;
-  background: linear-gradient(#ecf1f4 0%, #dae3eb 52%, #c1ceda 100%);
+  background: linear-gradient(
+    #dce7ee 0%,
+    #c6d4df 22%,
+    #afc1cf 36%,
+    #a4b9cc 62%,
+    #b9cee1 88%,
+    #d8e3ec 100%
+  );
   box-shadow: inset 1px 0 rgba(255,255,255,.48);
   font-size: 8px;
   line-height: 1;
