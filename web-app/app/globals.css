@@ -1143,19 +1143,22 @@ tbody tr:focus-visible {
   overflow: hidden;
   background: linear-gradient(
     to bottom,
-    #68696d 0%,
-    #8e9094 8%,
-    #a1a4a8 12%,
-    #adb0b5 16%,
-    #b8bac0 25%,
-    #c2c4ca 35%,
-    #c7c9cf 42%,
-    #cfd2d8 65%,
+    #3d3f44 0%,
+    #55575c 7%,
+    #7d8085 13%,
+    #d9dce0 20%,
+    #f1f2f3 26%,
+    #d3d5d9 34%,
+    #b0b3b9 48%,
+    #bfc2c8 62%,
+    #cdd0d6 78%,
     #d6d9df 100%
   );
   box-shadow:
-    inset 0 1px rgba(24,26,29,.32),
-    inset 0 2px rgba(255,255,255,.06);
+    inset 0 1px rgba(7,9,12,.64),
+    inset 0 2px rgba(255,255,255,.12),
+    inset 0 3px rgba(255,255,255,.18),
+    inset 0 -1px rgba(255,255,255,.34);
 }
 
 .fake-scrollbar .scroll-arrow {
@@ -1226,7 +1229,7 @@ tbody tr:focus-visible {
   width: 27%;
   height: 16px;
   padding: 0;
-  border: 1px solid #142a3a;
+  border: 1px solid #0c1d28;
   border-top-color: #b9d8e7;
   border-radius: 5px 5px 22px 22px / 3px 3px 14px 14px;
   background: linear-gradient(
@@ -1268,7 +1271,7 @@ tbody tr:focus-visible {
 }
 
 .fake-scrollbar .scroll-thumb:active {
-  border-color: #10283a;
+  border-color: #091c29;
   border-top-color: #a5c8db;
   background: linear-gradient(
     #8da8be 0%,
