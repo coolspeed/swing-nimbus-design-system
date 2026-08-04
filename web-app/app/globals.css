@@ -1157,7 +1157,7 @@ tbody tr:focus-visible {
   display: flex;
   width: max-content;
   height: 14px;
-  animation: indeterminate .52s linear infinite;
+  animation: indeterminate .4s linear infinite;
   margin-top: -7px;
   filter:
     drop-shadow(0 -1px 0 rgba(255,244,225,.82))
@@ -1295,9 +1295,9 @@ tbody tr:focus-visible {
 
 .fake-scrollbar .scroll-thumb {
   position: absolute;
-  top: -1px;
+  top: 0;
   width: 27%;
-  height: 16px;
+  height: 15px;
   padding: 0;
   border: 1px solid #0c1d28;
   border-top-color: #b9d8e7;

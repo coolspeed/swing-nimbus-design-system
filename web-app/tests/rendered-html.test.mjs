@@ -168,7 +168,7 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.match(css, /\.tab-strip button\[aria-selected="true"\]\s*\{[\s\S]*?border-width:\s*1\.5px 1\.5px 0[\s\S]*?border-color:\s*#22313f[\s\S]*?linear-gradient\(#d8e2e9 0%,\s*#c3d0db 36%,\s*#adbfce 66%,\s*#96aec1 100%\)/i);
   assert.match(css, /\.progress-track\s*\{[\s\S]*?height:\s*19px[\s\S]*?border:\s*1px solid #898c92[\s\S]*?#fff 0%,[\s\S]*?#ced0d4 46%,[\s\S]*?#f9fbff 100%/i);
   assert.match(css, /\.progress-track > \.progress-fill\s*\{[\s\S]*?#e7bc88 0%,[\s\S]*?#aa4a00 54%,[\s\S]*?#f49a31 100%[\s\S]*?0 -2px 3px rgba\(170,74,0,\.48\)[\s\S]*?0 3px 4px rgba\(166,70,0,\.38\)/i);
-  assert.match(css, /animation:\s*indeterminate \.52s linear infinite/i);
+  assert.match(css, /animation:\s*indeterminate \.4s linear infinite/i);
   assert.match(css, /\.progress-track\.indeterminate\s*\{[\s\S]*?height:\s*13px[\s\S]*?overflow:\s*hidden[\s\S]*?#fff 10%,[\s\S]*?#d8d9dc 52%,[\s\S]*?#fbfcff 100%[\s\S]*?inset 0 2px rgba\(255,255,255,\.92\)/i);
   assert.doesNotMatch(css, /\.progress-track\.indeterminate\s*\{[\s\S]*?background:\s*#d87a12/i);
   assert.match(css, /\.progress-track\.indeterminate \.progress-indeterminate-pattern\s*\{[\s\S]*?top:\s*50%[\s\S]*?height:\s*14px[\s\S]*?margin-top:\s*-7px/i);
@@ -188,7 +188,7 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.doesNotMatch(css, /\.fake-scrollbar \.scroll-thumb\s*\{[\s\S]*?cursor:\s*grab/i);
   assert.doesNotMatch(css, /\.fake-scrollbar \.scroll-thumb:active\s*\{[\s\S]*?cursor:\s*grabbing/i);
   assert.doesNotMatch(css, /\.fake-scrollbar \.scroll-thumb\s*\{[\s\S]*?transition:/i);
-  assert.match(css, /\.fake-scrollbar \.scroll-thumb\s*\{[\s\S]*?top:\s*-1px[\s\S]*?height:\s*16px[\s\S]*?border-radius:\s*5px 5px 22px 22px \/ 3px 3px 14px 14px[\s\S]*?#e6edef 0%,[\s\S]*?#95aec3 32%,[\s\S]*?#dcebf0 100%[\s\S]*?inset 0 0 0 1px rgba\(33,62,84,\.18\)[\s\S]*?inset -1px 0 rgba\(18,40,57,\.3\)[\s\S]*?inset 0 -1px #526f85[\s\S]*?0 1px 1px rgba\(21,39,55,\.22\)/i);
+  assert.match(css, /\.fake-scrollbar \.scroll-thumb\s*\{[\s\S]*?top:\s*0[\s\S]*?height:\s*15px[\s\S]*?border-radius:\s*5px 5px 22px 22px \/ 3px 3px 14px 14px[\s\S]*?#e6edef 0%,[\s\S]*?#95aec3 32%,[\s\S]*?#dcebf0 100%[\s\S]*?inset 0 0 0 1px rgba\(33,62,84,\.18\)[\s\S]*?inset -1px 0 rgba\(18,40,57,\.3\)[\s\S]*?inset 0 -1px #526f85[\s\S]*?0 1px 1px rgba\(21,39,55,\.22\)/i);
   assert.match(css, /border:\s*1px solid #0c1d28[\s\S]*?border-top-color:\s*#b9d8e7/i);
   assert.match(css, /@media \(hover:\s*hover\) and \(pointer:\s*fine\)\s*\{[\s\S]*?\.fake-scrollbar \.scroll-thumb:hover\s*\{[\s\S]*?#f5f9fa 0%,[\s\S]*?#a6bed1 32%,[\s\S]*?#e9f7fa 100%/i);
   assert.ok(css.indexOf(".fake-scrollbar .scroll-thumb:hover") < css.indexOf(".fake-scrollbar .scroll-thumb:active"));
