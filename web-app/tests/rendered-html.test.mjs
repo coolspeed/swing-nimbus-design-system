@@ -57,7 +57,7 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
 
   assert.ok(page.includes('data-testid={`tab-${tab.id}`}'));
   assert.doesNotMatch(page, /Nimbus native|theme-chip|toolbar-spacer/i);
-  assert.match(page, /const openContextAt = \(event: React\.MouseEvent<HTMLElement>\)[\s\S]*?event\.clientX[\s\S]*?event\.clientY[\s\S]*?getBoundingClientRect\(\)[\s\S]*?setContextMenuPosition/i);
+  assert.match(page, /const openContextAt = \(event: React\.MouseEvent<HTMLElement>,\s*language: PreviewLanguage = "en"\)[\s\S]*?event\.clientX[\s\S]*?event\.clientY[\s\S]*?getBoundingClientRect\(\)[\s\S]*?setContextMenuPosition/i);
   assert.match(page, /style=\{\{ left: contextMenuPosition\.x, top: contextMenuPosition\.y \}\}/i);
   assert.match(page, /onContextMenu=\{\(event\)[\s\S]*?openContext\(event\)/i);
   assert.doesNotMatch(css, /\.context-menu\s*\{\s*position:\s*absolute;\s*top:\s*48%;\s*left:\s*54%/i);
@@ -65,6 +65,12 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   for (const tab of ["foundations", "controls", "data", "feedback", "dialogs"]) {
     assert.match(page, new RegExp(`panel-${tab}`));
   }
+  assert.match(page, /\{ id: "dialogs", label: "Dialogs"/);
+  assert.match(page, /id="panel-dialogs"[\s\S]*?className="two-column korean-preview" lang="ko"[\s\S]*?대화상자 및 메뉴 예제/);
+  assert.match(page, /openDialog=\{\(id\) => showDialog\(id, "ko"\)\}/);
+  assert.match(page, /openContext=\{\(event\) => openContextAt\(event, "ko"\)\}/);
+  assert.match(page, /const \[dialogLanguage, setDialogLanguage\] = useState<PreviewLanguage>\("en"\)/);
+  assert.match(css, /--font-ui-korean:\s*Arial, "Malgun Gothic", "맑은 고딕", sans-serif/);
 
   assert.match(page, /data-testid="component-table"/);
   assert.match(page, /<td>\{row\.status\}<\/td>/);
@@ -72,12 +78,15 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.match(page, /data-testid=\{`dialog-\$\{type\}`\}/);
   assert.match(page, /function InternalDesktop\(\)[\s\S]*?setPointerCapture\(event\.pointerId\)[\s\S]*?getBoundingClientRect\(\)[\s\S]*?data-active=\{activeWindow === id\}/i);
   assert.match(page, /className="internal-minimize"[\s\S]*?className="internal-maximize"[\s\S]*?className="internal-close"/i);
-  assert.match(page, /aria-label=\{`Minimize \$\{title\}`\}[\s\S]*?aria-label=\{`\$\{state\.maximized \? "Restore" : "Maximize"\} \$\{title\}`\}[\s\S]*?aria-label=\{`Close \$\{title\}`\}/i);
+  assert.match(page, /aria-label=\{`\$\{title\} 최소화`\}[\s\S]*?aria-label=\{`\$\{title\} \$\{state\.maximized \? "복원" : "최대화"\}`\}[\s\S]*?aria-label=\{`\$\{title\} 닫기`\}/i);
   assert.match(css, /\.internal-window\[data-active="true"\] \.internal-minimize\s*\{[\s\S]*?#c66708 48%/i);
   assert.match(css, /\.internal-window\[data-active="true"\] \.internal-maximize\s*\{[\s\S]*?#6f8a10 48%/i);
   assert.match(css, /\.internal-window\[data-active="true"\] \.internal-close\s*\{[\s\S]*?#b22a1d 48%/i);
   for (const fileAction of ["Up one level", "Home folder", "Create new folder", "List", "Details"]) {
-    assert.match(page, new RegExp(`aria-label="${fileAction}"`));
+    assert.ok(page.includes(`"${fileAction}"`));
+  }
+  for (const fileAction of ["상위 폴더", "홈 폴더", "새 폴더 만들기", "목록", "자세히"]) {
+    assert.ok(page.includes(`"${fileAction}"`));
   }
   for (const icon of ["up", "home", "new-folder", "list", "details"]) {
     assert.match(page, new RegExp(`className="file-toolbar-icon icon-${icon}" aria-hidden="true" \\/>`));

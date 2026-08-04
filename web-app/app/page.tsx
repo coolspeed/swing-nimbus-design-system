@@ -5,6 +5,7 @@ import { SHOW_WINDOW_TITLE_BAR } from "./nimbus-config";
 
 type TabId = "foundations" | "controls" | "data" | "feedback" | "dialogs";
 type DialogId = "info" | "confirm" | "file" | "color" | null;
+type PreviewLanguage = "en" | "ko";
 type SortKey = "component" | "status" | "owner" | "updated";
 type ComponentRow = Record<SortKey, string>;
 type ContextMenuPosition = { x: number; y: number };
@@ -131,7 +132,9 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<TabId>("foundations");
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [dialog, setDialog] = useState<DialogId>(null);
+  const [dialogLanguage, setDialogLanguage] = useState<PreviewLanguage>("en");
   const [contextOpen, setContextOpen] = useState(false);
+  const [contextLanguage, setContextLanguage] = useState<PreviewLanguage>("en");
   const [contextMenuPosition, setContextMenuPosition] = useState<ContextMenuPosition>({ x: 0, y: 0 });
   const [treeOpen, setTreeOpen] = useState(true);
   const [sortKey, setSortKey] = useState<SortKey>("component");
@@ -213,7 +216,7 @@ export default function Home() {
     }
   };
 
-  const showDialog = (id: Exclude<DialogId, null>) => {
+  const showDialog = (id: Exclude<DialogId, null>, language: PreviewLanguage = "en") => {
     const activeElement =
       document.activeElement instanceof HTMLElement ? document.activeElement : null;
     setDialogOpener(
@@ -221,16 +224,18 @@ export default function Home() {
         ? menuOpenerRef.current
         : activeElement,
     );
+    setDialogLanguage(language);
     setDialog(id);
   };
 
-  const openContextAt = (event: React.MouseEvent<HTMLElement>) => {
+  const openContextAt = (event: React.MouseEvent<HTMLElement>, language: PreviewLanguage = "en") => {
     const hasPointerCoordinates = event.clientX !== 0 || event.clientY !== 0;
     const targetBounds = event.currentTarget.getBoundingClientRect();
     setContextMenuPosition({
       x: hasPointerCoordinates ? event.clientX : targetBounds.left,
       y: hasPointerCoordinates ? event.clientY : targetBounds.bottom,
     });
+    setContextLanguage(language);
     setContextOpen(true);
   };
 
@@ -426,7 +431,10 @@ export default function Home() {
             <FeedbackPanel />
           )}
           {activeTab === "dialogs" && (
-            <DialogsPanel openDialog={showDialog} openContext={openContextAt} />
+            <DialogsPanel
+              openDialog={(id) => showDialog(id, "ko")}
+              openContext={(event) => openContextAt(event, "ko")}
+            />
           )}
         </div>
 
@@ -445,7 +453,8 @@ export default function Home() {
             ref={contextMenuRef}
             className="context-menu"
             role="menu"
-            aria-label="Component actions"
+            aria-label={contextLanguage === "ko" ? "컴포넌트 작업" : "Component actions"}
+            lang={contextLanguage}
             style={{ left: contextMenuPosition.x, top: contextMenuPosition.y }}
             onClick={(event) => event.stopPropagation()}
             onKeyDown={(event) => {
@@ -471,10 +480,10 @@ export default function Home() {
               }
             }}
           >
-            <button role="menuitem" onClick={() => setContextOpen(false)}>Open component</button>
-            <button role="menuitem" onClick={() => setContextOpen(false)}>Duplicate</button>
+            <button role="menuitem" onClick={() => setContextOpen(false)}>{contextLanguage === "ko" ? "컴포넌트 열기" : "Open component"}</button>
+            <button role="menuitem" onClick={() => setContextOpen(false)}>{contextLanguage === "ko" ? "복제" : "Duplicate"}</button>
             <hr />
-            <button role="menuitem" onClick={() => setContextOpen(false)}>Archive</button>
+            <button role="menuitem" onClick={() => setContextOpen(false)}>{contextLanguage === "ko" ? "보관" : "Archive"}</button>
           </div>
         </div>
       )}
@@ -482,6 +491,7 @@ export default function Home() {
       {dialog && (
         <NimbusDialog
           type={dialog}
+          language={dialogLanguage}
           accent={accent}
           setAccent={setAccent}
           restoreFocusTo={dialogOpener}
@@ -826,19 +836,19 @@ function FeedbackPanel() {
 
 function DialogsPanel({ openDialog, openContext }: { openDialog: (id: Exclude<DialogId, null>) => void; openContext: (event: React.MouseEvent<HTMLElement>) => void }) {
   return (
-    <section id="panel-dialogs" role="tabpanel" aria-labelledby="tab-dialogs" className="two-column">
-      <Fieldset legend="Dialog & menu samples">
-        <p>Each button opens a web recreation of a standard Nimbus dialog.</p>
+    <section id="panel-dialogs" role="tabpanel" aria-labelledby="tab-dialogs" className="two-column korean-preview" lang="ko">
+      <Fieldset legend="대화상자 및 메뉴 예제">
+        <p>각 버튼은 표준 Nimbus 대화상자의 웹 재현을 엽니다.</p>
         <div className="dialog-buttons">
-          <NimbusButton onClick={() => openDialog("info")}>Information message</NimbusButton>
-          <NimbusButton onClick={() => openDialog("confirm")}>Confirmation message</NimbusButton>
-          <NimbusButton onClick={() => openDialog("file")}>Open file chooser</NimbusButton>
-          <NimbusButton onClick={() => openDialog("color")}>Open color chooser</NimbusButton>
-          <NimbusButton onClick={openContext}>Open context menu</NimbusButton>
+          <NimbusButton onClick={() => openDialog("info")}>정보 메시지</NimbusButton>
+          <NimbusButton onClick={() => openDialog("confirm")}>확인 메시지</NimbusButton>
+          <NimbusButton onClick={() => openDialog("file")}>파일 선택기 열기</NimbusButton>
+          <NimbusButton onClick={() => openDialog("color")}>색상 선택기 열기</NimbusButton>
+          <NimbusButton onClick={openContext}>컨텍스트 메뉴 열기</NimbusButton>
         </div>
-        <p className="muted-copy">Tip: right-click the table in Data views for the same context menu.</p>
+        <p className="muted-copy">도움말: 데이터 보기 탭의 표를 마우스 오른쪽 버튼으로 눌러도 같은 메뉴가 열립니다.</p>
       </Fieldset>
-      <Fieldset legend="Internal windows" className="desktop-fieldset">
+      <Fieldset legend="내부 창" className="desktop-fieldset">
         <InternalDesktop />
       </Fieldset>
     </section>
@@ -939,7 +949,7 @@ function InternalDesktop() {
         onPointerDown={() => setActiveWindow(id)}
       >
         <header
-          aria-label={`${title} title bar`}
+          aria-label={`${title} 제목 표시줄`}
           onDoubleClick={() => updateWindow(id, { maximized: !state.maximized, minimized: false })}
           onPointerDown={(event) => beginDrag(event, id)}
           onPointerMove={(event) => dragWindow(event, id)}
@@ -949,7 +959,7 @@ function InternalDesktop() {
           <button
             type="button"
             className="internal-window-menu"
-            aria-label={`${title} window menu`}
+            aria-label={`${title} 창 메뉴`}
             onPointerDown={(event) => event.stopPropagation()}
             onClick={() => setActiveWindow(id)}
           >▼</button>
@@ -958,21 +968,21 @@ function InternalDesktop() {
             <button
               type="button"
               className="internal-minimize"
-              aria-label={`Minimize ${title}`}
+              aria-label={`${title} 최소화`}
               onPointerDown={(event) => event.stopPropagation()}
               onClick={() => updateWindow(id, { minimized: !state.minimized, maximized: false })}
             >−</button>
             <button
               type="button"
               className="internal-maximize"
-              aria-label={`${state.maximized ? "Restore" : "Maximize"} ${title}`}
+              aria-label={`${title} ${state.maximized ? "복원" : "최대화"}`}
               onPointerDown={(event) => event.stopPropagation()}
               onClick={() => updateWindow(id, { maximized: !state.maximized, minimized: false })}
             >□</button>
             <button
               type="button"
               className="internal-close"
-              aria-label={`Close ${title}`}
+              aria-label={`${title} 닫기`}
               onPointerDown={(event) => event.stopPropagation()}
               onClick={() => closeWindow(id)}
             >×</button>
@@ -985,11 +995,11 @@ function InternalDesktop() {
 
   return (
     <div className="internal-desktop" ref={desktopRef}>
-      {renderInternalWindow("inspector", "Inspector", (
-        <><p>Selected: <b>Primary action</b></p><p>State: Default</p><label className="check-row"><input type="checkbox" defaultChecked /><span>Visible</span></label></>
+      {renderInternalWindow("inspector", "검사기", (
+        <><p>선택: <b>기본 동작</b></p><p>상태: 기본</p><label className="check-row"><input type="checkbox" defaultChecked /><span>표시</span></label></>
       ))}
-      {renderInternalWindow("preview", "Preview", (
-        <><p>Mini preview</p><div className="progress-track"><span className="progress-fill" style={{ width: "60%" }} /><span className="progress-value">60%</span></div></>
+      {renderInternalWindow("preview", "미리보기", (
+        <><p>간단한 미리보기</p><div className="progress-track"><span className="progress-fill" style={{ width: "60%" }} /><span className="progress-value">60%</span></div></>
       ))}
     </div>
   );
@@ -997,31 +1007,27 @@ function InternalDesktop() {
 
 function NimbusDialog({
   type,
+  language,
   accent,
   setAccent,
   restoreFocusTo,
   onClose,
 }: {
   type: Exclude<DialogId, null>;
+  language: PreviewLanguage;
   accent: string;
   setAccent: (value: string) => void;
   restoreFocusTo: HTMLElement | null;
   onClose: () => void;
 }) {
+  const ko = language === "ko";
   const dialogRef = useRef<HTMLElement>(null);
-  const [fileLocation, setFileLocation] = useState("Documents");
+  const [fileLocation, setFileLocation] = useState(ko ? "문서" : "Documents");
   const [fileView, setFileView] = useState<"list" | "details">("list");
   const [selectedFile, setSelectedFile] = useState("");
-  const [fileEntries, setFileEntries] = useState([
-    "Design tokens",
-    "Nimbus references",
-    "Component specs",
-    "Archived",
-    "Exports",
-    "Java sources",
-    "Web assets",
-    "Research notes",
-  ]);
+  const [fileEntries, setFileEntries] = useState(ko
+    ? ["디자인 토큰", "Nimbus 참고 자료", "컴포넌트 명세", "보관함", "내보내기", "Java 소스", "웹 자산", "조사 노트"]
+    : ["Design tokens", "Nimbus references", "Component specs", "Archived", "Exports", "Java sources", "Web assets", "Research notes"]);
 
   const changeFileLocation = (location: string) => {
     setFileLocation(location);
@@ -1030,10 +1036,11 @@ function NimbusDialog({
 
   const createFolder = () => {
     let suffix = 1;
-    let name = "New Folder";
+    const folderLabel = ko ? "새 폴더" : "New Folder";
+    let name = folderLabel;
     while (fileEntries.includes(name)) {
       suffix += 1;
-      name = `New Folder ${suffix}`;
+      name = `${folderLabel} ${suffix}`;
     }
     setFileEntries((entries) => [...entries, name]);
     setSelectedFile(name);
@@ -1078,7 +1085,9 @@ function NimbusDialog({
     }
   };
 
-  const titles = { info: "Nimbus Gallery", confirm: "Confirmation", file: "Open a mockup file", color: "Choose an accent color" };
+  const titles = ko
+    ? { info: "Nimbus 갤러리", confirm: "확인", file: "파일 열기", color: "강조 색상 선택" }
+    : { info: "Nimbus Gallery", confirm: "Confirmation", file: "Open a mockup file", color: "Choose an accent color" };
   return (
     <div className="modal-backdrop" role="presentation" onMouseDown={onClose}>
       <section
@@ -1087,50 +1096,51 @@ function NimbusDialog({
         role="dialog"
         aria-modal="true"
         aria-labelledby="dialog-title"
+        lang={language}
         tabIndex={-1}
         data-testid={`dialog-${type}`}
         onMouseDown={(event) => event.stopPropagation()}
         onKeyDown={trapFocus}
       >
-        <header><span id="dialog-title">{titles[type]}</span><button onClick={onClose} aria-label="Close dialog">×</button></header>
+        <header><span id="dialog-title">{titles[type]}</span><button onClick={onClose} aria-label={ko ? "대화상자 닫기" : "Close dialog"}>×</button></header>
         {type === "info" && (
-          <div className="message-dialog-body"><span className="info-orb">i</span><p>This is an information message.</p></div>
+          <div className="message-dialog-body"><span className="info-orb">i</span><p>{ko ? "한글 정보 메시지의 렌더링 예제입니다." : "This is an information message."}</p></div>
         )}
         {type === "confirm" && (
-          <div className="message-dialog-body"><span className="question-orb">?</span><p>Would you like to continue viewing this design system?</p></div>
+          <div className="message-dialog-body"><span className="question-orb">?</span><p>{ko ? "이 디자인 시스템을 계속 살펴보시겠습니까?" : "Would you like to continue viewing this design system?"}</p></div>
         )}
         {type === "file" && (
           <div className="file-dialog-body">
             <div className="look-in">
-              <label htmlFor="file-location">Look in:</label>
+              <label htmlFor="file-location">{ko ? "위치:" : "Look in:"}</label>
               <span className="file-location-shell">
                 <span className="folder-icon" aria-hidden="true" />
                 <select id="file-location" value={fileLocation} onChange={(event) => changeFileLocation(event.target.value)}>
-                  <option>Computer</option>
-                  <option>Home</option>
-                  <option>Documents</option>
+                  <option>{ko ? "컴퓨터" : "Computer"}</option>
+                  <option>{ko ? "홈" : "Home"}</option>
+                  <option>{ko ? "문서" : "Documents"}</option>
                 </select>
                 <span className="file-location-arrow" aria-hidden="true">▼</span>
               </span>
-              <div className="file-toolbar" role="toolbar" aria-label="File chooser navigation and view">
-                <button type="button" aria-label="Up one level" title="Up one level" onClick={() => changeFileLocation(fileLocation === "Documents" ? "Home" : "Computer")}><span className="file-toolbar-icon icon-up" aria-hidden="true" /></button>
-                <button type="button" aria-label="Home folder" title="Home folder" onClick={() => changeFileLocation("Home")}><span className="file-toolbar-icon icon-home" aria-hidden="true" /></button>
-                <button type="button" aria-label="Create new folder" title="Create new folder" onClick={createFolder}><span className="file-toolbar-icon icon-new-folder" aria-hidden="true" /></button>
-                <button type="button" aria-label="List" title="List" aria-pressed={fileView === "list"} onClick={() => setFileView("list")}><span className="file-toolbar-icon icon-list" aria-hidden="true" /></button>
-                <button type="button" aria-label="Details" title="Details" aria-pressed={fileView === "details"} onClick={() => setFileView("details")}><span className="file-toolbar-icon icon-details" aria-hidden="true" /></button>
+              <div className="file-toolbar" role="toolbar" aria-label={ko ? "파일 선택기 탐색 및 보기" : "File chooser navigation and view"}>
+                <button type="button" aria-label={ko ? "상위 폴더" : "Up one level"} title={ko ? "상위 폴더" : "Up one level"} onClick={() => changeFileLocation(fileLocation === (ko ? "문서" : "Documents") ? (ko ? "홈" : "Home") : (ko ? "컴퓨터" : "Computer"))}><span className="file-toolbar-icon icon-up" aria-hidden="true" /></button>
+                <button type="button" aria-label={ko ? "홈 폴더" : "Home folder"} title={ko ? "홈 폴더" : "Home folder"} onClick={() => changeFileLocation(ko ? "홈" : "Home")}><span className="file-toolbar-icon icon-home" aria-hidden="true" /></button>
+                <button type="button" aria-label={ko ? "새 폴더 만들기" : "Create new folder"} title={ko ? "새 폴더 만들기" : "Create new folder"} onClick={createFolder}><span className="file-toolbar-icon icon-new-folder" aria-hidden="true" /></button>
+                <button type="button" aria-label={ko ? "목록" : "List"} title={ko ? "목록" : "List"} aria-pressed={fileView === "list"} onClick={() => setFileView("list")}><span className="file-toolbar-icon icon-list" aria-hidden="true" /></button>
+                <button type="button" aria-label={ko ? "자세히" : "Details"} title={ko ? "자세히" : "Details"} aria-pressed={fileView === "details"} onClick={() => setFileView("details")}><span className="file-toolbar-icon icon-details" aria-hidden="true" /></button>
               </div>
             </div>
-            <div className={`file-grid file-view-${fileView}`} role="listbox" aria-label={`${fileLocation} folders`}>
-              {fileView === "details" && <div className="file-details-header"><span>Name</span><span>Type</span></div>}
+            <div className={`file-grid file-view-${fileView}`} role="listbox" aria-label={ko ? `${fileLocation} 폴더` : `${fileLocation} folders`}>
+              {fileView === "details" && <div className="file-details-header"><span>{ko ? "이름" : "Name"}</span><span>{ko ? "유형" : "Type"}</span></div>}
               {fileEntries.map((folder) => (
                 <button key={folder} type="button" role="option" aria-selected={selectedFile === folder} onClick={() => setSelectedFile(folder)}>
                   <span><span className="folder-icon" aria-hidden="true" />{folder}</span>
-                  {fileView === "details" && <small>File folder</small>}
+                  {fileView === "details" && <small>{ko ? "파일 폴더" : "File folder"}</small>}
                 </button>
               ))}
             </div>
-            <label className="file-field"><span>File name:</span><input className="nimbus-input" value={selectedFile} onChange={(event) => setSelectedFile(event.target.value)} /></label>
-            <label className="file-field"><span>Files of type:</span><NimbusSelect><option>All files</option><option>PNG images</option><option>Java source</option></NimbusSelect></label>
+            <label className="file-field"><span>{ko ? "파일 이름:" : "File name:"}</span><input className="nimbus-input" value={selectedFile} onChange={(event) => setSelectedFile(event.target.value)} /></label>
+            <label className="file-field"><span>{ko ? "파일 형식:" : "Files of type:"}</span><NimbusSelect><option>{ko ? "모든 파일" : "All files"}</option><option>{ko ? "PNG 이미지" : "PNG images"}</option><option>{ko ? "Java 소스" : "Java source"}</option></NimbusSelect></label>
           </div>
         )}
         {type === "color" && (
@@ -1140,20 +1150,22 @@ function NimbusDialog({
               {["#33628C", "#39698A", "#73A4D1", "#BF6204", "#2A7849", "#9D3A3A"].map((color) => (
                 <button
                   key={color}
-                  aria-label={`Choose ${color}`}
+                  aria-label={ko ? `${color} 색상 선택` : `Choose ${color}`}
                   aria-pressed={accent === color}
                   style={{ backgroundColor: color }}
                   onClick={() => setAccent(color)}
                 />
               ))}
             </div>
-            <label>Custom color <input type="color" value={accent} onChange={(event) => setAccent(event.target.value)} /></label>
+            <label>{ko ? "사용자 지정 색상" : "Custom color"} <input type="color" value={accent} onChange={(event) => setAccent(event.target.value)} /></label>
           </div>
         )}
         <footer>
-          {type === "confirm" && <NimbusButton onClick={onClose}>No</NimbusButton>}
-          {type === "file" && <NimbusButton onClick={onClose}>Cancel</NimbusButton>}
-          <NimbusButton data-autofocus className="dialog-default" onClick={onClose}>{type === "file" ? "Open" : "OK"}</NimbusButton>
+          {type === "confirm" && <NimbusButton onClick={onClose}>{ko ? "아니요" : "No"}</NimbusButton>}
+          {type === "file" && <NimbusButton onClick={onClose}>{ko ? "취소" : "Cancel"}</NimbusButton>}
+          <NimbusButton data-autofocus className="dialog-default" onClick={onClose}>
+            {type === "file" ? (ko ? "열기" : "Open") : type === "confirm" ? (ko ? "예" : "Yes") : (ko ? "확인" : "OK")}
+          </NimbusButton>
         </footer>
       </section>
     </div>

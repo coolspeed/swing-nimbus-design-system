@@ -25,6 +25,7 @@
   --nimbus-control-chrome-edge: #cedce7;
   --nimbus-control-chrome-border: #687c8e;
   --font-ui: Arial, "Malgun Gothic", sans-serif;
+  --font-ui-korean: Arial, "Malgun Gothic", "맑은 고딕", sans-serif;
 }
 
 * {
@@ -122,6 +123,13 @@ textarea:focus-visible {
     0 4px 14px rgba(0, 0, 0, 0.32),
     inset 0 0 0 1px rgba(255, 255, 255, 0.72);
   transition: width .18s ease, height .18s ease;
+}
+
+.korean-preview,
+.nimbus-dialog[lang="ko"],
+.context-menu[lang="ko"] {
+  font-family: var(--font-ui-korean);
+  word-break: keep-all;
 }
 
 .app-window.without-title-bar {

@@ -67,10 +67,17 @@ OpenJDK Nimbus `UIManager` 기본값과 대조해 만든 구현 기준이다. �
 
 ## 4. 타이포그래피
 
-기본 글꼴은 `SansSerif` 논리 글꼴이다. 이 프로젝트의 Windows/OpenJDK 24 캡처 환경에서
-라틴 문자의 첫 물리 폰트는 `Arial`, 한글 fallback은 `Malgun Gothic`으로 확인했다.
+Nimbus `UIManager`의 `defaultFont`는 12 pt `SansSerif` 논리 글꼴이다. Java 논리 글꼴의
+물리 폰트 매핑은 JDK 구현, 운영체제, 로케일에 따라 달라지므로 물리 폰트를 Swing 코드에
+직접 고정하지 않는다. 이 프로젝트의 Windows/OpenJDK 24 캡처 환경에서 실제 composite
+font slot을 조사한 결과 라틴 문자의 첫 물리 폰트는 `Arial`, 한글 글리프의 slot은
+`Malgun Gothic`으로 확인했다.
 웹 재현은 `"Arial", "Malgun Gothic", sans-serif` 순서를 사용한다. `Segoe UI`나 Geist로
 임의 대체하지 않는다.
+
+`Dialogs` 탭 제목은 영문으로 유지하되, 탭 패널과 그곳에서 연 대화상자·컨텍스트 메뉴에는
+`lang="ko"`와 한글 전용 font stack을 적용한다. 상단 툴바나 다른 탭에서 연 동일 종류의
+대화상자는 영문 상태를 유지해 한글 렌더링 프리뷰의 범위를 `Dialogs` 탭으로 제한한다.
 
 | 역할 | Swing | 웹 CSS | 사용처 |
 |---|---|---|---|

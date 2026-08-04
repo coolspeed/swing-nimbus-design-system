@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.KeyEvent;
 import java.util.Arrays;
+import java.util.Locale;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -124,7 +125,7 @@ public final class Main {
         openButton.setToolTipText("Open the file chooser demo");
         JButton saveButton = new JButton("Save");
         saveButton.setToolTipText("Save is intentionally inactive in this mockup");
-        openButton.addActionListener(event -> showFileChooser(toolBar));
+        openButton.addActionListener(event -> showFileChooser(toolBar, false));
         toolBar.add(newButton);
         toolBar.add(openButton);
         toolBar.add(saveButton);
@@ -165,7 +166,7 @@ public final class Main {
         tabs.addTab("Controls", createControlsTab());
         tabs.addTab("Data views", createDataTab());
         tabs.addTab("Feedback", createFeedbackTab());
-        tabs.addTab("Overlays", createDialogsTab());
+        tabs.addTab("Dialogs", createDialogsTab());
         tabs.setMnemonicAt(0, KeyEvent.VK_F);
         tabs.setMnemonicAt(1, KeyEvent.VK_C);
         tabs.setMnemonicAt(2, KeyEvent.VK_D);
@@ -456,7 +457,7 @@ public final class Main {
     }
 
     private static JPanel createDialogLauncherPanel() {
-        JPanel launchers = titledPanel("Dialog & menu samples");
+        JPanel launchers = titledPanel("대화상자 및 메뉴 예제");
         launchers.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.insets = new Insets(6, 8, 6, 8);
@@ -464,42 +465,45 @@ public final class Main {
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 1;
 
-        JLabel description = new JLabel("Each button opens a standard Nimbus dialog.");
+        JLabel description = new JLabel("각 버튼은 표준 Nimbus 대화상자를 엽니다.");
         c.gridy = 0;
         launchers.add(description, c);
 
-        JButton info = new JButton("Information message");
-        info.addActionListener(event -> JOptionPane.showMessageDialog(launchers,
-                "This is an information message.", "Nimbus Gallery", JOptionPane.INFORMATION_MESSAGE));
+        JButton info = new JButton("정보 메시지");
+        info.addActionListener(event -> JOptionPane.showOptionDialog(launchers,
+                "한글 정보 메시지의 렌더링 예제입니다.", "Nimbus 갤러리",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
+                new Object[] {"확인"}, "확인"));
         c.gridy = 1;
         launchers.add(info, c);
 
-        JButton warning = new JButton("Confirmation message");
-        warning.addActionListener(event -> JOptionPane.showConfirmDialog(launchers,
-                "Would you like to continue viewing this mockup?", "Confirmation", JOptionPane.YES_NO_CANCEL_OPTION));
+        JButton warning = new JButton("확인 메시지");
+        warning.addActionListener(event -> JOptionPane.showOptionDialog(launchers,
+                "이 디자인 시스템을 계속 살펴보시겠습니까?", "확인",
+                JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                new Object[] {"예", "아니요", "취소"}, "예"));
         c.gridy = 2;
         launchers.add(warning, c);
 
-        JButton file = new JButton("Open file chooser");
-        file.setToolTipText("Shows JFileChooser");
-        file.addActionListener(event -> showFileChooser(launchers));
+        JButton file = new JButton("파일 선택기 열기");
+        file.setToolTipText("JFileChooser를 엽니다");
+        file.addActionListener(event -> showFileChooser(launchers, true));
         c.gridy = 3;
         launchers.add(file, c);
 
-        JButton color = new JButton("Open color chooser");
-        color.setToolTipText("Shows JColorChooser");
-        color.addActionListener(event -> JColorChooser.showDialog(launchers,
-                "Choose an accent color", new Color(88, 130, 190)));
+        JButton color = new JButton("색상 선택기 열기");
+        color.setToolTipText("JColorChooser를 엽니다");
+        color.addActionListener(event -> showKoreanColorChooser(launchers));
         c.gridy = 4;
         launchers.add(color, c);
 
-        JButton context = new JButton("Open context menu");
-        context.setToolTipText("Shows JPopupMenu");
+        JButton context = new JButton("컨텍스트 메뉴 열기");
+        context.setToolTipText("JPopupMenu를 엽니다");
         JPopupMenu menu = new JPopupMenu();
-        menu.add(new JMenuItem("Rename"));
-        menu.add(new JMenuItem("Move to folder"));
+        menu.add(new JMenuItem("이름 바꾸기"));
+        menu.add(new JMenuItem("폴더로 이동"));
         menu.add(new JSeparator());
-        menu.add(new JMenuItem("Delete"));
+        menu.add(new JMenuItem("삭제"));
         context.addActionListener(event -> menu.show(context, 0, context.getHeight()));
         c.gridy = 5;
         launchers.add(context, c);
@@ -507,38 +511,55 @@ public final class Main {
         c.gridy = 6;
         c.weighty = 1;
         c.anchor = GridBagConstraints.NORTHWEST;
-        JLabel hint = new JLabel("Tip: the table on the Data views tab also has a right-click menu.");
+        JLabel hint = new JLabel("도움말: 데이터 보기 탭의 표에도 마우스 오른쪽 버튼 메뉴가 있습니다.");
         hint.setForeground(UIManager.getColor("Label.disabledForeground"));
         launchers.add(hint, c);
         return launchers;
     }
 
-    private static void showFileChooser(java.awt.Component parent) {
+    private static void showFileChooser(java.awt.Component parent, boolean korean) {
         JFileChooser chooser = new JFileChooser();
-        chooser.setDialogTitle("Open a mockup file");
+        if (korean) {
+            chooser.setLocale(Locale.KOREAN);
+            chooser.updateUI();
+            chooser.setDialogTitle("파일 열기");
+            chooser.setApproveButtonText("열기");
+            chooser.setApproveButtonToolTipText("선택한 파일을 엽니다");
+        } else {
+            chooser.setDialogTitle("Open a mockup file");
+        }
         chooser.showOpenDialog(parent);
     }
 
+    private static void showKoreanColorChooser(java.awt.Component parent) {
+        JColorChooser chooser = new JColorChooser(new Color(88, 130, 190));
+        chooser.setLocale(Locale.KOREAN);
+        chooser.updateUI();
+        JOptionPane.showOptionDialog(parent, chooser, "강조 색상 선택",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null,
+                new Object[] {"확인", "취소"}, "확인");
+    }
+
     private static JPanel createDesktopPanePanel() {
-        JPanel panel = titledPanel("Internal windows");
+        JPanel panel = titledPanel("내부 창");
         panel.setLayout(new BorderLayout());
         JDesktopPane desktop = new JDesktopPane();
         desktop.setBackground(UIManager.getColor("Panel.background"));
 
-        JInternalFrame inspector = new JInternalFrame("Inspector", true, true, true, true);
+        JInternalFrame inspector = new JInternalFrame("검사기", true, true, true, true);
         JPanel inspectorBody = new JPanel(new GridLayout(3, 1, 4, 4));
         inspectorBody.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
-        inspectorBody.add(new JLabel("Selected: Primary action"));
-        inspectorBody.add(new JLabel("State: Default"));
-        inspectorBody.add(new JCheckBox("Visible", true));
+        inspectorBody.add(new JLabel("선택: 기본 동작"));
+        inspectorBody.add(new JLabel("상태: 기본"));
+        inspectorBody.add(new JCheckBox("표시", true));
         inspector.add(inspectorBody);
         inspector.setBounds(18, 20, 250, 150);
         inspector.setVisible(true);
 
-        JInternalFrame preview = new JInternalFrame("Preview", true, true, true, true);
+        JInternalFrame preview = new JInternalFrame("미리보기", true, true, true, true);
         JPanel previewBody = new JPanel(new BorderLayout(6, 6));
         previewBody.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
-        previewBody.add(new JLabel("Mini preview"), BorderLayout.NORTH);
+        previewBody.add(new JLabel("간단한 미리보기"), BorderLayout.NORTH);
         JProgressBar miniProgress = new JProgressBar(0, 100);
         miniProgress.setValue(60);
         miniProgress.setStringPainted(true);
