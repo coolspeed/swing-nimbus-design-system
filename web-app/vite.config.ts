@@ -39,6 +39,7 @@ const normalizeSitesWorkerConfig = {
 
 const localBindingConfig = {
   main: "./worker/index.ts",
+  compatibility_flags: ["nodejs_compat_v2"],
   d1_databases: d1
     ? [
         {
