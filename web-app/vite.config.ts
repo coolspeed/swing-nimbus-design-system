@@ -1,4 +1,6 @@
 import vinext from "vinext";
+import { readFile, writeFile } from "node:fs/promises";
+import { resolve } from "node:path";
 import { defineConfig } from "vite";
 import hostingConfig from "./.openai/hosting.json";
 import { sites } from "./build/sites-vite-plugin";
@@ -10,6 +12,30 @@ const { d1, r2 } = hostingConfig;
 
 // macOS Seatbelt blocks FSEvents, so Codex previews need polling for HMR.
 const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === "seatbelt";
+
+const normalizeSitesWorkerConfig = {
+  name: "normalize-sites-worker-config",
+  apply: "build" as const,
+  enforce: "post" as const,
+  async closeBundle() {
+    const workerConfigPath = resolve(process.cwd(), "dist", "server", "wrangler.json");
+
+    try {
+      const workerConfig = JSON.parse(await readFile(workerConfigPath, "utf8")) as {
+        compatibility_flags?: string[];
+      };
+
+      if (workerConfig.compatibility_flags?.length === 0) {
+        delete workerConfig.compatibility_flags;
+        await writeFile(workerConfigPath, JSON.stringify(workerConfig));
+      }
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code !== "ENOENT") {
+        throw error;
+      }
+    }
+  },
+};
 
 const localBindingConfig = {
   main: "./worker/index.ts",
@@ -53,6 +79,7 @@ export default defineConfig(async () => {
         viteEnvironment: { name: "rsc", childEnvironments: ["ssr"] },
         config: localBindingConfig,
       }),
+      normalizeSitesWorkerConfig,
     ],
   };
 });
