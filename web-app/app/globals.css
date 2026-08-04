@@ -525,34 +525,43 @@ textarea:focus-visible {
 }
 
 .tab-strip {
+  --tab-divider-gutter: clamp(4px, 1.2%, 12px);
+  --tab-start-gutter: clamp(8px, 1.5%, 17px);
   position: relative;
   min-width: 0;
   overflow: hidden;
 }
 
-.tab-list {
-  display: flex;
-  align-items: end;
+.tab-scroller {
   width: 100%;
   height: 100%;
   min-width: 0;
-  padding: 0 0 3px 17px;
   overflow-x: auto;
   overflow-y: hidden;
   overscroll-behavior-inline: contain;
   scrollbar-width: none;
 }
 
-.tab-list::-webkit-scrollbar {
+.tab-scroller::-webkit-scrollbar {
   display: none;
+}
+
+.tab-list {
+  position: relative;
+  display: flex;
+  align-items: end;
+  width: max-content;
+  min-width: 100%;
+  height: 100%;
+  padding: 0 var(--tab-divider-gutter) 3px var(--tab-start-gutter);
 }
 
 .tab-divider {
   position: absolute;
   z-index: 0;
-  right: 12px;
+  right: var(--tab-divider-gutter);
   bottom: 0;
-  left: 12px;
+  left: var(--tab-divider-gutter);
   border-bottom: 3px double #294a63;
   pointer-events: none;
 }
@@ -563,8 +572,9 @@ textarea:focus-visible {
   min-width: 80px;
   height: 24px;
   padding: 1px 11px;
-  border: 1px solid #66717c;
-  border-bottom: 0;
+  border-width: 1.25px 1.25px 0;
+  border-style: solid;
+  border-color: #566572;
   border-radius: 7px 7px 0 0;
   background: linear-gradient(#f5f6f8, #e1e4e8 60%, #eceef1);
   box-shadow: inset 0 1px rgba(255,255,255,.55);
@@ -1681,21 +1691,153 @@ tbody tr:focus-visible {
 
 .file-toolbar-icon {
   position: relative;
-  min-width: 16px;
-  color: #526779;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1;
+  display: block;
+  flex: 0 0 21px;
+  width: 21px;
+  height: 20px;
 }
 
-.icon-up { color: #3c78a6; }
-.icon-home { color: #8a6f10; font-size: 18px; }
-.icon-new-folder { color: #db7607; }
-.icon-list,
-.icon-details { color: #526779; font-size: 17px; }
+.icon-up::before,
+.icon-new-folder::before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 6px;
+  width: 16px;
+  height: 13px;
+  border: 1px solid #405a6d;
+  border-radius: 1px 2px 2px 1px;
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,.62) 0 1px, transparent 2px),
+    linear-gradient(to bottom, #a9c0d0 0 22%, #7899af 23% 55%, #52758f 100%);
+  box-shadow:
+    inset 1px 0 rgba(235,246,251,.72),
+    inset -1px -1px rgba(34,63,84,.3),
+    0 1px rgba(34,43,51,.24);
+  clip-path: polygon(0 24%, 27% 24%, 34% 0, 67% 0, 75% 24%, 100% 24%, 100% 100%, 0 100%);
+}
+
+.icon-up::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: 7px;
+  top: 0;
+  width: 12px;
+  height: 14px;
+  background: linear-gradient(to right, #63b8eb, #9bd7f6 42%, #57a9dc 68%, #3286bf);
+  clip-path: polygon(50% 0, 100% 43%, 73% 43%, 73% 100%, 27% 100%, 27% 43%, 0 43%);
+  filter:
+    drop-shadow(1px 0 #2b6790)
+    drop-shadow(-1px 0 #2b6790)
+    drop-shadow(0 1px #224e70)
+    drop-shadow(0 -1px #5a8ba9);
+}
+
+.icon-home::before {
+  content: "";
+  position: absolute;
+  inset: 1px 1px 0;
+  background: linear-gradient(135deg, #f5dc76 0 28%, #c29a27 53%, #8b6913 100%);
+  clip-path: polygon(50% 0, 100% 43%, 88% 43%, 88% 100%, 59% 100%, 59% 64%, 42% 64%, 42% 100%, 12% 100%, 12% 43%, 0 43%);
+  filter:
+    drop-shadow(1px 0 #5f521d)
+    drop-shadow(-1px 0 #5f521d)
+    drop-shadow(0 1px #51471d)
+    drop-shadow(0 -1px #75641d);
+}
+
+.icon-home::after {
+  content: "";
+  position: absolute;
+  left: 9px;
+  bottom: 0;
+  width: 4px;
+  height: 8px;
+  border: 1px solid #64501b;
+  background: linear-gradient(to right, #8d6813, #c59b2c 52%, #74530f);
+  box-shadow: 6px -5px 0 -1px #426e8a, 6px -5px 0 0 #5e5d45;
+}
+
+.icon-new-folder::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 13px;
+  height: 13px;
+  background: linear-gradient(135deg, #ffeb75 12%, #ffae16 48%, #f16800 78%);
+  clip-path: polygon(50% 0, 59% 34%, 82% 10%, 69% 40%, 100% 34%, 72% 52%, 100% 66%, 66% 64%, 82% 92%, 58% 70%, 50% 100%, 42% 70%, 17% 92%, 34% 63%, 0 68%, 29% 51%, 0 34%, 31% 40%, 17% 9%, 41% 34%);
+  filter:
+    drop-shadow(1px 0 #bc5610)
+    drop-shadow(-1px 0 #bc5610)
+    drop-shadow(0 1px #a84c0d);
+}
+
+.icon-list::before,
+.icon-details::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 0;
+  width: 15px;
+  height: 19px;
+  border: 1px solid #8297a6;
+  background-color: #eaf1f5;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.64),
+    0 1px rgba(35,49,59,.18);
+}
+
+.icon-list::before {
+  background:
+    linear-gradient(#66757f, #66757f) 6px 4px / 6px 2px no-repeat,
+    linear-gradient(#66757f, #66757f) 6px 8px / 6px 2px no-repeat,
+    linear-gradient(#66757f, #66757f) 6px 12px / 6px 2px no-repeat,
+    linear-gradient(#66757f, #66757f) 6px 16px / 6px 1px no-repeat,
+    linear-gradient(#edf3f6, #dbe7ed);
+}
+
+.icon-list::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 4px;
+  width: 2px;
+  height: 2px;
+  background: #52616c;
+  box-shadow: 0 4px #52616c, 0 8px #52616c, 0 12px #52616c;
+}
+
+.icon-details::before {
+  left: 2px;
+  background:
+    repeating-linear-gradient(to right, transparent 0 4px, #aebcc5 4px 5px),
+    repeating-linear-gradient(to bottom, transparent 0 4px, #aebcc5 4px 5px),
+    linear-gradient(#edf3f6, #dbe7ed);
+}
+
+.icon-details::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 9px;
+  height: 9px;
+  border: 2px solid #40596b;
+  border-radius: 50%;
+  background:
+    linear-gradient(#687f8e, #687f8e) center 3px / 5px 1px no-repeat,
+    linear-gradient(90deg, #687f8e, #687f8e) 3px center / 1px 5px no-repeat,
+    rgba(172,202,219,.68);
+  box-shadow:
+    3px 3px 0 -2px #334959,
+    inset 0 0 0 1px rgba(255,255,255,.55);
+}
 
 .file-toolbar button[aria-pressed="true"] .file-toolbar-icon {
-  color: #3f4b55;
+  filter: saturate(.84) brightness(.9);
 }
 
 .file-grid {
@@ -1890,10 +2032,6 @@ tbody tr:focus-visible {
     padding-inline: 12px;
   }
 
-  .tab-list {
-    padding-left: 8px;
-  }
-
   .tab-strip button {
     min-width: 98px;
   }
@@ -1994,10 +2132,6 @@ tbody tr:focus-visible {
   .page-head .hero-action {
     min-height: 54px;
     padding-inline: 12px;
-  }
-
-  .tab-list {
-    padding-left: 8px;
   }
 
   .tab-strip button {

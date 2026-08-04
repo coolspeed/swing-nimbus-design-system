@@ -386,24 +386,26 @@ export default function Home() {
         </section>
 
         <div className="tab-strip">
-          <div className="tab-list" role="tablist" aria-label="Design system sections">
-            {tabs.map((tab, index) => (
-              <button
-                key={tab.id}
-                id={`tab-${tab.id}`}
-                role="tab"
-                data-testid={`tab-${tab.id}`}
-                aria-selected={activeTab === tab.id}
-                aria-controls={`panel-${tab.id}`}
-                tabIndex={activeTab === tab.id ? 0 : -1}
-                onClick={() => setActiveTab(tab.id)}
-                onKeyDown={(event) => handleTabKeyDown(event, index)}
-              >
-                <u>{tab.label.slice(0, 1)}</u>{tab.label.slice(1)}
-              </button>
-            ))}
+          <div className="tab-scroller">
+            <div className="tab-list" role="tablist" aria-label="Design system sections">
+              {tabs.map((tab, index) => (
+                <button
+                  key={tab.id}
+                  id={`tab-${tab.id}`}
+                  role="tab"
+                  data-testid={`tab-${tab.id}`}
+                  aria-selected={activeTab === tab.id}
+                  aria-controls={`panel-${tab.id}`}
+                  tabIndex={activeTab === tab.id ? 0 : -1}
+                  onClick={() => setActiveTab(tab.id)}
+                  onKeyDown={(event) => handleTabKeyDown(event, index)}
+                >
+                  <u>{tab.label.slice(0, 1)}</u>{tab.label.slice(1)}
+                </button>
+              ))}
+              <div className="tab-divider" aria-hidden="true" />
+            </div>
           </div>
-          <div className="tab-divider" aria-hidden="true" />
         </div>
 
         <div className="content-area">
@@ -1111,11 +1113,11 @@ function NimbusDialog({
                 <span className="file-location-arrow" aria-hidden="true">▼</span>
               </span>
               <div className="file-toolbar" role="toolbar" aria-label="File chooser navigation and view">
-                <button type="button" aria-label="Up one level" title="Up one level" onClick={() => changeFileLocation(fileLocation === "Documents" ? "Home" : "Computer")}><span className="file-toolbar-icon icon-up" aria-hidden="true">↑</span></button>
-                <button type="button" aria-label="Home folder" title="Home folder" onClick={() => changeFileLocation("Home")}><span className="file-toolbar-icon icon-home" aria-hidden="true">⌂</span></button>
-                <button type="button" aria-label="Create new folder" title="Create new folder" onClick={createFolder}><span className="file-toolbar-icon icon-new-folder" aria-hidden="true">✳</span></button>
-                <button type="button" aria-label="List" title="List" aria-pressed={fileView === "list"} onClick={() => setFileView("list")}><span className="file-toolbar-icon icon-list" aria-hidden="true">▤</span></button>
-                <button type="button" aria-label="Details" title="Details" aria-pressed={fileView === "details"} onClick={() => setFileView("details")}><span className="file-toolbar-icon icon-details" aria-hidden="true">▦</span></button>
+                <button type="button" aria-label="Up one level" title="Up one level" onClick={() => changeFileLocation(fileLocation === "Documents" ? "Home" : "Computer")}><span className="file-toolbar-icon icon-up" aria-hidden="true" /></button>
+                <button type="button" aria-label="Home folder" title="Home folder" onClick={() => changeFileLocation("Home")}><span className="file-toolbar-icon icon-home" aria-hidden="true" /></button>
+                <button type="button" aria-label="Create new folder" title="Create new folder" onClick={createFolder}><span className="file-toolbar-icon icon-new-folder" aria-hidden="true" /></button>
+                <button type="button" aria-label="List" title="List" aria-pressed={fileView === "list"} onClick={() => setFileView("list")}><span className="file-toolbar-icon icon-list" aria-hidden="true" /></button>
+                <button type="button" aria-label="Details" title="Details" aria-pressed={fileView === "details"} onClick={() => setFileView("details")}><span className="file-toolbar-icon icon-details" aria-hidden="true" /></button>
               </div>
             </div>
             <div className={`file-grid file-view-${fileView}`} role="listbox" aria-label={`${fileLocation} folders`}>
