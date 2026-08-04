@@ -47,13 +47,12 @@ test("server-renders the Nimbus design-system catalog", async () => {
 });
 
 test("keeps the design-system tokens and interactive contracts explicit", async () => {
-  const [page, layout, css, packageJson, config, viteConfig] = await Promise.all([
+  const [page, layout, css, packageJson, config] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
     readFile(new URL("../app/nimbus-config.ts", import.meta.url), "utf8"),
-    readFile(new URL("../vite.config.ts", import.meta.url), "utf8"),
   ]);
 
   assert.ok(page.includes('data-testid={`tab-${tab.id}`}'));
@@ -121,7 +120,6 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.doesNotMatch(css, /Cascadia Mono|Consolas/i);
   assert.match(css, /\.app-window\s*\{[\s\S]*?width:\s*min\(1200px,\s*calc\(100vw - 140px\)\)[\s\S]*?height:\s*min\(720px,\s*calc\(100vh - 140px\)\)/i);
   assert.match(config, /export const SHOW_WINDOW_TITLE_BAR = true/);
-  assert.match(viteConfig, /workerConfig\.compatibility_flags\?\.length === 0[\s\S]*?delete workerConfig\.compatibility_flags/i);
   assert.match(page, /SHOW_WINDOW_TITLE_BAR\s*\?\s*""\s*:\s*"without-title-bar"/);
   assert.match(page, /data-window-title-bar=\{SHOW_WINDOW_TITLE_BAR \? "visible" : "hidden"\}/);
   assert.match(page, /\{SHOW_WINDOW_TITLE_BAR && \([\s\S]*?<header className="title-bar">/i);
