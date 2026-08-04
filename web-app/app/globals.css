@@ -380,20 +380,20 @@ textarea:focus-visible {
     #f6f6f8 3%,
     #f0f1f3 8%,
     #e7e9ec 26%,
-    #d6d9df 63%,
-    #d6d9df 70%,
-    #d7dae0 73%,
-    #e2e5ea 88%,
-    #e8ebef 96%,
-    #c2c8cf 100%
+    #d7d9dd 48%,
+    #c9ced4 63%,
+    #c1c7ce 72%,
+    #c8ced5 80%,
+    #d7dbe1 90%,
+    #e5e8ec 100%
   );
   box-shadow:
     inset 0 1px rgba(255,255,255,.92),
     inset 1px 0 rgba(255,255,255,.42),
     inset -1px 0 rgba(54,62,70,.15),
-    inset 0 -1px rgba(58,67,76,.36),
+    inset 0 -1px rgba(255,255,255,.42),
     0 -1px rgba(255,255,255,.48),
-    0 1px 1px rgba(32,39,46,.52);
+    0 1px 1px rgba(38,44,50,.42);
 }
 
 .nimbus-select {
@@ -440,14 +440,15 @@ textarea:focus-visible {
     var(--nimbus-control-chrome-top) 0%,
     var(--nimbus-control-chrome-upper) 22%,
     var(--nimbus-control-chrome-mid) 36%,
-    var(--nimbus-control-chrome-dark) 62%,
-    var(--nimbus-control-chrome-lower) 86%,
-    #c5d2dc 96%,
-    #9aa9b5 100%
+    var(--nimbus-control-chrome-dark) 56%,
+    #8fa7ba 72%,
+    #9aafbf 82%,
+    #b1c2cf 90%,
+    #c1ced7 100%
   );
   box-shadow:
     inset 1px 0 rgba(255,255,255,.48),
-    inset 0 -1px rgba(45,57,68,.42);
+    inset 0 -1px rgba(255,255,255,.28);
   font-size: 9px;
 }
 
@@ -458,12 +459,12 @@ textarea:focus-visible {
     #f9fbfc 3%,
     #e9f1f6 8%,
     #dce9f1 26%,
-    #c9dce8 63%,
-    #c9dce8 70%,
-    #ccdfea 73%,
-    #dee9ef 88%,
-    #e7eff3 96%,
-    #b8c5ce 100%
+    #d1e1eb 48%,
+    #bdcfda 63%,
+    #b4c8d5 72%,
+    #bfd1dc 80%,
+    #d3dfe6 90%,
+    #e2ebf0 100%
   );
 }
 

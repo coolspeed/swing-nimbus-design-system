@@ -134,9 +134,9 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.match(css, /\.hero-action\s*\{[\s\S]*?min-height:\s*54px/i);
   assert.match(css, /\.tool-primary,[\s\S]*?\.dialog-default\s*\{[\s\S]*?0 0 0 2px rgba\(115,164,209,\.65\)[\s\S]*?inset -1px 0 rgba\(54,62,70,\.15\)[\s\S]*?0 1px 1px rgba\(38,44,50,\.42\)/i);
   assert.match(css, /\.nimbus-select-shell\s*\{[\s\S]*?overflow:\s*hidden/i);
-  assert.match(css, /\.nimbus-select-shell\s*\{[\s\S]*?#e2e5ea 88%,[\s\S]*?#e8ebef 96%,[\s\S]*?#c2c8cf 100%[\s\S]*?inset 0 -1px rgba\(58,67,76,\.36\)[\s\S]*?0 1px 1px rgba\(32,39,46,\.52\)/i);
+  assert.match(css, /\.nimbus-select-shell\s*\{[\s\S]*?#c9ced4 63%,[\s\S]*?#c1c7ce 72%,[\s\S]*?#c8ced5 80%,[\s\S]*?#e5e8ec 100%[\s\S]*?inset 0 -1px rgba\(255,255,255,\.42\)[\s\S]*?0 1px 1px rgba\(38,44,50,\.42\)/i);
   assert.match(css, /\.nimbus-select-arrow\s*\{[\s\S]*?width:\s*17px/i);
-  assert.match(css, /\.nimbus-select-arrow\s*\{[\s\S]*?#c5d2dc 96%,[\s\S]*?#9aa9b5 100%[\s\S]*?inset 0 -1px rgba\(45,57,68,\.42\)[\s\S]*?font-size:\s*9px/i);
+  assert.match(css, /\.nimbus-select-arrow\s*\{[\s\S]*?#8fa7ba 72%,[\s\S]*?#9aafbf 82%,[\s\S]*?#c1ced7 100%[\s\S]*?inset 0 -1px rgba\(255,255,255,\.28\)[\s\S]*?font-size:\s*9px/i);
   assert.match(css, /--nimbus-control-chrome-top:\s*#d6e2ea/i);
   assert.match(css, /--nimbus-control-chrome-dark:\s*#9fb5c7/i);
   assert.match(css, /--nimbus-control-chrome-edge:\s*#cedce7/i);
