@@ -1207,13 +1207,21 @@ tbody tr:focus-visible {
 
 
 .fake-scrollbar {
+  position: relative;
   height: 15px;
   display: grid;
   grid-template-columns: 24px 1fr 24px;
   border: 0;
-  overflow: hidden;
-  background-color: transparent;
-  background-image: linear-gradient(
+  overflow: visible;
+  background: transparent;
+  box-shadow: none;
+}
+
+.fake-scrollbar::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 -1px;
+  background: linear-gradient(
     to bottom,
     #494a4c 0%,
     #646669 8%,
@@ -1225,10 +1233,7 @@ tbody tr:focus-visible {
     #cfd2d8 65%,
     #d6d9df 100%
   );
-  background-position: 0 1px;
-  background-size: 100% calc(100% - 1px);
-  background-repeat: no-repeat;
-  box-shadow: none;
+  pointer-events: none;
 }
 
 .fake-scrollbar .scroll-arrow {
