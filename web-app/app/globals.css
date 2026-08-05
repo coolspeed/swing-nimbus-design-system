@@ -1158,7 +1158,7 @@ tbody tr:focus-visible {
   width: max-content;
   height: 14px;
   animation: indeterminate .4s linear infinite;
-  margin-top: -7px;
+  margin-top: -7.5px;
   filter:
     drop-shadow(0 -1px 0 rgba(255,244,225,.82))
     drop-shadow(0 1px 0 rgba(133,65,4,.78));

@@ -228,6 +228,10 @@ HiDPI scaling에 맡기고 픽셀 단위 확대 코드를 추가하지 않는다
   주기 경계에 흰색 세로 틈이나 톱니 모양 안티앨리어싱이 드러나지 않아야 한다.
   각 반복 주황 물방울 내부에는 밝은 오렌지 tone-on-tone 세로 highlight를 1 px 두 줄씩 두고,
   stream과 같은 속도·방향으로 이동시킨다.
+- indeterminate stream의 14 px 패턴 레이어는 13 px track의 수학적 중앙보다 0.5 px 위에 둔다
+  (`top: 50%; margin-top: -7.5px`). `scaleY(.86)`, 곡선 안티앨리어싱과 하단 그림자가 합성된
+  최종 래스터에서 주황색 첫 행 위와 마지막 행 아래에 각각 1 px 여백이 남아야 하며, DOM box의
+  중심값만으로 대칭을 판정하지 않는다.
 - indeterminate stream은 determinate보다 밝은 전용 주황 프로파일(`#F0C995 → #C36903 → #F8AA48`)을 사용하고, 위에는 밝은 반사선, 아래에는 짙은 drop shadow를 더해 흰 track에서 떠 있는 볼록한 흐름으로 보이게 한다. track 상반부는 `#777C84` 외곽선 다음에 흰 반사선을 2 px 겹치고, 52% 지점의 `#D8D9DC`까지 내려가는 오목면으로 만든다.
 - horizontal scrollbar의 화살표 버튼은 트랙 쪽 경계만 오목하게 파고, thumb는 상단이
   직선이고 하단 두 모서리가 둥근 Nimbus의 비대칭 실루엣을 유지한다. 웹 재현에서는
