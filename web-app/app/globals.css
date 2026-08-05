@@ -1169,7 +1169,7 @@ tbody tr:focus-visible {
   position: absolute;
   inset: 6.75px 0 auto;
   height: .5px;
-  background: linear-gradient(#e0a05e, #c36903 54%, #df8120);
+  background: linear-gradient(#e6a65f, var(--orange) 54%, #e78a24);
 }
 
 .progress-indeterminate-pattern i {
@@ -1189,13 +1189,13 @@ tbody tr:focus-visible {
     ),
     linear-gradient(
       to bottom,
-      #f0c995 0%,
-      #e4aa64 12%,
-      #d9903c 36%,
-      #c36903 54%,
-      #cb720b 58%,
-      #e58422 94%,
-      #f8aa48 100%
+      #f3cfa0 0%,
+      #e8ad68 12%,
+      #dc9440 36%,
+      var(--orange) 54%,
+      #ce7610 58%,
+      #e68a27 94%,
+      #fbaa4a 100%
     );
   clip-path: path("M -1 6 C 1.5 6 3.25 6 4 5.75 C 5 5 6.5 2.5 10.5 1.75 C 12 1.5 13.5 1.5 15 1.5 C 16.5 1.5 18 1.5 19.5 1.75 C 23.5 2.5 25 5 26 5.75 C 26.75 6 28.5 6 30 6 L 30 8 C 28.5 8 26.75 8 26 8.25 C 25 9 23.5 11.5 19.5 12.25 C 18 12.5 16.5 12.5 15 12.5 C 13.5 12.5 12 12.5 10.5 12.25 C 6.5 11.5 5 9 4 8.25 C 3.25 8 1.5 8 -1 8 Z");
 }
