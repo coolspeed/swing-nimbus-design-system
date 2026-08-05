@@ -1177,7 +1177,7 @@ tbody tr:focus-visible {
   width: 30px;
   height: 14px;
   margin-right: -2px;
-  transform: scaleY(.86);
+  transform: scaleX(.85) scaleY(.86);
   background:
     linear-gradient(
       90deg,
@@ -1187,6 +1187,7 @@ tbody tr:focus-visible {
       rgba(238,159,78,.78) 63% 65%,
       transparent 66%
     ),
+    linear-gradient(rgba(255,120,0,.12), rgba(255,120,0,.12)),
     linear-gradient(
       to bottom,
       #f3cfa0 0%,
@@ -1323,7 +1324,6 @@ tbody tr:focus-visible {
     inset 0 3px rgba(255,255,255,.24),
     inset 0 0 0 1px rgba(33,62,84,.18),
     inset -1px 0 rgba(18,40,57,.3),
-    inset 0 -1px #526f85,
     inset 0 -2px rgba(228,247,253,.6),
     inset 0 -3px rgba(219,240,250,.28),
     0 1px 1px rgba(21,39,55,.22);
