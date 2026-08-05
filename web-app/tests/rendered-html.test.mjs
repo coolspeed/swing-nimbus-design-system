@@ -175,10 +175,11 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.doesNotMatch(css, /\.progress-track\.indeterminate\s*\{[\s\S]*?background:\s*#d87a12/i);
   assert.match(css, /\.progress-track\.indeterminate \.progress-indeterminate-pattern\s*\{[\s\S]*?top:\s*50%[\s\S]*?left:\s*-28px[\s\S]*?height:\s*14px[\s\S]*?margin-top:\s*-7\.5px/i);
   assert.match(css, /\.progress-indeterminate-pattern::before\s*\{[\s\S]*?inset:\s*6\.8px 0 auto[\s\S]*?height:\s*\.4px[\s\S]*?linear-gradient\(#e6a65f,\s*var\(--orange\) 54%,\s*#e78a24\)/i);
-  assert.match(css, /\.progress-indeterminate-pattern i\s*\{[\s\S]*?flex:\s*0 0 30px[\s\S]*?width:\s*30px[\s\S]*?height:\s*14px[\s\S]*?margin-right:\s*-2px[\s\S]*?transform:\s*scaleX\(\.85\) scaleY\(\.86\)[\s\S]*?filter:\s*saturate\(1\.12\)/i);
-  assert.match(css, /clip-path:\s*path\("M -1 6 C 1\.5 6 3\.25 6 4 5\.75/i);
-  assert.match(css, /C 13 1\.5 14 1\.5 15 1\.5/);
-  assert.match(css, /C 26\.75 6 28\.5 6 30 6 L 30 8/i);
+  assert.match(css, /\.progress-indeterminate-pattern i\s*\{[\s\S]*?flex:\s*0 0 30px[\s\S]*?width:\s*30px[\s\S]*?height:\s*14px[\s\S]*?margin-right:\s*-2px[\s\S]*?filter:\s*saturate\(1\.12\)/i);
+  assert.doesNotMatch(css, /\.progress-indeterminate-pattern i\s*\{[\s\S]*?transform:\s*scale/i);
+  assert.match(css, /clip-path:\s*path\("M -1 6\.8 C 1\.5 6\.8 3\.6 6\.75 5\.1 6\.45/i);
+  assert.match(css, /C 13\.05 2\.27 14 2\.27 15 2\.27/);
+  assert.match(css, /C 26\.4 6\.75 28\.5 6\.8 30 6\.8 L 30 7\.2/i);
   assert.match(css, /@keyframes indeterminate\s*\{[\s\S]*?translateX\(28px\)/i);
   assert.doesNotMatch(css, /radial-gradient\(ellipse 18px 9px at 50% 50%/i);
   assert.match(css, /\.progress-indeterminate-pattern i\s*\{[\s\S]*?rgba\(238,159,78,\.78\) 35% 37%[\s\S]*?rgba\(238,159,78,\.78\) 63% 65%[\s\S]*?linear-gradient\(rgba\(255,120,0,\.12\),\s*rgba\(255,120,0,\.12\)\)[\s\S]*?#f3cfa0 0%,[\s\S]*?var\(--orange\) 54%,[\s\S]*?#fbaa4a 100%/i);
