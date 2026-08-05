@@ -1220,7 +1220,7 @@ tbody tr:focus-visible {
 .fake-scrollbar::before {
   content: "";
   position: absolute;
-  inset: 1px 0 -1px;
+  inset: .5px 0 -1.5px;
   background: linear-gradient(
     to bottom,
     #494a4c 0%,
@@ -1300,9 +1300,9 @@ tbody tr:focus-visible {
 
 .fake-scrollbar .scroll-thumb {
   position: absolute;
-  top: 1px;
+  top: .5px;
   width: 27%;
-  height: 15px;
+  height: 16px;
   padding: 0;
   border: 1px solid #0c1d28;
   border-top-color: #b9d8e7;
