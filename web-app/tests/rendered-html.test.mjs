@@ -175,7 +175,7 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.doesNotMatch(css, /\.progress-track\.indeterminate\s*\{[\s\S]*?background:\s*#d87a12/i);
   assert.match(css, /\.progress-track\.indeterminate \.progress-indeterminate-pattern\s*\{[\s\S]*?top:\s*50%[\s\S]*?left:\s*-28px[\s\S]*?height:\s*14px[\s\S]*?margin-top:\s*-7\.5px/i);
   assert.match(css, /\.progress-indeterminate-pattern::before\s*\{[\s\S]*?inset:\s*6\.8px 0 auto[\s\S]*?height:\s*\.4px[\s\S]*?linear-gradient\(#e6a65f,\s*var\(--orange\) 54%,\s*#e78a24\)/i);
-  assert.match(css, /\.progress-indeterminate-pattern i\s*\{[\s\S]*?flex:\s*0 0 30px[\s\S]*?width:\s*30px[\s\S]*?height:\s*14px[\s\S]*?margin-right:\s*-2px[\s\S]*?transform:\s*scaleX\(\.85\) scaleY\(\.86\)/i);
+  assert.match(css, /\.progress-indeterminate-pattern i\s*\{[\s\S]*?flex:\s*0 0 30px[\s\S]*?width:\s*30px[\s\S]*?height:\s*14px[\s\S]*?margin-right:\s*-2px[\s\S]*?transform:\s*scaleX\(\.85\) scaleY\(\.86\)[\s\S]*?filter:\s*saturate\(1\.12\)/i);
   assert.match(css, /clip-path:\s*path\("M -1 6 C 1\.5 6 3\.25 6 4 5\.75/i);
   assert.match(css, /C 13 1\.5 14 1\.5 15 1\.5/);
   assert.match(css, /C 26\.75 6 28\.5 6 30 6 L 30 8/i);

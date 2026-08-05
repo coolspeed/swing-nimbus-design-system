@@ -1178,6 +1178,7 @@ tbody tr:focus-visible {
   height: 14px;
   margin-right: -2px;
   transform: scaleX(.85) scaleY(.86);
+  filter: saturate(1.12);
   background:
     linear-gradient(
       90deg,
