@@ -1299,8 +1299,44 @@ tbody tr:focus-visible {
   touch-action: none;
 }
 
+.fake-scrollbar .scroll-track::before,
+.fake-scrollbar .scroll-track::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: .5px;
+  width: 14px;
+  height: 13px;
+  pointer-events: none;
+}
+
+.fake-scrollbar .scroll-track::before {
+  left: 10px;
+  background: radial-gradient(
+    ellipse at 0 0,
+    rgba(14,16,18,.98) 0 18%,
+    rgba(28,30,33,.9) 34%,
+    rgba(59,61,65,.62) 58%,
+    rgba(92,95,100,.24) 76%,
+    transparent 100%
+  );
+}
+
+.fake-scrollbar .scroll-track::after {
+  right: 10px;
+  background: radial-gradient(
+    ellipse at 100% 0,
+    rgba(14,16,18,.98) 0 18%,
+    rgba(28,30,33,.9) 34%,
+    rgba(59,61,65,.62) 58%,
+    rgba(92,95,100,.24) 76%,
+    transparent 100%
+  );
+}
+
 .fake-scrollbar .scroll-thumb {
   position: absolute;
+  z-index: 1;
   top: .5px;
   width: 27%;
   height: 16px;
