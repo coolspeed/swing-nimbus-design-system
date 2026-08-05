@@ -77,6 +77,8 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.doesNotMatch(page, /status-pill|status-ready|status-draft|status-in-review/);
   assert.match(page, /data-testid=\{`dialog-\$\{type\}`\}/);
   assert.match(page, /function InternalDesktop\(\)[\s\S]*?setPointerCapture\(event\.pointerId\)[\s\S]*?getBoundingClientRect\(\)[\s\S]*?data-active=\{activeWindow === id\}/i);
+  assert.match(css, /\.internal-window header\s*\{[\s\S]*?cursor:\s*default/i);
+  assert.doesNotMatch(css, /\.internal-window header\s*\{[\s\S]*?cursor:\s*move/i);
   assert.match(page, /className="internal-minimize"[\s\S]*?className="internal-maximize"[\s\S]*?className="internal-close"/i);
   assert.match(page, /aria-label=\{`\$\{title\} 최소화`\}[\s\S]*?aria-label=\{`\$\{title\} \$\{state\.maximized \? "복원" : "최대화"\}`\}[\s\S]*?aria-label=\{`\$\{title\} 닫기`\}/i);
   assert.match(css, /\.internal-window\[data-active="true"\] \.internal-minimize\s*\{[\s\S]*?#c66708 48%/i);
