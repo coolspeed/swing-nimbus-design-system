@@ -1157,7 +1157,7 @@ tbody tr:focus-visible {
   display: flex;
   width: max-content;
   height: 14px;
-  animation: indeterminate .4s linear infinite;
+  animation: indeterminate .333s linear infinite;
   margin-top: -7.5px;
   filter:
     drop-shadow(0 -1px 0 rgba(255,244,225,.82))
@@ -1167,8 +1167,8 @@ tbody tr:focus-visible {
 .progress-indeterminate-pattern::before {
   content: "";
   position: absolute;
-  inset: 6.5px 0 auto;
-  height: 1px;
+  inset: 6.75px 0 auto;
+  height: .5px;
   background: linear-gradient(#e0a05e, #c36903 54%, #df8120);
 }
 
@@ -1177,7 +1177,7 @@ tbody tr:focus-visible {
   width: 30px;
   height: 14px;
   margin-right: -1px;
-  transform: scaleY(.86);
+  transform: scaleY(.72);
   background:
     linear-gradient(
       90deg,
@@ -1197,7 +1197,7 @@ tbody tr:focus-visible {
       #e58422 94%,
       #f8aa48 100%
     );
-  clip-path: path("M -1 6 C 1.5 6 2.5 6 4 5.5 C 6.25 4.5 7.75 2.25 10.5 1.75 C 12 1.5 13.5 1.5 15 1.5 C 16.5 1.5 18 1.5 19.5 1.75 C 22.25 2.25 23.75 4.5 26 5.5 C 27.5 6 28.5 6 30 6 L 30 8 C 28.5 8 27.5 8 26 8.5 C 23.75 9.5 22.25 11.75 19.5 12.25 C 18 12.5 16.5 12.5 15 12.5 C 13.5 12.5 12 12.5 10.5 12.25 C 7.75 11.75 6.25 9.5 4 8.5 C 2.5 8 1.5 8 -1 8 Z");
+  clip-path: path("M -1 6 C 1.5 6 3.25 6 4 5.75 C 5 5 6.5 2.5 10.5 1.75 C 12 1.5 13.5 1.5 15 1.5 C 16.5 1.5 18 1.5 19.5 1.75 C 23.5 2.5 25 5 26 5.75 C 26.75 6 28.5 6 30 6 L 30 8 C 28.5 8 26.75 8 26 8.25 C 25 9 23.5 11.5 19.5 12.25 C 18 12.5 16.5 12.5 15 12.5 C 13.5 12.5 12 12.5 10.5 12.25 C 6.5 11.5 5 9 4 8.25 C 3.25 8 1.5 8 -1 8 Z");
 }
 
 @keyframes indeterminate {
