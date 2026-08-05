@@ -1153,7 +1153,7 @@ tbody tr:focus-visible {
 .progress-track.indeterminate .progress-indeterminate-pattern {
   position: absolute;
   top: 50%;
-  left: -29px;
+  left: -28px;
   display: flex;
   width: max-content;
   height: 14px;
@@ -1176,7 +1176,7 @@ tbody tr:focus-visible {
   flex: 0 0 30px;
   width: 30px;
   height: 14px;
-  margin-right: -1px;
+  margin-right: -2px;
   transform: scaleY(.86);
   background:
     linear-gradient(
@@ -1197,12 +1197,12 @@ tbody tr:focus-visible {
       #e68a27 94%,
       #fbaa4a 100%
     );
-  clip-path: path("M -1 6 C 1.5 6 3.25 6 4 5.75 C 5 5 6.5 2.5 10.5 1.75 C 12 1.5 13.5 1.5 15 1.5 C 16.5 1.5 18 1.5 19.5 1.75 C 23.5 2.5 25 5 26 5.75 C 26.75 6 28.5 6 30 6 L 30 8 C 28.5 8 26.75 8 26 8.25 C 25 9 23.5 11.5 19.5 12.25 C 18 12.5 16.5 12.5 15 12.5 C 13.5 12.5 12 12.5 10.5 12.25 C 6.5 11.5 5 9 4 8.25 C 3.25 8 1.5 8 -1 8 Z");
+  clip-path: path("M -1 6 C 1.5 6 3.25 6 4 5.75 C 5 5 7 2.5 12 1.75 C 13 1.5 14 1.5 15 1.5 C 16 1.5 17 1.5 18 1.75 C 23 2.5 25 5 26 5.75 C 26.75 6 28.5 6 30 6 L 30 8 C 28.5 8 26.75 8 26 8.25 C 25 9 23 11.5 18 12.25 C 17 12.5 16 12.5 15 12.5 C 14 12.5 13 12.5 12 12.25 C 7 11.5 5 9 4 8.25 C 3.25 8 1.5 8 -1 8 Z");
 }
 
 @keyframes indeterminate {
   from { transform: translateX(0); }
-  to { transform: translateX(29px); }
+  to { transform: translateX(28px); }
 }
 
 

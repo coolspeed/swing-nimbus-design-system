@@ -173,13 +173,13 @@ test("keeps the design-system tokens and interactive contracts explicit", async 
   assert.match(css, /animation:\s*indeterminate \.333s linear infinite/i);
   assert.match(css, /\.progress-track\.indeterminate\s*\{[\s\S]*?height:\s*15px[\s\S]*?overflow:\s*hidden[\s\S]*?#fff 10%,[\s\S]*?#dee0e3 52%,[\s\S]*?#fbfcff 100%[\s\S]*?inset 0 2px rgba\(255,255,255,\.82\)[\s\S]*?inset 0 3px rgba\(84,89,96,\.12\)[\s\S]*?inset 0 -1px rgba\(95,101,109,\.34\)/i);
   assert.doesNotMatch(css, /\.progress-track\.indeterminate\s*\{[\s\S]*?background:\s*#d87a12/i);
-  assert.match(css, /\.progress-track\.indeterminate \.progress-indeterminate-pattern\s*\{[\s\S]*?top:\s*50%[\s\S]*?left:\s*-29px[\s\S]*?height:\s*14px[\s\S]*?margin-top:\s*-7\.5px/i);
+  assert.match(css, /\.progress-track\.indeterminate \.progress-indeterminate-pattern\s*\{[\s\S]*?top:\s*50%[\s\S]*?left:\s*-28px[\s\S]*?height:\s*14px[\s\S]*?margin-top:\s*-7\.5px/i);
   assert.match(css, /\.progress-indeterminate-pattern::before\s*\{[\s\S]*?inset:\s*6\.75px 0 auto[\s\S]*?height:\s*\.5px[\s\S]*?linear-gradient\(#e6a65f,\s*var\(--orange\) 54%,\s*#e78a24\)/i);
-  assert.match(css, /\.progress-indeterminate-pattern i\s*\{[\s\S]*?flex:\s*0 0 30px[\s\S]*?width:\s*30px[\s\S]*?height:\s*14px[\s\S]*?margin-right:\s*-1px[\s\S]*?transform:\s*scaleY\(\.86\)/i);
+  assert.match(css, /\.progress-indeterminate-pattern i\s*\{[\s\S]*?flex:\s*0 0 30px[\s\S]*?width:\s*30px[\s\S]*?height:\s*14px[\s\S]*?margin-right:\s*-2px[\s\S]*?transform:\s*scaleY\(\.86\)/i);
   assert.match(css, /clip-path:\s*path\("M -1 6 C 1\.5 6 3\.25 6 4 5\.75/i);
-  assert.match(css, /C 12 1\.5 13\.5 1\.5 15 1\.5/);
+  assert.match(css, /C 13 1\.5 14 1\.5 15 1\.5/);
   assert.match(css, /C 26\.75 6 28\.5 6 30 6 L 30 8/i);
-  assert.match(css, /@keyframes indeterminate\s*\{[\s\S]*?translateX\(29px\)/i);
+  assert.match(css, /@keyframes indeterminate\s*\{[\s\S]*?translateX\(28px\)/i);
   assert.doesNotMatch(css, /radial-gradient\(ellipse 18px 9px at 50% 50%/i);
   assert.match(css, /\.progress-indeterminate-pattern i\s*\{[\s\S]*?rgba\(242,173,88,\.78\) 35% 37%[\s\S]*?rgba\(242,173,88,\.78\) 63% 65%[\s\S]*?#f3cfa0 0%,[\s\S]*?var\(--orange\) 54%,[\s\S]*?#fbaa4a 100%/i);
   assert.match(css, /\.fake-scrollbar\s*\{[\s\S]*?position:\s*relative[\s\S]*?height:\s*15px[\s\S]*?grid-template-columns:\s*24px 1fr 24px[\s\S]*?overflow:\s*visible[\s\S]*?background:\s*transparent[\s\S]*?box-shadow:\s*none/i);
