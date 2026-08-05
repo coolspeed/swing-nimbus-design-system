@@ -1300,7 +1300,7 @@ tbody tr:focus-visible {
 
 .fake-scrollbar .scroll-thumb {
   position: absolute;
-  top: 0;
+  top: 1px;
   width: 27%;
   height: 15px;
   padding: 0;
