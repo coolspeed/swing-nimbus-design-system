@@ -1127,7 +1127,7 @@ tbody tr:focus-visible {
 }
 
 .progress-track.indeterminate {
-  height: 13px;
+  height: 15px;
   overflow: hidden;
   border-color: #777c84;
   background: linear-gradient(
@@ -1177,7 +1177,7 @@ tbody tr:focus-visible {
   width: 30px;
   height: 14px;
   margin-right: -1px;
-  transform: scaleY(.72);
+  transform: scaleY(.86);
   background:
     linear-gradient(
       90deg,
