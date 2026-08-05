@@ -1182,9 +1182,9 @@ tbody tr:focus-visible {
     linear-gradient(
       90deg,
       transparent 0 34%,
-      rgba(255,206,139,.9) 35% 37%,
+      rgba(242,173,88,.78) 35% 37%,
       transparent 38% 62%,
-      rgba(255,206,139,.9) 63% 65%,
+      rgba(242,173,88,.78) 63% 65%,
       transparent 66%
     ),
     linear-gradient(
